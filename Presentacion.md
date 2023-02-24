@@ -19,7 +19,7 @@ La aplicación sirve como medio de comunicación anónimo para personas cercanas
 | Android Studio | Desarrollo de la aplicación móvil |
 | API de geolocalización | Identificación de la ubicación del usuario |
 
-## Avances
+## Estructura
 - Pantalla de carga 
 - Pantalla de inicio de sesión
 - Pantalla de registro
