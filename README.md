@@ -27,3 +27,9 @@ La aplicación sirve como medio de comunicación anónimo para personas cercanas
 - Ver perfil
 - Pantalla de "buscando sala de chat"
 - El chat
+
+## Construcción del diseño
+
+Véase el siguiente enlace de Figma
+
+[https://www.figma.com/file/ddmPxT7uDvlgndoo8PZOQR/Anonymous-Chat-v.1.0?node-id=0%3A1&t=o6GwLl7WQfU6dpRm-0](Figma)
