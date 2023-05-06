@@ -4,24 +4,23 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.Color
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
-import com.lanazirot.anonymouschat.ui.screens.ChatsScreen
 import com.lanazirot.anonymouschat.ui.theme.AnonymousChatTheme
 import dagger.hilt.android.AndroidEntryPoint
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
 import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.compose.ui.channels.ChannelsScreen
 import io.getstream.chat.android.offline.model.message.attachments.UploadAttachmentsNetworkType
 import io.getstream.chat.android.offline.plugin.configuration.Config
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
+import com.lanazirot.anonymouschat.domain.models.app.appNavigation
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -57,9 +56,9 @@ class MainActivity : ComponentActivity() {
             AnonymousChatTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = Color.Black
                 ) {
-                    ChatsScreen(onBackPressed = { finish() })
+                    appNavigation()
                 }
             }
         }
