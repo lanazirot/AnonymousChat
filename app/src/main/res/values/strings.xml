@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AnonymousChat</string>
+    <string name="api_key">szv7syqafk64</string>
+    <string name="jwt">eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWxhbmMifQ.PrfCcH1Fb8KrNIY8OZPza8N_v8M61Ixi-UhPos4EKEA</string>
 </resources>
