@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "284051697851",
+    "project_id": "anonymouschat-5b588",
+    "storage_bucket": "anonymouschat-5b588.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284051697851:android:f3137ae948e1c257feb99e",
+        "android_client_info": {
+          "package_name": "com.lanazirot.anonymouschat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "284051697851-hnrgjhelq7m74u85ttlac6qf57lushth.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.anonymouschat",
+            "certificate_hash": "1e163af468019e4a04e375b59362bf384a6281c8"
+          }
+        },
+        {
+          "client_id": "284051697851-lro474aenbne24s7cten8eu6suvvfjam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCk34I_Ajvzw48MOCTws0RlqJ_qxqXwzGM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "284051697851-8g37hb1f1v5qrn3t6189mmkla44efm9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

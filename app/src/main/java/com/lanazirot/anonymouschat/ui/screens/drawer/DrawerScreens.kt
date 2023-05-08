@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.ui.screens.drawerScreen
+package com.lanazirot.anonymouschat.ui.screens.drawer
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -48,24 +48,6 @@ fun TopBar(title: String = "", buttonIcon: ImageVector, icon : Painter, onButton
         },
         backgroundColor = Color.Black
     )
-}
-
-@Composable
-fun PantallaPrincipal(openDrawer: () -> Unit) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        TopBar(
-            title = "Anonymous Chat",
-            icon = painterResource(R.drawable.home),
-            buttonIcon = Icons.Filled.Menu,
-            onButtonClicked = { openDrawer() }
-        )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Home Page content here.")
-        }
-    }
 }
 
 @Composable

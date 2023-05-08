@@ -12,17 +12,18 @@ import androidx.navigation.compose.rememberNavController
 import com.lanazirot.anonymouschat.ui.screens.appScreen.RegisterScreen
 import com.lanazirot.anonymouschat.domain.models.drawer.Drawer
 import com.lanazirot.anonymouschat.domain.models.drawer.DrawerScreens
-import com.lanazirot.anonymouschat.ui.screens.appScreen.PostSplashScreen
-import com.lanazirot.anonymouschat.ui.screens.drawerScreen.Creditos
-import com.lanazirot.anonymouschat.ui.screens.drawerScreen.Dudas
-import com.lanazirot.anonymouschat.ui.screens.drawerScreen.Invitar
-import com.lanazirot.anonymouschat.ui.screens.drawerScreen.PantallaPrincipal
-import com.lanazirot.anonymouschat.ui.screens.drawerScreen.Politicas
-import com.lanazirot.anonymouschat.ui.screens.drawerScreen.Preferencias
+import com.lanazirot.anonymouschat.ui.navigator.AppScreens
+import com.lanazirot.anonymouschat.ui.screens.appScreen.LoginScreen
+import com.lanazirot.anonymouschat.ui.screens.drawer.Creditos
+import com.lanazirot.anonymouschat.ui.screens.drawer.Dudas
+import com.lanazirot.anonymouschat.ui.screens.drawer.Invitar
+import com.lanazirot.anonymouschat.ui.screens.drawer.Politicas
+import com.lanazirot.anonymouschat.ui.screens.drawer.Preferencias
+import com.lanazirot.anonymouschat.ui.screens.rooms.RoomsScreen
 import kotlinx.coroutines.launch
 
 @Composable
-fun appNavigation(){
+fun AppNavigation(){
     val drawernavController = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -53,30 +54,34 @@ fun appNavigation(){
             startDestination = AppScreens.Login.route
         ) {
             composable(AppScreens.Login.route) {
-                PostSplashScreen(navController = drawernavController)
+                LoginScreen(navController = drawernavController)
             }
 
             composable(AppScreens.Register.route) {
                 RegisterScreen(navController = drawernavController)
             }
 
-            composable(DrawerScreens.PantallaP.route) {
-                PantallaPrincipal(openDrawer = { openDrawer() })
+            composable(DrawerScreens.Main.route) {
+                RoomsScreen(openDrawer = { openDrawer() })
             }
 
-            composable(DrawerScreens.Invitar.route) {
+            composable(DrawerScreens.Share.route) {
                 Invitar(navController = drawernavController)
             }
-            composable(DrawerScreens.Dudas.route) {
+
+            composable(DrawerScreens.About.route) {
                 Dudas(navController = drawernavController)
             }
-            composable(DrawerScreens.Preferencias.route) {
+
+            composable(DrawerScreens.Preferences.route) {
                 Preferencias(navController = drawernavController)
             }
-            composable(DrawerScreens.Politicas.route) {
+
+            composable(DrawerScreens.Politics.route) {
                 Politicas(navController = drawernavController)
             }
-            composable(DrawerScreens.Creditos.route) {
+
+            composable(DrawerScreens.Credits.route) {
                 Creditos(navController = drawernavController)
             }
         }
