@@ -99,11 +99,13 @@ fun LoginScreen(navController: NavController) {
 
         Button(
             onClick = {
-                loginViewModel.signInWithCredentials(
-                    email = "",
-                    password = "",
-                    toHome = { navController.navigate(DrawerScreens.Main.route) },
-                )
+                try {
+                    loginViewModel.signInWithCredentials(
+                        toHome = { navController.navigate(DrawerScreens.Main.route) },
+                    )
+                } catch (e: Exception) {
+                    Log.d("LoginScreen", e.toString())
+                }
             },
             modifier = Modifier
                 .fillMaxWidth()

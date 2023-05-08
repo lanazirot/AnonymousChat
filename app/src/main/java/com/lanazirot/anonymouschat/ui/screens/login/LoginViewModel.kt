@@ -28,9 +28,9 @@ class LoginViewModel @Inject constructor(
         _userState.value = _userState.value.copy(user = newUser)
     }
 
-    fun signInWithCredentials(email: String, password: String, toHome: () -> Unit) = viewModelScope.launch {
+    fun signInWithCredentials(toHome: () -> Unit) = viewModelScope.launch {
         try {
-            _auth.signInWithEmailAndPassword(email, password)
+            _auth.signInWithEmailAndPassword(_userState.value.user.email, _userState.value.user.password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         toHome()
