@@ -16,6 +16,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,6 +43,8 @@ fun LoginScreen(navController: NavController) {
     val loginViewModel: LoginViewModel = hiltViewModel()
     val googleToken = stringResource(id = R.string.google_token)
     val context = androidx.compose.ui.platform.LocalContext.current
+
+    val userAux by loginViewModel.userState.collectAsState()
 
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
         val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
@@ -71,16 +75,36 @@ fun LoginScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(32.dp))
 
-        StyledText(variable = "", text = "Nombre de usuario", visualTransformation = VisualTransformation.None)
+        StyledText(
+            value = userAux.user.email,
+            text = "Correo electrónico",
+            onValueChange = { loginViewModel.updateUser(
+                userAux.user.copy(email = it)
+            ) },
+            visualTransformation = VisualTransformation.None
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        StyledText(variable = "", text = "Contraseña", visualTransformation = PasswordVisualTransformation())
+        StyledText(
+            value = userAux.user.password,
+            onValueChange = { loginViewModel.updateUser(
+                userAux.user.copy(password = it)
+            ) },
+            text = "Contraseña",
+            visualTransformation = PasswordVisualTransformation()
+        )
 
         Spacer(modifier = Modifier.height(32.dp))
 
         Button(
-            onClick = { },
+            onClick = {
+                loginViewModel.signInWithCredentials(
+                    email = "",
+                    password = "",
+                    toHome = { navController.navigate(DrawerScreens.Main.route) },
+                )
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp),

@@ -14,11 +14,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,19 +25,24 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.domain.models.app.StyledText
+import com.lanazirot.anonymouschat.domain.models.drawer.DrawerScreens
+import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 
 @Composable
 fun RegisterScreen(navController : NavController) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
+    val loginViewModel: LoginViewModel = hiltViewModel()
+
+    val userAux by loginViewModel.userState.collectAsState()
+
     val imagePainter = painterResource(R.drawable.user)
     val warning = painterResource(R.drawable.warning)
 
     val openDialog = remember { mutableStateOf(false)  }
+    val errorMessage = remember { mutableStateOf("Algo ha salido mal, intentalo mas tarde.") }
 
     Column(
         modifier = Modifier
@@ -58,20 +59,56 @@ fun RegisterScreen(navController : NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        StyledText(username,"Username", VisualTransformation.None)
+        StyledText(
+            value = userAux.user.email,
+            text = "Correo electrónico",
+            onValueChange = { loginViewModel.updateUser(
+                userAux.user.copy(email = it)
+            ) },
+            visualTransformation = VisualTransformation.None
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        StyledText(password,"Password", PasswordVisualTransformation())
+        StyledText(
+            value = userAux.user.password,
+            onValueChange = { loginViewModel.updateUser(
+                userAux.user.copy(password = it)
+            ) },
+            text = "Contraseña",
+            visualTransformation = PasswordVisualTransformation()
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        StyledText(confirmPassword,"Confirmar password", VisualTransformation.None)
-
+        StyledText(
+            value = userAux.user.confirmPassword,
+            onValueChange = { loginViewModel.updateUser(
+                userAux.user.copy(confirmPassword = it)
+            ) },
+            text = "Confirmar contraseña",
+            visualTransformation = PasswordVisualTransformation()
+        )
         Spacer(modifier = Modifier.height(32.dp))
 
         Button(
-            onClick = { openDialog.value = true },
+            onClick = {
+                if (validatePasswords(userAux.user.password, userAux.user.confirmPassword)) {
+                    try {
+                        loginViewModel.createUserWithCredentials(
+                            userAux.user.email,
+                            userAux.user.password,
+                            { navController.navigate(DrawerScreens.Main.route) }
+                        )
+                    } catch (e: Exception) {
+                        errorMessage.value = e.message.toString()
+                        openDialog.value = true
+                    }
+                } else {
+                    errorMessage.value = "Las contraseñas no coinciden."
+                    openDialog.value = true
+                }
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp),
@@ -113,7 +150,7 @@ fun RegisterScreen(navController : NavController) {
                 },
                 text = {
                     Text(
-                        text = "Algo ha salido mal. Inténtalo de nuevo más tarde",
+                        text = errorMessage.value,
                         color = Color.Black,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.h4.copy(
@@ -137,6 +174,9 @@ fun RegisterScreen(navController : NavController) {
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
-
     }
+}
+
+fun validatePasswords(password: String, confirmPassword: String): Boolean {
+    return password == confirmPassword
 }

@@ -18,11 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun StyledText(variable: String,text : String, visualTransformation: VisualTransformation) {
-    var value = variable
+fun StyledText(value: String, text : String, onValueChange: (String) -> Unit, visualTransformation: VisualTransformation) {
     OutlinedTextField(
         value = value,
-        onValueChange = { value = it },
+        onValueChange = { onValueChange(it) },
         label = {
             Box(
                 modifier = Modifier.fillMaxWidth(),
