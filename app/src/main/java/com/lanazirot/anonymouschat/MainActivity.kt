@@ -20,36 +20,39 @@ import io.getstream.chat.android.offline.model.message.attachments.UploadAttachm
 import io.getstream.chat.android.offline.plugin.configuration.Config
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 import com.lanazirot.anonymouschat.domain.models.app.AppNavigation
+import com.lanazirot.anonymouschat.ui.screens.chat.ChatScreen
+import com.lanazirot.anonymouschat.ui.screens.rooms.RoomsScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val offlinePluginFactory = StreamOfflinePluginFactory(
-            config = Config(
-                backgroundSyncEnabled = true,
-                userPresence = true,
-                persistenceEnabled = true,
-                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING,
-            ),
-            appContext = applicationContext,
-        )
-
-        val client = ChatClient.Builder("b67pax5b2wdq", applicationContext)
-            .withPlugin(offlinePluginFactory)
-            .logLevel(ChatLogLevel.ALL) // Set to NOTHING in prod
-            .build()
-
-        val user = User(
-            id = "tutorial-droid",
-            name = "Tutorial Droid",
-            image = "https://bit.ly/2TIt8NR"
-        )
-        client.connectUser(
-            user = user,
-            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZHJvaWQifQ.NhEr0hP9W9nwqV7ZkdShxvi02C5PR7SJE7Cs4y7kyqg"
-        ).enqueue()
+        //TOKEN MANUAL PARA ACCESO AL CHAT
+//        val offlinePluginFactory = StreamOfflinePluginFactory(
+//            config = Config(
+//                backgroundSyncEnabled = true,
+//                userPresence = true,
+//                persistenceEnabled = true,
+//                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING,
+//            ),
+//            appContext = applicationContext,
+//        )
+//
+//        val client = ChatClient.Builder("b67pax5b2wdq", applicationContext)
+//            .withPlugin(offlinePluginFactory)
+//            .logLevel(ChatLogLevel.ALL) // Set to NOTHING in prod
+//            .build()
+//
+//        val user = User(
+//            id = "tutorial-droid",
+//            name = "Tutorial Droid",
+//            image = "https://bit.ly/2TIt8NR"
+//        )
+//        client.connectUser(
+//            user = user,
+//            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZHJvaWQifQ.NhEr0hP9W9nwqV7ZkdShxvi02C5PR7SJE7Cs4y7kyqg"
+//        ).enqueue()
 
         setContent {
             AnonymousChatTheme {

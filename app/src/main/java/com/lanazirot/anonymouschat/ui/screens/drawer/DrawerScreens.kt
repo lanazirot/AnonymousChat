@@ -51,24 +51,6 @@ fun TopBar(title: String = "", buttonIcon: ImageVector, icon : Painter, onButton
 }
 
 @Composable
-fun PantallaPrincipal(openDrawer: () -> Unit) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        TopBar(
-            title = "Anonymous Chat",
-            icon = painterResource(R.drawable.home),
-            buttonIcon = Icons.Filled.Menu,
-            onButtonClicked = { openDrawer() }
-        )
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Home Page content here.")
-        }
-    }
-}
-
-@Composable
 fun Invitar(navController: NavController) {
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
