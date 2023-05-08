@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -22,6 +23,9 @@ import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFacto
 import com.lanazirot.anonymouschat.domain.models.app.AppNavigation
 import com.lanazirot.anonymouschat.ui.screens.chat.ChatScreen
 import com.lanazirot.anonymouschat.ui.screens.rooms.RoomsScreen
+import io.getstream.chat.android.compose.ui.channels.ChannelsScreen
+import io.getstream.chat.android.compose.ui.theme.ChatTheme
+import androidx.compose.runtime.*
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -29,41 +33,65 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         //TOKEN MANUAL PARA ACCESO AL CHAT
-//        val offlinePluginFactory = StreamOfflinePluginFactory(
-//            config = Config(
-//                backgroundSyncEnabled = true,
-//                userPresence = true,
-//                persistenceEnabled = true,
-//                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING,
-//            ),
-//            appContext = applicationContext,
-//        )
-//
-//        val client = ChatClient.Builder("b67pax5b2wdq", applicationContext)
-//            .withPlugin(offlinePluginFactory)
-//            .logLevel(ChatLogLevel.ALL) // Set to NOTHING in prod
-//            .build()
-//
+        val offlinePluginFactory = StreamOfflinePluginFactory(
+            config = Config(
+                backgroundSyncEnabled = true,
+                userPresence = true,
+                persistenceEnabled = true,
+                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING,
+            ),
+            appContext = applicationContext,
+        )
+
+        val client = ChatClient.Builder("szv7syqafk64", applicationContext)
+            .withPlugin(offlinePluginFactory)
+            .logLevel(ChatLogLevel.ALL) // Set to NOTHING in prod
+            .build()
+
 //        val user = User(
-//            id = "tutorial-droid",
-//            name = "Tutorial Droid",
+//            id = "alanc",
+//            name = "alanc",
 //            image = "https://bit.ly/2TIt8NR"
 //        )
 //        client.connectUser(
 //            user = user,
-//            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZHJvaWQifQ.NhEr0hP9W9nwqV7ZkdShxvi02C5PR7SJE7Cs4y7kyqg"
+//            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWxhbmMifQ.PrfCcH1Fb8KrNIY8OZPza8N_v8M61Ixi-UhPos4EKEA"
 //        ).enqueue()
 
+        val user = User(
+            id = "castro",
+            name = "castro",
+            image = "https://bit.ly/2TIt8NR"
+        )
+        client.connectUser(
+            user = user,
+            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiY2FzdHJvIn0.lX5zevCLLZMmHBDp6zDpapgDDcI8Lmfv5nZmdD7J574"
+        ).enqueue()
+
         setContent {
-            AnonymousChatTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.Black
-                ) {
-                    AppNavigation()
-                }
+            ChatTheme {
+                ChannelsScreen(
+                    title = "Rooms",
+                    onItemClick = {
+                        channel -> startActivity(RoomsActivity.getIntent(this, channel.cid))
+                    },
+                    onBackPressed = {
+                        finish()
+                    }
+                )
             }
         }
+
+//        setContent {
+//            AnonymousChatTheme {
+//                Surface(
+//                    modifier = Modifier.fillMaxSize(),
+//                    color = Color.Black
+//                ) {
+//                    AppNavigation()
+//                }
+//            }
+//        }
         hideSystemUI()
     }
 

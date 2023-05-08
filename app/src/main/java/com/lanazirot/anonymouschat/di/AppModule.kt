@@ -26,11 +26,11 @@ object AppModule {
 //            appContext = context
 //        )
 
-    @Singleton
-    @Provides
-    fun provideChatClient(@ApplicationContext c: Context) =
-        ChatClient.Builder(c.getString(R.string.api_key), c)
-//            .withPlugin(offlinePluginFactory)
-            .logLevel(ChatLogLevel.ALL)
-            .build()
+//    @Singleton
+//    @Provides
+//    fun provideChatClient(@ApplicationContext c: Context) =
+//        ChatClient.Builder(c.getString(R.string.stream_app_key), c)
+////            .withPlugin(offlinePluginFactory)
+//            .logLevel(ChatLogLevel.ALL)
+//            .build()
 }
