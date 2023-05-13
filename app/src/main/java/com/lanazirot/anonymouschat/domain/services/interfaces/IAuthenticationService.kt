@@ -1,7 +1,9 @@
 package com.lanazirot.anonymouschat.domain.services.interfaces
 
 import com.google.firebase.auth.FirebaseAuth
+import io.getstream.chat.android.client.ChatClient
 
-interface IAuthentication {
+interface IAuthenticationService {
     fun getFirebaseAuth(): FirebaseAuth
+    fun provideStreamClient() : ChatClient
 }

@@ -62,7 +62,7 @@ fun AppNavigation(){
             }
 
             composable(DrawerScreens.Main.route) {
-                RoomsScreen(openDrawer = { openDrawer() })
+                RoomsScreen()
             }
 
             composable(DrawerScreens.Share.route) {

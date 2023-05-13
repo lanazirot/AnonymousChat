@@ -32,66 +32,31 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //TOKEN MANUAL PARA ACCESO AL CHAT
-        val offlinePluginFactory = StreamOfflinePluginFactory(
-            config = Config(
-                backgroundSyncEnabled = true,
-                userPresence = true,
-                persistenceEnabled = true,
-                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING,
-            ),
-            appContext = applicationContext,
-        )
-
-        val client = ChatClient.Builder("szv7syqafk64", applicationContext)
-            .withPlugin(offlinePluginFactory)
-            .logLevel(ChatLogLevel.ALL) // Set to NOTHING in prod
-            .build()
-
-//        val user = User(
-//            id = "alanc",
-//            name = "alanc",
-//            image = "https://bit.ly/2TIt8NR"
-//        )
-//        client.connectUser(
-//            user = user,
-//            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWxhbmMifQ.PrfCcH1Fb8KrNIY8OZPza8N_v8M61Ixi-UhPos4EKEA"
-//        ).enqueue()
-
-        val user = User(
-            id = "castro",
-            name = "castro",
-            image = "https://bit.ly/2TIt8NR"
-        )
-        client.connectUser(
-            user = user,
-            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiY2FzdHJvIn0.lX5zevCLLZMmHBDp6zDpapgDDcI8Lmfv5nZmdD7J574"
-        ).enqueue()
-
-        setContent {
-            ChatTheme {
-                ChannelsScreen(
-                    title = "Rooms",
-                    onItemClick = {
-                        channel -> startActivity(RoomsActivity.getIntent(this, channel.cid))
-                    },
-                    onBackPressed = {
-                        finish()
-                    }
-                )
-            }
-        }
-
 //        setContent {
-//            AnonymousChatTheme {
-//                Surface(
-//                    modifier = Modifier.fillMaxSize(),
-//                    color = Color.Black
-//                ) {
-//                    AppNavigation()
-//                }
+//            ChatTheme {
+//                ChannelsScreen(
+//                    title = "Rooms",
+//                    onItemClick = {
+//                        channel -> startActivity(RoomsActivity.getIntent(this, channel.cid))
+//                    },
+//                    onBackPressed = {
+//                        finish()
+//                    }
+//                )
 //            }
 //        }
+
+        setContent {
+            AnonymousChatTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = Color.Black
+                ) {
+                    RoomsScreen()
+//                    AppNavigation()
+                }
+            }
+        }
         hideSystemUI()
     }
 
