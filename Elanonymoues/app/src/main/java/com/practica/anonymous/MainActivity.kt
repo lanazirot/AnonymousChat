@@ -10,7 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.practica.anonymous.ui.models.LoadingPreApp
 import com.practica.anonymous.ui.models.PostSplashScreen
+import com.practica.anonymous.ui.models.Preferences
+import com.practica.anonymous.ui.models.SplashScreenAnony
 import com.practica.anonymous.ui.theme.AnonymousTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    PostSplashScreen()
+                    LoadingPreApp()
                 }
             }
         }

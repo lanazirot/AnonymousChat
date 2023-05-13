@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -21,7 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.practica.anonymous.R
 
 
@@ -52,7 +55,10 @@ fun PostSplashScreen() {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
-                ) { Text("Nombre de usuario") }
+                ) { Text("Nombre de usuario", style = MaterialTheme.typography.bodyMedium.copy(
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )) }
             },
             singleLine = true,
             modifier = Modifier
@@ -76,10 +82,13 @@ fun PostSplashScreen() {
 
                     //Text with aligned horizontal center
                     Text(
-                        text = "Contraseña",
+                        text = "Contraseña", style = MaterialTheme.typography.bodyMedium.copy(
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold
+                        ))
 
 
-                        )
+                        
                 }
             },
             singleLine = true,
