@@ -1,22 +1,18 @@
 package com.lanazirot.anonymouschat.ui.screens.chat
 
 import androidx.compose.runtime.Composable
-import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.logger.ChatLogLevel
-import io.getstream.chat.android.client.models.User
+import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import io.getstream.chat.android.compose.ui.messages.MessagesScreen
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
-import io.getstream.chat.android.offline.model.message.attachments.UploadAttachmentsNetworkType
-import io.getstream.chat.android.offline.plugin.configuration.Config
-import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
 
 @Composable
-fun ChatScreen(channelId: String) {
+fun ChatScreen(channelId : String) {
+    val navController = GlobalProvider.current.navController
+
     ChatTheme {
         MessagesScreen(
             channelId = channelId,
-            onBackPressed = { /* TODO */ },
-            onHeaderActionClick = { /* TODO */ }
+            onBackPressed = { navController.popBackStack() }
         )
     }
 }

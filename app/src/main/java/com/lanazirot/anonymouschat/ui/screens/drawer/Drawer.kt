@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.lanazirot.anonymouschat.R
+import com.lanazirot.anonymouschat.ui.navigator.routes.screens
 
 @Composable
 fun Drawer (

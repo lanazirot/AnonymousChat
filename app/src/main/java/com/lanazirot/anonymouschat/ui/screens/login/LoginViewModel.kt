@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.AuthCredential
 import com.lanazirot.anonymouschat.domain.models.UserLogin
-import com.lanazirot.anonymouschat.domain.repositories.FirebaseRepository
+import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,9 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    firebase : FirebaseRepository
+    authenticationService: IAuthenticationService
 ) : ViewModel() {
-    private val _auth = firebase.getFirebaseAuth()
+    private val _auth = authenticationService.getFirebaseAuth()
     private val _loading = MutableLiveData(false)
 
     private val _userState = MutableStateFlow(UserState())
@@ -34,6 +34,7 @@ class LoginViewModel @Inject constructor(
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         toHome()
+                        //TODO Guardar token global, generar token Stream
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -50,6 +51,7 @@ class LoginViewModel @Inject constructor(
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         toHome()
+                        //TODO Guardar token global, generar token Stream
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -68,6 +70,7 @@ class LoginViewModel @Inject constructor(
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             toHome()
+                            //TODO Crear usuario en Stream
                         }
 
                         _loading.value = false

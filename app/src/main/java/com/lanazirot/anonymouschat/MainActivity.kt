@@ -5,62 +5,39 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.navigation.compose.rememberNavController
+import com.lanazirot.anonymouschat.domain.models.app.AppNavigation
+import com.lanazirot.anonymouschat.ui.providers.AppProvider
+import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.theme.AnonymousChatTheme
 import dagger.hilt.android.AndroidEntryPoint
-import io.getstream.chat.android.client.ChatClient
-import io.getstream.chat.android.client.logger.ChatLogLevel
-import io.getstream.chat.android.client.models.User
-import io.getstream.chat.android.offline.model.message.attachments.UploadAttachmentsNetworkType
-import io.getstream.chat.android.offline.plugin.configuration.Config
-import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
-import com.lanazirot.anonymouschat.domain.models.app.AppNavigation
-import com.lanazirot.anonymouschat.ui.screens.chat.ChatScreen
-import com.lanazirot.anonymouschat.ui.screens.rooms.RoomsScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //TOKEN MANUAL PARA ACCESO AL CHAT
-//        val offlinePluginFactory = StreamOfflinePluginFactory(
-//            config = Config(
-//                backgroundSyncEnabled = true,
-//                userPresence = true,
-//                persistenceEnabled = true,
-//                uploadAttachmentsNetworkType = UploadAttachmentsNetworkType.NOT_ROAMING,
-//            ),
-//            appContext = applicationContext,
-//        )
-//
-//        val client = ChatClient.Builder("b67pax5b2wdq", applicationContext)
-//            .withPlugin(offlinePluginFactory)
-//            .logLevel(ChatLogLevel.ALL) // Set to NOTHING in prod
-//            .build()
-//
-//        val user = User(
-//            id = "tutorial-droid",
-//            name = "Tutorial Droid",
-//            image = "https://bit.ly/2TIt8NR"
-//        )
-//        client.connectUser(
-//            user = user,
-//            token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoidHV0b3JpYWwtZHJvaWQifQ.NhEr0hP9W9nwqV7ZkdShxvi02C5PR7SJE7Cs4y7kyqg"
-//        ).enqueue()
-
         setContent {
+            val navController = rememberNavController()
+            val gp = AppProvider(navController = navController)
+
             AnonymousChatTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = Color.Black
+                CompositionLocalProvider(
+                    GlobalProvider provides gp
                 ) {
-                    AppNavigation()
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = Color.Black
+                    ) {
+                        AppNavigation(navController)
+                    }
                 }
             }
         }
