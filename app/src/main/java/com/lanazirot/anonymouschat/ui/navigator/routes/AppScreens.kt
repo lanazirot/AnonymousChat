@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.ui.navigator
+package com.lanazirot.anonymouschat.ui.navigator.routes
 
 sealed class AppScreens(val title: String, val route: String)  {
     object Login : AppScreens("Iniciar sesion","login")

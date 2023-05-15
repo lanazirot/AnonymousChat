@@ -29,12 +29,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.domain.models.app.StyledText
-import com.lanazirot.anonymouschat.domain.models.drawer.DrawerScreens
+import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
+import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 
 @Composable
-fun RegisterScreen(navController : NavController) {
+fun RegisterScreen() {
     val loginViewModel: LoginViewModel = hiltViewModel()
+    val navController = GlobalProvider.current.navController
 
     val userAux by loginViewModel.userState.collectAsState()
 

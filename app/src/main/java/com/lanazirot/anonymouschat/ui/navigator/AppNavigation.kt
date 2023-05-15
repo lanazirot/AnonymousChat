@@ -6,13 +6,13 @@ import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.lanazirot.anonymouschat.ui.screens.appScreen.RegisterScreen
 import com.lanazirot.anonymouschat.domain.models.drawer.Drawer
-import com.lanazirot.anonymouschat.domain.models.drawer.DrawerScreens
-import com.lanazirot.anonymouschat.ui.navigator.AppScreens
+import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
+import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.screens.appScreen.LoginScreen
 import com.lanazirot.anonymouschat.ui.screens.chat.ChatScreen
 import com.lanazirot.anonymouschat.ui.screens.drawer.Creditos
@@ -24,8 +24,7 @@ import com.lanazirot.anonymouschat.ui.screens.rooms.RoomsScreen
 import kotlinx.coroutines.launch
 
 @Composable
-fun AppNavigation(){
-    val drawernavController = rememberNavController()
+fun AppNavigation(navController: NavHostController) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val openDrawer = {
@@ -33,6 +32,7 @@ fun AppNavigation(){
             drawerState.open()
         }
     }
+
     ModalDrawer(
         drawerState = drawerState,
         gesturesEnabled = drawerState.isOpen,
@@ -42,7 +42,7 @@ fun AppNavigation(){
                     scope.launch {
                         drawerState.close()
                     }
-                    drawernavController.navigate(route) {
+                    navController.navigate(route) {
                         launchSingleTop = true
                     }
                 }
@@ -51,45 +51,44 @@ fun AppNavigation(){
         drawerBackgroundColor = Color.Black
     ) {
         NavHost(
-            navController = drawernavController,
+            navController = navController,
             startDestination = DrawerScreens.Main.route
         ) {
             composable(AppScreens.Login.route) {
-                LoginScreen(navController = drawernavController)
+                LoginScreen()
             }
 
             composable(AppScreens.Register.route) {
-                RegisterScreen(navController = drawernavController)
+                RegisterScreen()
             }
 
-            composable(AppScreens.Chat.route + "/{channelId}") { backStackEntry ->
-                val channelId = backStackEntry.arguments?.getString("channelId") ?: ""
-                ChatScreen(channelId = channelId)
+            composable("${AppScreens.Chat.route}/{channelId}") { backStackEntry ->
+                ChatScreen(channelId = backStackEntry.arguments?.getString("channelId") ?: "")
             }
 
             composable(DrawerScreens.Main.route) {
-                RoomsScreen(navController = drawernavController)
+                RoomsScreen()
             }
 
 
             composable(DrawerScreens.Share.route) {
-                Invitar(navController = drawernavController)
+                Invitar()
             }
 
             composable(DrawerScreens.About.route) {
-                Dudas(navController = drawernavController)
+                Dudas()
             }
 
             composable(DrawerScreens.Preferences.route) {
-                Preferencias(navController = drawernavController)
+                Preferencias()
             }
 
             composable(DrawerScreens.Politics.route) {
-                Politicas(navController = drawernavController)
+                Politicas()
             }
 
             composable(DrawerScreens.Credits.route) {
-                Creditos(navController = drawernavController)
+                Creditos()
             }
         }
     }

@@ -4,14 +4,7 @@ import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
@@ -29,21 +22,21 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.domain.models.app.StyledText
-import com.lanazirot.anonymouschat.domain.models.drawer.DrawerScreens
-import com.lanazirot.anonymouschat.ui.navigator.AppScreens
+import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
+import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
+import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LoginScreen() {
     val loginViewModel: LoginViewModel = hiltViewModel()
     val googleToken = stringResource(id = R.string.google_token)
     val context = androidx.compose.ui.platform.LocalContext.current
-
+    val navController = GlobalProvider.current.navController
     val userAux by loginViewModel.userState.collectAsState()
 
     val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
@@ -52,7 +45,8 @@ fun LoginScreen(navController: NavController) {
         try {
             val account = task.getResult(com.google.android.gms.common.api.ApiException::class.java)!!
             val credential = com.google.firebase.auth.GoogleAuthProvider.getCredential(account.idToken, null)
-            loginViewModel.signInWithGoogle(credential = credential, toHome = { navController.navigate(DrawerScreens.Main.route) })
+            loginViewModel.signInWithGoogle(credential = credential, toHome = { navController.navigate(
+                DrawerScreens.Main.route) })
         } catch (ignore: com.google.android.gms.common.api.ApiException) {
             Log.d("LoginScreen", ignore.toString())
         }

@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.lanazirot.anonymouschat.domain.models.drawer.ScrollableScreen
 import com.lanazirot.anonymouschat.R
+import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 
 //Nota: Separarlas proximamente
 
@@ -51,7 +52,9 @@ fun TopBar(title: String = "", buttonIcon: ImageVector, icon : Painter, onButton
 }
 
 @Composable
-fun Invitar(navController: NavController) {
+fun Invitar() {
+    val navController = GlobalProvider.current.navController
+
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
             title = "Invitar",
@@ -69,7 +72,9 @@ fun Invitar(navController: NavController) {
 }
 
 @Composable
-fun Dudas(navController: NavController) {
+fun Dudas() {
+    val navController = GlobalProvider.current.navController
+
     val listItems = listOf("General", "¿Que es Anonymous Chat?", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris elementum porttitor dapibus."
         , "¿Quienes pueden enviarme mensaje?", "Praesent suscipit semper risus non aliquam. Aenean non ante eu ligula vehicula vehicula. Quisque sodales tincidunt mattis."
         , "¿Como se maneja la privacidad en  Anonymous Chat?", "Cras varius lacus ac eros vulputate vulputate. Nunc nec blandit quam, vitae convallis elit. Sed rutrum placerat justo eget rutrum."
@@ -87,7 +92,9 @@ fun Dudas(navController: NavController) {
 }
 
 @Composable
-fun Preferencias(navController: NavController) {
+fun Preferencias() {
+    val navController = GlobalProvider.current.navController
+
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(
             title = "Preferencias",
@@ -105,7 +112,8 @@ fun Preferencias(navController: NavController) {
 }
 
 @Composable
-fun Politicas(navController: NavController){
+fun Politicas() {
+    val navController = GlobalProvider.current.navController
     val listItems = listOf("Interpretation and Definition", "Interpretation", "The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural."
     , "Definitions", "For the purposes of this Privacy Policy:\n" +
                 "Account means a unique account created for You to access our Service or parts of our Service.\n" +
@@ -141,7 +149,9 @@ fun Politicas(navController: NavController){
 }
 
 @Composable
-fun Creditos(navController: NavController) {
+fun Creditos() {
+    val navController = GlobalProvider.current.navController
+
     Column(modifier = Modifier.fillMaxSize().background(Color.Black)) {
         TopBar(
             title = "Creditos",

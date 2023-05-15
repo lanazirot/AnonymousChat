@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.domain.models.drawer
+package com.lanazirot.anonymouschat.ui.navigator.routes
 
 import com.lanazirot.anonymouschat.R
 
