@@ -9,10 +9,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RoomsViewModel @Inject constructor (
-    private val streamService: IStreamService
+    private val streamService: IStreamService,
 ): ViewModel() {
     fun connectUser() {
-        val userResponse = streamService.getUser("alan.ssuc2311@gmail.com")
+        val userResponse = streamService.getAnonymousUser("alan.ssuc2311@gmail.com")
 
         if(userResponse is Response.Success) {
             val user = userResponse.data

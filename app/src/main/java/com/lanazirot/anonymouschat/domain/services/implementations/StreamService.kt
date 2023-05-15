@@ -12,8 +12,9 @@ class StreamService @Inject constructor(
     override fun connectUser(user: User): Response<Boolean> {
         try {
             var response : Response<Boolean> = Response.Failure(Exception())
+            var currentToken = ""
 
-            streamClient.provideStreamClient().connectUser(
+            streamClient.getChatClient().connectUser(
                 user = user,
                 //TODO: Token generado por API
                 token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWxhbi1zc3VjMjMxMUBnbWFpbC1jb20ifQ.wCCUpRnCQjngni_uikul7rKMlF3WxDN-keZKP5lZ2BM"
@@ -31,7 +32,7 @@ class StreamService @Inject constructor(
         }
     }
 
-    override fun getUser(email : String): Response<User> {
+    override fun getAnonymousUser(email : String): Response<User> {
         val emailForStream = email.replace(".", "-")
 
         try {

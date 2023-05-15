@@ -14,6 +14,7 @@ import com.lanazirot.anonymouschat.domain.models.drawer.Drawer
 import com.lanazirot.anonymouschat.domain.models.drawer.DrawerScreens
 import com.lanazirot.anonymouschat.ui.navigator.AppScreens
 import com.lanazirot.anonymouschat.ui.screens.appScreen.LoginScreen
+import com.lanazirot.anonymouschat.ui.screens.chat.ChatScreen
 import com.lanazirot.anonymouschat.ui.screens.drawer.Creditos
 import com.lanazirot.anonymouschat.ui.screens.drawer.Dudas
 import com.lanazirot.anonymouschat.ui.screens.drawer.Invitar
@@ -51,7 +52,7 @@ fun AppNavigation(){
     ) {
         NavHost(
             navController = drawernavController,
-            startDestination = AppScreens.Login.route
+            startDestination = DrawerScreens.Main.route
         ) {
             composable(AppScreens.Login.route) {
                 LoginScreen(navController = drawernavController)
@@ -61,9 +62,15 @@ fun AppNavigation(){
                 RegisterScreen(navController = drawernavController)
             }
 
-            composable(DrawerScreens.Main.route) {
-                RoomsScreen()
+            composable(AppScreens.Chat.route + "/{channelId}") { backStackEntry ->
+                val channelId = backStackEntry.arguments?.getString("channelId") ?: ""
+                ChatScreen(channelId = channelId)
             }
+
+            composable(DrawerScreens.Main.route) {
+                RoomsScreen(navController = drawernavController)
+            }
+
 
             composable(DrawerScreens.Share.route) {
                 Invitar(navController = drawernavController)

@@ -5,5 +5,5 @@ import io.getstream.chat.android.client.ChatClient
 
 interface IAuthenticationService {
     fun getFirebaseAuth(): FirebaseAuth
-    fun provideStreamClient() : ChatClient
+    fun getChatClient() : ChatClient
 }

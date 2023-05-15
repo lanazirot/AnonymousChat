@@ -14,14 +14,20 @@ class AuthenticationService @Inject constructor(
     private val context : Context,
     private val offlinePluginFactory: StreamOfflinePluginFactory
 ) : IAuthenticationService {
+    private var chatClient: ChatClient? = null
+
     override fun getFirebaseAuth(): FirebaseAuth {
         return FirebaseAuth.getInstance()
     }
 
-    override fun provideStreamClient(): ChatClient {
-        return ChatClient.Builder(context.getString(R.string.stream_app_key), context)
-            .withPlugin(offlinePluginFactory)
-            .logLevel(ChatLogLevel.ALL)
-            .build()
+    override fun getChatClient(): ChatClient {
+        if (chatClient == null) {
+            chatClient = ChatClient.Builder(context.getString(R.string.stream_app_key), context)
+                .withPlugin(offlinePluginFactory)
+                .logLevel(ChatLogLevel.ALL)
+                .build()
+        }
+
+        return chatClient!!
     }
 }
