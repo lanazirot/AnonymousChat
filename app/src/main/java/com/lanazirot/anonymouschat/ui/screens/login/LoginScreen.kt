@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.domain.models.app.StyledText
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
@@ -43,11 +44,14 @@ fun LoginScreen() {
         val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
 
         try {
-            val account = task.getResult(com.google.android.gms.common.api.ApiException::class.java)!!
+            val account = task.getResult(ApiException::class.java)!!
             val credential = com.google.firebase.auth.GoogleAuthProvider.getCredential(account.idToken, null)
-            loginViewModel.signInWithGoogle(credential = credential, toHome = { navController.navigate(
-                DrawerScreens.Main.route) })
-        } catch (ignore: com.google.android.gms.common.api.ApiException) {
+            loginViewModel.signInWithGoogle(
+                credential = credential,
+                toHome = {
+                    navController.navigate("${DrawerScreens.Main.route}/${account.email}")
+                })
+        } catch (ignore: ApiException) {
             Log.d("LoginScreen", ignore.toString())
         }
     }
@@ -95,7 +99,7 @@ fun LoginScreen() {
             onClick = {
                 try {
                     loginViewModel.signInWithCredentials(
-                        toHome = { navController.navigate(DrawerScreens.Main.route) },
+                        toHome = { navController.navigate("${DrawerScreens.Main.route}/${userAux.user.email}") },
                     )
                 } catch (e: Exception) {
                     Log.d("LoginScreen", e.toString())

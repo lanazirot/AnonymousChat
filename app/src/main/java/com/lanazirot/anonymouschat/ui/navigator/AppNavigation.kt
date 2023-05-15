@@ -52,7 +52,7 @@ fun AppNavigation(navController: NavHostController) {
     ) {
         NavHost(
             navController = navController,
-            startDestination = DrawerScreens.Main.route
+            startDestination = AppScreens.Login.route
         ) {
             composable(AppScreens.Login.route) {
                 LoginScreen()
@@ -66,10 +66,9 @@ fun AppNavigation(navController: NavHostController) {
                 ChatScreen(channelId = backStackEntry.arguments?.getString("channelId") ?: "")
             }
 
-            composable(DrawerScreens.Main.route) {
-                RoomsScreen()
+            composable("${DrawerScreens.Main.route}/{email}") { backStackEntry ->
+                RoomsScreen(email = backStackEntry.arguments?.getString("email") ?: "")
             }
-
 
             composable(DrawerScreens.Share.route) {
                 Invitar()

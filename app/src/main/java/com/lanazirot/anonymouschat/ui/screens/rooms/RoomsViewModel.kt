@@ -11,8 +11,8 @@ import javax.inject.Inject
 class RoomsViewModel @Inject constructor (
     private val streamService: IStreamService,
 ): ViewModel() {
-    fun connectUser() {
-        val userResponse = streamService.getAnonymousUser("alan.ssuc2311@gmail.com")
+    fun connectUser(email :String) {
+        val userResponse = streamService.getAnonymousUser(email)
 
         if(userResponse is Response.Success) {
             val user = userResponse.data

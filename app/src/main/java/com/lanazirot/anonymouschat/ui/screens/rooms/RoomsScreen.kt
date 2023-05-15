@@ -8,11 +8,11 @@ import io.getstream.chat.android.compose.ui.channels.ChannelsScreen
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 @Composable
-fun RoomsScreen() {
+fun RoomsScreen(email :String) {
     val roomsViewModel : RoomsViewModel = hiltViewModel()
     val navController = GlobalProvider.current.navController
 
-    roomsViewModel.connectUser()
+    roomsViewModel.connectUser(email)
 
     ChatTheme {
         ChannelsScreen(
