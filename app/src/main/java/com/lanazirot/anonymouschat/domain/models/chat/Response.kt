@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.domain.models
+package com.lanazirot.anonymouschat.domain.models.chat
 
 sealed class Response<out T> {
     object Loading: Response<Nothing>()

@@ -1,6 +1,6 @@
 package com.lanazirot.anonymouschat.domain.services.implementations
 
-import com.lanazirot.anonymouschat.domain.models.Response
+import com.lanazirot.anonymouschat.domain.models.chat.Response
 import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
 import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
 import io.getstream.chat.android.client.models.User
@@ -17,7 +17,7 @@ class StreamService @Inject constructor(
             streamClient.getChatClient().connectUser(
                 user = user,
                 //TODO: Token generado por API
-                token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWxhbi1zc3VjMjMxMUBnbWFpbC1jb20ifQ.wCCUpRnCQjngni_uikul7rKMlF3WxDN-keZKP5lZ2BM"
+                token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWxhbi1hYml1ZC1jYXN0cm9AZ21haWwtY29tIn0.y-n8CLexoNpaHpKaFMYLWjD2RrBNYefUAJzq-PZw-Xg"
             ).enqueue { result ->
                 if (result.isSuccess) {
                     response = Response.Success(true)

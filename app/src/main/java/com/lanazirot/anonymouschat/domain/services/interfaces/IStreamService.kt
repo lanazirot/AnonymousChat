@@ -1,6 +1,6 @@
 package com.lanazirot.anonymouschat.domain.services.interfaces
 
-import com.lanazirot.anonymouschat.domain.models.Response
+import com.lanazirot.anonymouschat.domain.models.chat.Response
 import io.getstream.chat.android.client.models.User
 
 interface IStreamService {

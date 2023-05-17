@@ -13,13 +13,16 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.compose.rememberNavController
+import com.lanazirot.anonymouschat.di.AppModule
 import com.lanazirot.anonymouschat.domain.models.app.AppNavigation
 import com.lanazirot.anonymouschat.ui.providers.AppProvider
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.theme.AnonymousChatTheme
+import dagger.Component
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
+//@Component(modules = [AppModule::class])
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,13 +44,5 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        hideSystemUI()
-    }
-
-    private fun hideSystemUI() {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        val windowInsetsController = ViewCompat.getWindowInsetsController(window.decorView) ?: return
-        windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
     }
 }
