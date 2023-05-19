@@ -20,5 +20,4 @@ class AuthRepository @Inject constructor(
         } else {
             throw Exception("Error getting random user")
         }
-    }.flowOn(Dispatchers.IO)
-}
+    }.flowOn(Dispatchers.IO)}

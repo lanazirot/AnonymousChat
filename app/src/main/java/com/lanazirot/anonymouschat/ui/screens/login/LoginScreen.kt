@@ -49,8 +49,9 @@ fun LoginScreen() {
             loginViewModel.signInWithGoogle(
                 credential = credential,
                 toHome = {
-                    navController.navigate("${DrawerScreens.Main.route}/${account.email}")
-                })
+                    navController.navigate(DrawerScreens.Main.route)
+                }
+            )
         } catch (ignore: ApiException) {
             Log.d("LoginScreen", ignore.toString())
         }

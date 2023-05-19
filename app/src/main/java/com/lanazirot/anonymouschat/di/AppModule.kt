@@ -9,9 +9,6 @@ import com.lanazirot.anonymouschat.domain.services.implementations.Authenticatio
 import com.lanazirot.anonymouschat.domain.services.implementations.StreamService
 import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
 import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
-import com.lanazirot.anonymouschat.domain.services.interfaces.api.IAuthAPI
-import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI
-import com.lanazirot.anonymouschat.domain.services.interfaces.api.IUserAPI
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -22,8 +19,6 @@ import dagger.hilt.components.SingletonComponent
 import io.getstream.chat.android.offline.model.message.attachments.UploadAttachmentsNetworkType
 import io.getstream.chat.android.offline.plugin.configuration.Config
 import io.getstream.chat.android.offline.plugin.factory.StreamOfflinePluginFactory
-import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module
@@ -67,6 +62,5 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideMoshi(): Moshi =
-        Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    fun provideMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 }

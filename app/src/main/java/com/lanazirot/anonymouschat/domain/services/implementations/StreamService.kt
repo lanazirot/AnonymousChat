@@ -17,7 +17,7 @@ class StreamService @Inject constructor(
             streamClient.getChatClient().connectUser(
                 user = user,
                 //TODO: Token generado por API
-                token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWxhbi1hYml1ZC1jYXN0cm9AZ21haWwtY29tIn0.y-n8CLexoNpaHpKaFMYLWjD2RrBNYefUAJzq-PZw-Xg"
+                token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiYWxhbi1zc3VjMjMxMUBnbWFpbC1jb20iLCJleHAiOjE2ODQ0OTc2OTd9.2FyPo83BSWpDaf6zJtgm5Jc-pG1Xx0DQi8nnla4YNQI"
             ).enqueue { result ->
                 if (result.isSuccess) {
                     response = Response.Success(true)
@@ -49,5 +49,9 @@ class StreamService @Inject constructor(
 
     override fun createUser(): Response<User> {
         TODO()
+    }
+
+    override fun getCurrentUser() : User? {
+        return streamClient.getChatClient().getCurrentUser()
     }
 }

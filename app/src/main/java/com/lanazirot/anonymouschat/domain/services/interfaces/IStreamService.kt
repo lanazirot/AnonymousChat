@@ -7,6 +7,7 @@ interface IStreamService {
     fun connectUser(user : User) : Response<Boolean>
 
     //GET
+    fun getCurrentUser() : User?
     fun getAnonymousUser(email : String) : Response<User>
 
     //POST

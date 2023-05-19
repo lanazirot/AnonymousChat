@@ -28,4 +28,6 @@ class RoomsViewModel @Inject constructor (
             }
         }
     }
+
+    fun getCurrentUser() = streamService.getCurrentUser()
 }

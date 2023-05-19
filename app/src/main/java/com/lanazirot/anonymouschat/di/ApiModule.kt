@@ -17,20 +17,20 @@ import javax.inject.Singleton
 object ApiModule {
     @Provides
     @Singleton
-    fun provideAPIBuilder() = Retrofit.Builder()
+    fun provideAPIBuilder() :Retrofit = Retrofit.Builder()
         .baseUrl("")
         .addConverterFactory(MoshiConverterFactory.create(provideMoshi()))
         .build()
 
     @Provides
     @Singleton
-    fun provideAuthAPI(retrofit: Retrofit) = retrofit.create(IAuthAPI::class.java)
+    fun provideAuthAPI(retrofit: Retrofit) :IAuthAPI = retrofit.create(IAuthAPI::class.java)
 
     @Provides
     @Singleton
-    fun provideUserAPI(retrofit: Retrofit) = retrofit.create(IUserAPI::class.java)
+    fun provideUserAPI(retrofit: Retrofit) :IUserAPI = retrofit.create(IUserAPI::class.java)
 
     @Provides
     @Singleton
-    fun provideChannelAPI(retrofit: Retrofit) = retrofit.create(IChannelAPI::class.java)
+    fun provideChannelAPI(retrofit: Retrofit) :IChannelAPI = retrofit.create(IChannelAPI::class.java)
 }
