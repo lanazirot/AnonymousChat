@@ -66,8 +66,8 @@ fun AppNavigation(navController: NavHostController) {
                 ChatScreen(channelId = backStackEntry.arguments?.getString("channelId") ?: "")
             }
 
-            composable("${DrawerScreens.Main.route}/{email}") { backStackEntry ->
-                RoomsScreen(email = backStackEntry.arguments?.getString("email") ?: "")
+            composable(DrawerScreens.Main.route) {
+                RoomsScreen(openDrawer = { openDrawer() })
             }
 
             composable(DrawerScreens.Share.route) {

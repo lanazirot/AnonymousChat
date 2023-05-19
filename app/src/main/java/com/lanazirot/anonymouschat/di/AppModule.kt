@@ -1,11 +1,16 @@
 package com.lanazirot.anonymouschat.di
 
 import android.content.Context
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.domain.services.implementations.AuthenticationService
 import com.lanazirot.anonymouschat.domain.services.implementations.StreamService
 import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
 import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,4 +49,18 @@ object AppModule {
     fun provideStreamService(@ApplicationContext context: Context) : IStreamService = StreamService(
         streamClient = provideAuthenticationService(context)
     )
+
+    @Provides
+    @Singleton
+    fun provideGoogleSignInClient(@ApplicationContext applicationContext: Context): GoogleSignInClient {
+        val mGoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(applicationContext.getString(R.string.google_token))
+            .requestEmail()
+            .build()
+        return GoogleSignIn.getClient(applicationContext, mGoogleSignInOptions)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 }

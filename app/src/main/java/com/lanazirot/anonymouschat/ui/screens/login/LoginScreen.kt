@@ -49,8 +49,9 @@ fun LoginScreen() {
             loginViewModel.signInWithGoogle(
                 credential = credential,
                 toHome = {
-                    navController.navigate("${DrawerScreens.Main.route}/${account.email}")
-                })
+                    navController.navigate(DrawerScreens.Main.route)
+                }
+            )
         } catch (ignore: ApiException) {
             Log.d("LoginScreen", ignore.toString())
         }
@@ -146,5 +147,12 @@ fun LoginScreen() {
         ) {
             Text(text = "Registrarme", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
         }
+
+        Button(
+            onClick = { loginViewModel.logout() }
+        ) {
+            Text(text = "Logout")
+        }
+
     }
 }

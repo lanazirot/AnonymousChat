@@ -8,11 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.lanazirot.anonymouschat.domain.models.drawer.ScrollableScreen
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
@@ -29,16 +28,21 @@ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 //Nota: Separarlas proximamente
 
 @Composable
-fun TopBar(title: String = "", buttonIcon: ImageVector, icon : Painter, onButtonClicked: () -> Unit) {
+fun TopBar(title: String = "", buttonIcon: ImageVector, icon: Painter?, onButtonClicked: () -> Unit) {
+    val tittleStyled = if (icon != null) "      $title" else title
+
     TopAppBar(
         title = {
-            Image(
-                painter = icon,
-                contentDescription = "null",
-                modifier = Modifier.size(25.dp)
-            )
+            if (icon != null) {
+                Image(
+                    painter = icon,
+                    contentDescription = "null",
+                    modifier = Modifier.size(25.dp)
+                )
+            }
+
             Text(
-                text = "      $title",
+                text = tittleStyled,
                 color = Color.White
             )
         },
@@ -59,9 +63,8 @@ fun Invitar() {
         TopBar(
             title = "Invitar",
             icon = painterResource(R.drawable.iinvitar),
-            buttonIcon = Icons.Filled.ArrowBack,
-            onButtonClicked = { navController.popBackStack() }
-        )
+            buttonIcon = Icons.Filled.ArrowBack
+        ) { navController.popBackStack() }
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -84,9 +87,8 @@ fun Dudas() {
         TopBar(
             title = "Dudas",
             icon = painterResource(R.drawable.idudas),
-            buttonIcon = Icons.Filled.ArrowBack,
-            onButtonClicked = { navController.popBackStack() }
-        )
+            buttonIcon = Icons.Filled.ArrowBack
+        ) { navController.popBackStack() }
         ScrollableScreen(listItems)
     }
 }
@@ -99,9 +101,8 @@ fun Preferencias() {
         TopBar(
             title = "Preferencias",
             icon = painterResource(R.drawable.ipreferencias),
-            buttonIcon = Icons.Filled.ArrowBack,
-            onButtonClicked = { navController.popBackStack() }
-        )
+            buttonIcon = Icons.Filled.ArrowBack
+        ) { navController.popBackStack() }
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -141,9 +142,8 @@ fun Politicas() {
         TopBar(
             title = "Politicas",
             icon = painterResource(R.drawable.ipoliticas),
-            buttonIcon = Icons.Filled.ArrowBack,
-            onButtonClicked = { navController.popBackStack() }
-        )
+            buttonIcon = Icons.Filled.ArrowBack
+        ) { navController.popBackStack() }
         ScrollableScreen(listItems)
     }
 }
@@ -157,9 +157,8 @@ fun Creditos() {
             title = "Creditos",
 
             icon = painterResource(R.drawable.icreditos),
-            buttonIcon = Icons.Filled.ArrowBack,
-            onButtonClicked = { navController.popBackStack() }
-        )
+            buttonIcon = Icons.Filled.ArrowBack
+        ) { navController.popBackStack() }
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,

@@ -4,8 +4,11 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.AuthCredential
-import com.lanazirot.anonymouschat.domain.models.UserLogin
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.lanazirot.anonymouschat.domain.models.chat.UserLogin
 import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    authenticationService: IAuthenticationService
+    authenticationService: IAuthenticationService,
+    private val googleSignInClient: GoogleSignInClient,
 ) : ViewModel() {
     private val _auth = authenticationService.getFirebaseAuth()
     private val _loading = MutableLiveData(false)
@@ -81,6 +85,12 @@ class LoginViewModel @Inject constructor(
             }
         } catch (e: Exception) {
             throw e
+        }
+    }
+
+    fun logout() {
+        googleSignInClient.revokeAccess().addOnCompleteListener {
+            Firebase.auth.signOut()
         }
     }
 }

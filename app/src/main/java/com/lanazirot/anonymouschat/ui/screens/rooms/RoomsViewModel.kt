@@ -2,7 +2,7 @@ package com.lanazirot.anonymouschat.ui.screens.rooms
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.lanazirot.anonymouschat.domain.models.Response
+import com.lanazirot.anonymouschat.domain.models.chat.Response
 import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -28,4 +28,6 @@ class RoomsViewModel @Inject constructor (
             }
         }
     }
+
+    fun getCurrentUser() = streamService.getCurrentUser()
 }
