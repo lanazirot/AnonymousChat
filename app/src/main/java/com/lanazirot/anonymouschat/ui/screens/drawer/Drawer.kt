@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.domain.models.drawer
+package com.lanazirot.anonymouschat.ui.screens.drawer
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,6 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.navigator.routes.screens
 
@@ -28,6 +30,8 @@ fun Drawer (
     modifier: Modifier = Modifier,
     onDestinationClicked: (route: String) -> Unit
 ) {
+
+    var name = Firebase.auth.currentUser?.displayName ?: ""
     Column(
         modifier
             .fillMaxHeight()
@@ -45,9 +49,9 @@ fun Drawer (
                     .padding(end = 16.dp)
             )
             Text(
-                text = "Usuario",
+                text = "${name}",
                 color = Color.White,
-                fontSize = 25.sp,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
         }
