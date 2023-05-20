@@ -1,41 +1,73 @@
 {
   "project_info": {
-    "project_number": "284051697851",
-    "project_id": "anonymouschat-5b588",
-    "storage_bucket": "anonymouschat-5b588.appspot.com"
+    "project_number": "866657722835",
+    "project_id": "pokedex-compose",
+    "storage_bucket": "pokedex-compose.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:284051697851:android:f3137ae948e1c257feb99e",
+        "mobilesdk_app_id": "1:866657722835:android:9f26050b02cdd9ed134f26",
         "android_client_info": {
-          "package_name": "com.lanazirot.anonymouschat"
+          "package_name": "com.lanazirot.pokedex"
         }
       },
       "oauth_client": [
         {
-          "client_id": "284051697851-hnrgjhelq7m74u85ttlac6qf57lushth.apps.googleusercontent.com",
+          "client_id": "866657722835-ac8n8t917l79j741q7lggkr6mf7p9jkp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.lanazirot.anonymouschat",
+            "package_name": "com.lanazirot.pokedex",
+            "certificate_hash": "c44685096d11843d0489ff2a318a201b6393de34"
+          }
+        },
+        {
+          "client_id": "866657722835-l4tf74cg7r0c36q8hui6evlc4ehbkj0o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.pokedex",
+            "certificate_hash": "07bf010b07ee672512d99dbb49e91c57700bedc9"
+          }
+        },
+        {
+          "client_id": "866657722835-qg04qtcr0t4bd3ufqgnvbe6ag02ea5gn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.pokedex",
+            "certificate_hash": "76647ee155e690f73790546aa4427488325457e8"
+          }
+        },
+        {
+          "client_id": "866657722835-qta28uv209p3t2vdjgr6euq4rtf8vlh8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.pokedex",
             "certificate_hash": "1e163af468019e4a04e375b59362bf384a6281c8"
           }
         },
         {
-          "client_id": "284051697851-lro474aenbne24s7cten8eu6suvvfjam.apps.googleusercontent.com",
+          "client_id": "866657722835-vdjhq20q9pblm289f2hd41fnjr5dbd4f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.pokedex",
+            "certificate_hash": "c45a247c2c14510a5ccb28e7cdb120562982789c"
+          }
+        },
+        {
+          "client_id": "866657722835-1jued83l5mm620e5qedpcpgkkic5iob4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCk34I_Ajvzw48MOCTws0RlqJ_qxqXwzGM"
+          "current_key": "AIzaSyDIzfIVwKOhHQK3fRobqe3b_qcXXaCOqfk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "284051697851-8g37hb1f1v5qrn3t6189mmkla44efm9p.apps.googleusercontent.com",
+              "client_id": "866657722835-1jued83l5mm620e5qedpcpgkkic5iob4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
