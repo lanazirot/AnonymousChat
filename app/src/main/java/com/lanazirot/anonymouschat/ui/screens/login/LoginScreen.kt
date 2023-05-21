@@ -31,6 +31,7 @@ import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
+import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 @Composable
 fun LoginScreen() {
@@ -112,7 +113,7 @@ fun LoginScreen() {
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(147, 46, 61
             ))
         ) {
-            Text(text = "Iniciar sesión", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Iniciar sesión", color = Color.White, fontFamily = Anonymous, fontSize = 20.sp, fontWeight = FontWeight.Normal)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -132,7 +133,7 @@ fun LoginScreen() {
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(147, 46, 61
             ))
         ) {
-            Text(text = "Iniciar sesión con Google", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Iniciar sesión con Google", color = Color.White, fontFamily = Anonymous, fontSize = 20.sp, fontWeight = FontWeight.Normal)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -145,7 +146,7 @@ fun LoginScreen() {
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(147, 46, 61
             ))
         ) {
-            Text(text = "Registrarme", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Registrarme", color = Color.White, fontFamily = Anonymous, fontSize = 20.sp, fontWeight = FontWeight.Normal)
         }
 
     }
