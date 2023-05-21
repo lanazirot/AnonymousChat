@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AnonymousChat</string>
+    <string name="google_token">284051697851-lro474aenbne24s7cten8eu6suvvfjam.apps.googleusercontent.com</string>
+    <string name="stream_app_key">g86vvadnsr44</string>
+</resources>
