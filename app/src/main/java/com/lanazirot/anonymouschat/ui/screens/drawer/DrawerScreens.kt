@@ -47,7 +47,7 @@ fun TopBar(title: String = "", buttonIcon: ImageVector, icon: Painter?, onButton
                 color = Color.White,
                 fontFamily = Anonymous,
                 fontWeight = FontWeight.Black,
-                fontSize = 25.sp
+                fontSize = 35.sp
             )
         },
         navigationIcon = {
