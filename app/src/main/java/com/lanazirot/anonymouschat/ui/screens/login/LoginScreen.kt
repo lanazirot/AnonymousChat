@@ -148,11 +148,5 @@ fun LoginScreen() {
             Text(text = "Registrarme", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
         }
 
-        Button(
-            onClick = { loginViewModel.logout() }
-        ) {
-            Text(text = "Logout")
-        }
-
     }
 }
