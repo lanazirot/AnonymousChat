@@ -20,10 +20,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.lanazirot.anonymouschat.domain.models.drawer.ScrollableScreen
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
+import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 @Composable
 fun TopBar(title: String = "", buttonIcon: ImageVector, icon: Painter?, onButtonClicked: () -> Unit) {
@@ -41,7 +44,10 @@ fun TopBar(title: String = "", buttonIcon: ImageVector, icon: Painter?, onButton
 
             Text(
                 text = tittleStyled,
-                color = Color.White
+                color = Color.White,
+                fontFamily = Anonymous,
+                fontWeight = FontWeight.Black,
+                fontSize = 25.sp
             )
         },
         navigationIcon = {
