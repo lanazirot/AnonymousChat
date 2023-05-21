@@ -16,7 +16,6 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 @Composable
 fun StyledText(value: String, text : String, onValueChange: (String) -> Unit, visualTransformation: VisualTransformation) {
     OutlinedTextField(
@@ -31,9 +30,12 @@ fun StyledText(value: String, text : String, onValueChange: (String) -> Unit, vi
                     text = text,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
+//                    style = Anonymous,
+//                    fontSize = 24.sp,
+//                    fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.h2.copy(
                         fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Normal
                     )
                 )
             }},
