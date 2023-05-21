@@ -50,7 +50,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
             Spacer(modifier = Modifier.height(20.dp))
             Column(modifier = Modifier.fillMaxWidth().height(500.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
                 Text(text = "Buscando salas", fontFamily = Anonymous, fontWeight = FontWeight.Normal, fontSize = 26.sp, color = Color.White)
-                Spacer(modifier = Modifier.width(15.dp))
+                Spacer(modifier = Modifier.height(15.dp))
                 ChannelList(
                     itemContent = { channelItem ->
                         CustomRoomList(channelItem = channelItem, user = user)
