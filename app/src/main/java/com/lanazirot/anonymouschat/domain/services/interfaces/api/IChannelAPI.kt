@@ -8,16 +8,12 @@ import retrofit2.http.DELETE
 import retrofit2.http.POST
 
 interface IChannelAPI {
-
-    //ESTAN MAL xd
-    //PERO CREO QUE NO SON NECESARIAS
-    //TODO: VERIFICAR
     @POST("channel/")
-    suspend fun createChannel(@Body channelDTO: CreateChannelDTO): Response<CreateChannelDTO>
+    suspend fun createChannel(@Body channelDTO: CreateChannelDTO): CreateChannelDTO
 
     @POST("channel/add-member-to-channel")
-    suspend fun addMemberToChannel(@Body channelDTO: AddMemberToChannelDTO): Response<AddMemberToChannelDTO>
+    suspend fun addMemberToChannel(@Body channelDTO: AddMemberToChannelDTO): AddMemberToChannelDTO
 
     @DELETE("channel/")
-    suspend fun deleteChannel(@Body channelID: String): Response<Boolean>
+    suspend fun deleteChannel(@Body channelID: String): Boolean
 }

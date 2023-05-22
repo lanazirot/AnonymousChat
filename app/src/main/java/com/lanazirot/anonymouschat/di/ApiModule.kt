@@ -1,6 +1,7 @@
 package com.lanazirot.anonymouschat.di
 
 import com.lanazirot.anonymouschat.domain.constants.APIConstants
+import com.lanazirot.anonymouschat.domain.converters.BooleanConverterFactory
 import com.lanazirot.anonymouschat.domain.converters.StringConverterFactory
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IAuthAPI
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI
@@ -23,8 +24,9 @@ object ApiModule {
     fun provideAPIBuilder(moshiProvider : Moshi) :Retrofit =
         Builder()
             .baseUrl(APIConstants.BASE_URL)
-            .addConverterFactory(StringConverterFactory())
             .addConverterFactory(MoshiConverterFactory.create(moshiProvider))
+            .addConverterFactory(StringConverterFactory())
+            .addConverterFactory(BooleanConverterFactory())
         .build()
 
     @Provides

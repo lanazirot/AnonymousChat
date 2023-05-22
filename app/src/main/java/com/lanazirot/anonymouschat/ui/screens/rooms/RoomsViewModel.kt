@@ -18,7 +18,7 @@ class RoomsViewModel @Inject constructor (
             val user = userResponse.data
 
             if(user != null) {
-                val connectionResponse = streamService.connectUser(user)
+                val connectionResponse = streamService.connectUser(user, false)
 
                 if(connectionResponse is Response.Success) {
                     Log.d("StreamService", "User connected")

@@ -1,7 +1,10 @@
 package com.lanazirot.anonymouschat.domain.services.implementations
 
+import com.lanazirot.anonymouschat.domain.models.api.AddMemberToChannelDTO
+import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
 import com.lanazirot.anonymouschat.domain.models.chat.Response
 import com.lanazirot.anonymouschat.domain.repositories.AuthRepository
+import com.lanazirot.anonymouschat.domain.repositories.ChannelRepository
 import com.lanazirot.anonymouschat.domain.repositories.UserRepository
 import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
 import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
@@ -11,51 +14,115 @@ import javax.inject.Inject
 class StreamService @Inject constructor(
     private val streamClient : IAuthenticationService,
     private val userRepository: UserRepository,
+    private val channelRepository: ChannelRepository,
     private val authRepository: AuthRepository
 ) : IStreamService {
-    override fun connectUser(user: User): Response<Boolean> {
+    override fun getCurrentUser(): User? {
+        return streamClient.getChatClient().getCurrentUser()
+    }
+
+    override fun connectUser(user: User, lastAttempt: Boolean): Response<Boolean> {
         try {
-            var response : Response<Boolean> = Response.Failure(Exception())
-                val token = userRepository.generateToken(user.id)
+            var response: Response<Boolean> = Response.Failure(Exception())
+            val token = userRepository.generateToken(user.id)
 
-                streamClient.getChatClient().connectUser(
-                    user = user,
-                    token = token
-                ).enqueue { result ->
-                    if (result.isSuccess) {
-                        response = Response.Success(true)
-                    } else {
-                        response = Response.Failure(Exception())
-                    }
+            streamClient.getChatClient().connectUser(
+                user = user,
+                token = token
+            ).enqueue { result ->
+                if (result.isSuccess) { //Si te lograste conectar, adelante..
+                    response = Response.Success(true)
+                } else { //Si no lo lograste, es porque el usuario aun no existe en Stream, entonces lo creamos y volvemos a intentar
+                    if (!lastAttempt) { //Siempre y cuando no haya intentado crearlo anteriormente
+                        if (createUser(user.id)) //Si logro crear el usuario, volvemos a intentar
+                            response = connectUser(
+                                user,
+                                true
+                            ) //Intentamos de nuevo y regresamos la respuesta
+                    } //Si no logro crear el usuario, regresamos la respuesta erronea
                 }
+            }
 
-                return response
-
+            return response
         } catch (e: Exception) {
             return Response.Failure(e)
         }
     }
 
-    override fun getAnonymousUser(email : String): Response<User> {
+    override fun getAnonymousUser(email: String): Response<User> {
         try {
             val emailForStream = email.replace(".", "-").replace("@", "-")
             val randomUser = authRepository.getRandomUser(emailForStream)
 
-            return Response.Success(User(
-                id = emailForStream,
-                name = randomUser.username,
-                image = randomUser.photoUrl
-            ))
+            return Response.Success(
+                User(
+                    id = emailForStream,
+                    name = randomUser.username,
+                    image = randomUser.photoUrl
+                )
+            )
         } catch (e: Exception) {
             return Response.Failure(e)
         }
     }
 
-    override fun createUser(): Response<User> {
-        TODO()
+    override fun createUser(email: String): Boolean {
+        try {
+            val emailForStream = email.replace(".", "-").replace("@", "-")
+            return userRepository.createUser(emailForStream)
+        } catch (e: Exception) {
+            return false
+        }
     }
 
-    override fun getCurrentUser() : User? {
-        return streamClient.getChatClient().getCurrentUser()
+    override fun createChannel(email: String): Response<Boolean> {
+        try {
+            val response = channelRepository.createChannel(
+                CreateChannelDTO(
+                    email = email,
+                )
+            )
+
+            if (response) {
+                return Response.Success(true)
+            } else {
+                return Response.Failure(Exception())
+            }
+        } catch (e: Exception) {
+            return Response.Failure(e)
+        }
+    }
+
+    override fun deleteChannel(channelID: String): Response<Boolean> {
+        try {
+            val response = channelRepository.deleteChannel(channelID)
+
+            if (response) {
+                return Response.Success(true)
+            } else {
+                return Response.Failure(Exception())
+            }
+        } catch (e: Exception) {
+            return Response.Failure(e)
+        }
+    }
+
+    override fun addMemberToChannel(channelID: String, email: String): Response<Boolean> {
+        try {
+            val response = channelRepository.addMemberToChannel(
+                AddMemberToChannelDTO(
+                    channelID = channelID,
+                    email = email
+                )
+            )
+
+            if (response) {
+                return Response.Success(true)
+            } else {
+                return Response.Failure(Exception())
+            }
+        } catch (e: Exception) {
+            return Response.Failure(e)
+        }
     }
 }

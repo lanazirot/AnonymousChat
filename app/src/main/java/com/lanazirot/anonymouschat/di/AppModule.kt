@@ -6,12 +6,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.di.RepositoriesModule.provideAuthRepository
+import com.lanazirot.anonymouschat.di.RepositoriesModule.provideChannelRepository
 import com.lanazirot.anonymouschat.di.RepositoriesModule.provideUserRepository
 import com.lanazirot.anonymouschat.domain.services.implementations.AuthenticationService
 import com.lanazirot.anonymouschat.domain.services.implementations.StreamService
 import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
 import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IAuthAPI
+import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IUserAPI
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -53,11 +55,13 @@ object AppModule {
     fun provideStreamService(
         @ApplicationContext context: Context,
         userAPI: IUserAPI,
-        authAPI: IAuthAPI
+        authAPI: IAuthAPI,
+        channelAPI: IChannelAPI
     ): IStreamService = StreamService(
         streamClient = provideAuthenticationService(context),
         userRepository = provideUserRepository(userAPI),
-        authRepository = provideAuthRepository(authAPI)
+        authRepository = provideAuthRepository(authAPI),
+        channelRepository = provideChannelRepository(channelAPI)
     )
 
     @Provides
