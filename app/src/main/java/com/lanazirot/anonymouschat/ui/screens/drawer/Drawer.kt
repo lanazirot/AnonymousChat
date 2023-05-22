@@ -23,14 +23,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.screens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
-import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 
 @Composable
 fun Drawer (

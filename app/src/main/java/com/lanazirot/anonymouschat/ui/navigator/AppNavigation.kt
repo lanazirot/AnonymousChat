@@ -1,37 +1,18 @@
 package com.lanazirot.anonymouschat.ui.navigator
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.DrawerValue
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.ModalDrawer
-import androidx.compose.material.rememberDrawerState
-import androidx.compose.material.rememberSwipeableState
-import androidx.compose.material.swipeable
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -41,15 +22,9 @@ import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.screens.appScreen.LoginScreen
 import com.lanazirot.anonymouschat.ui.screens.appScreen.RegisterScreen
 import com.lanazirot.anonymouschat.ui.screens.chat.ChatScreen
-import com.lanazirot.anonymouschat.ui.screens.drawer.Creditos
-import com.lanazirot.anonymouschat.ui.screens.drawer.Drawer
-import com.lanazirot.anonymouschat.ui.screens.drawer.Dudas
-import com.lanazirot.anonymouschat.ui.screens.drawer.Invitar
-import com.lanazirot.anonymouschat.ui.screens.drawer.Politicas
-import com.lanazirot.anonymouschat.ui.screens.drawer.Preferencias
+import com.lanazirot.anonymouschat.ui.screens.drawer.*
 import com.lanazirot.anonymouschat.ui.screens.rooms.RoomsScreen
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
 
 enum class SwipeDirection(val raw: Int) {
     Left(0),
