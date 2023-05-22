@@ -24,7 +24,7 @@ class AuthenticationService @Inject constructor(
         if (chatClient == null) {
             chatClient = ChatClient.Builder(context.getString(R.string.stream_app_key), context)
                 .withPlugin(offlinePluginFactory)
-                .logLevel(ChatLogLevel.ALL)
+                .logLevel(ChatLogLevel.ALL)//TODO: Change level log
                 .build()
         }
 

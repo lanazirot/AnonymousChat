@@ -1,32 +1,55 @@
 package com.lanazirot.anonymouschat.domain.repositories
 
-import com.lanazirot.anonymouschat.domain.services.interfaces.api.IUserAPI;
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import android.util.Log
+import com.lanazirot.anonymouschat.domain.services.interfaces.api.IUserAPI
+import kotlinx.coroutines.*
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class UserRepository @Inject constructor(
     private val userAPI: IUserAPI
-){
-    fun generateToken(email: String) : Flow<String> = flow {
-        val response = userAPI.generateToken(email)
-        if (response.isSuccessful) {
-            emit(response.body()!!)
-        } else {
-            throw Exception("Error generating token")
-        }
-    }.flowOn(Dispatchers.IO)
+) {
+    @OptIn(DelicateCoroutinesApi::class)
+    fun generateToken(email: String) : String {
+        //Obtenemos el token desde nuestro almacenamiento local
+        var token = ""
 
-    fun createUser(email: String) : Flow<Unit> = flow {
-        val response = userAPI.createUser(email)
-        if (response.isSuccessful) {
-            emit(Unit)
-        } else {
-            throw Exception("Error creating user")
+        //Si tengo un token almacenado en mi local, utiliza ese token
+        if (token != "") {
+            return token
         }
-    }.flowOn(Dispatchers.IO)
+
+        runBlocking {
+            val job = GlobalScope.launch {
+                //Generamos el token
+                token = userAPI.generateToken(email)
+
+                if(token != "") {
+                    Log.d("StreamService", "Token generated")
+                    //Guardamos el token en local
+
+                } else {
+                    Log.d("StreamService", "Token not generated")
+                }
+            }
+            job.join()
+        }
+
+        return token
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun createUser(email: String): Boolean {
+        var response = ""
+
+        runBlocking {
+            val job = GlobalScope.launch {
+                response = userAPI.createUser(email)
+            }
+            job.join()
+        }
+
+        return response == ""
+    }
 }

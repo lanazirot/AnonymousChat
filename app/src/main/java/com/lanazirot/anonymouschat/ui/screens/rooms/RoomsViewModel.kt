@@ -11,16 +11,18 @@ import javax.inject.Inject
 class RoomsViewModel @Inject constructor (
     private val streamService: IStreamService,
 ): ViewModel() {
-    fun connectUser(email :String) {
+    fun getCurrentUser() = streamService.getCurrentUser()
+
+    fun connectUser(email: String) {
         val userResponse = streamService.getAnonymousUser(email)
 
-        if(userResponse is Response.Success) {
+        if (userResponse is Response.Success) {
             val user = userResponse.data
 
-            if(user != null) {
-                val connectionResponse = streamService.connectUser(user)
+            if (user != null) {
+                val connectionResponse = streamService.connectUser(user, false)
 
-                if(connectionResponse is Response.Success) {
+                if (connectionResponse is Response.Success) {
                     Log.d("StreamService", "User connected")
                 } else {
                     Log.d("StreamService", "User not connected")
@@ -29,5 +31,7 @@ class RoomsViewModel @Inject constructor (
         }
     }
 
-    fun getCurrentUser() = streamService.getCurrentUser()
+    fun createRoom() {
+        streamService.createChannel(getCurrentUser()!!.id)
+    }
 }

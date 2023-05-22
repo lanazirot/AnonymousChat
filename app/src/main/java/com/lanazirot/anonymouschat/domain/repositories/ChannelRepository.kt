@@ -2,8 +2,9 @@ package com.lanazirot.anonymouschat.domain.repositories;
 
 import com.lanazirot.anonymouschat.domain.models.api.AddMemberToChannelDTO
 import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
+import com.lanazirot.anonymouschat.domain.models.api.RandomUserDTO
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI;
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -14,30 +15,48 @@ import javax.inject.Singleton;
 class ChannelRepository @Inject constructor(
     private val channelAPI: IChannelAPI
 ) {
-    fun createChannel(channelDTO: CreateChannelDTO) : Flow<CreateChannelDTO> = flow {
-        val response = channelAPI.createChannel(channelDTO)
-        if (response.isSuccessful) {
-            emit(response.body()!!)
-        } else {
-            throw Exception("Error creating channel")
-        }
-    }.flowOn(Dispatchers.IO)
+    @OptIn(DelicateCoroutinesApi::class)
+    fun createChannel(channelDTO: CreateChannelDTO): Boolean {
+        var response :CreateChannelDTO? = null
 
-    fun addMemberToChannel(channelDTO: AddMemberToChannelDTO) : Flow<AddMemberToChannelDTO> = flow {
-        val response = channelAPI.addMemberToChannel(channelDTO)
-        if (response.isSuccessful) {
-            emit(response.body()!!)
-        } else {
-            throw Exception("Error adding member to channel")
-        }
-    }.flowOn(Dispatchers.IO)
+        runBlocking {
+            val job = GlobalScope.launch {
+                response = channelAPI.createChannel(channelDTO)
+            }
 
-    fun deleteChannel(channelID: String) : Flow<Boolean> = flow {
-        val response = channelAPI.deleteChannel(channelID)
-        if (response.isSuccessful) {
-            emit(response.body()!!)
-        } else {
-            throw Exception("Error deleting channel")
+            job.join()
         }
-    }.flowOn(Dispatchers.IO)
+
+        return response != null
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun addMemberToChannel(channelDTO: AddMemberToChannelDTO): Boolean {
+        var response :AddMemberToChannelDTO? = null
+
+        runBlocking {
+            val job = GlobalScope.launch {
+                response = channelAPI.addMemberToChannel(channelDTO)
+            }
+
+            job.join()
+        }
+
+        return response != null
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun deleteChannel(channelID: String): Boolean {
+        var response :Boolean? = null
+
+        runBlocking {
+            val job = GlobalScope.launch {
+                response = channelAPI.deleteChannel(channelID)
+            }
+
+            job.join()
+        }
+
+        return response != null
+    }
 }

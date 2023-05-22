@@ -38,8 +38,9 @@ fun Drawer (
     onDestinationClicked: (route: String) -> Unit,
     onCloseDrawer: () -> Unit
 ) {
-    var name = Firebase.auth.currentUser?.displayName ?: ""
+    val name = Firebase.auth.currentUser?.displayName ?: ""
     val navController = GlobalProvider.current.navController
+    val loginViewModel: LoginViewModel = hiltViewModel()
 
     Column(
         modifier
@@ -57,7 +58,7 @@ fun Drawer (
                     .padding(end = 16.dp)
             )
             Text(
-                text = "${name}",
+                text = name,
                 color = Color.White,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
@@ -86,6 +87,7 @@ fun Drawer (
         Button(
             onClick = {
                 onCloseDrawer()
+                loginViewModel.logout()
                 navController.navigate(AppScreens.Login.route) {
                     popUpTo(AppScreens.Login.route) {
                         inclusive = true
