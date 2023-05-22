@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.domain.models.drawer
+package com.lanazirot.anonymouschat.ui.screens.drawer
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,22 +23,31 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.lanazirot.anonymouschat.R
+import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.screens
+import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
+import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 
 @Composable
 fun Drawer (
     modifier: Modifier = Modifier,
-    onDestinationClicked: (route: String) -> Unit
+    onDestinationClicked: (route: String) -> Unit,
+    onCloseDrawer: () -> Unit
 ) {
+    var name = Firebase.auth.currentUser?.displayName ?: ""
+    val navController = GlobalProvider.current.navController
+
     Column(
         modifier
             .fillMaxHeight()
             .width(300.dp)
             .background(Color(83, 83, 83))
-            .padding(start = 25.dp)
     ) {
-        Row(modifier = Modifier,
+        Row(modifier = Modifier.fillMaxWidth().background(Color.Black).padding(start = 25.dp),
             verticalAlignment = Alignment.CenterVertically) {
             Image(
                 painter = painterResource(R.drawable.iusuario),
@@ -45,15 +57,15 @@ fun Drawer (
                     .padding(end = 16.dp)
             )
             Text(
-                text = "Usuario",
+                text = "${name}",
                 color = Color.White,
-                fontSize = 25.sp,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
         }
         Spacer(modifier = Modifier.height(24.dp))
         screens.forEach { screen ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(modifier= Modifier.padding(start = 25.dp),verticalAlignment = Alignment.CenterVertically) {
                 Image(
                     painter = painterResource(screen.icon),
                     contentDescription = "null",
@@ -71,5 +83,28 @@ fun Drawer (
             }
             Spacer(modifier = Modifier.height(25.dp))
         }
+        Button(
+            onClick = {
+                onCloseDrawer()
+                navController.navigate(AppScreens.Login.route) {
+                    popUpTo(AppScreens.Login.route) {
+                        inclusive = true
+                    }
+                }
+            },
+            modifier = Modifier.padding(8.dp),
+            content = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Image(
+                        painter = painterResource(R.drawable.isalir), // Reemplaza con el recurso de imagen adecuado
+                        contentDescription = "Logout",
+                        modifier = Modifier.size(24.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = "Logout",color = Color.White)
+                }
+            },
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+        )
     }
 }

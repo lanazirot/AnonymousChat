@@ -31,9 +31,12 @@ fun StyledText(value: String, text : String, onValueChange: (String) -> Unit, vi
                     text = text,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
+//                    style = Anonymous,
+//                    fontSize = 24.sp,
+//                    fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.h2.copy(
                         fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Normal
                     )
                 )
             }},
