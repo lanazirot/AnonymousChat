@@ -15,6 +15,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lanazirot.anonymouschat.ui.theme.Anonymous
 import io.getstream.chat.android.client.models.Channel
 
 @Composable
@@ -37,8 +38,9 @@ fun ChatHeader(channel: Channel, onBack : () -> Unit) {
             Text(
                 text = channel.name,
                 style = TextStyle(
+                    fontFamily = Anonymous,
                     fontSize = 16.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.Normal,
                     color = Color.Red
                 ),
             )
