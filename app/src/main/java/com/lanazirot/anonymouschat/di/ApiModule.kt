@@ -24,9 +24,9 @@ object ApiModule {
     fun provideAPIBuilder(moshiProvider : Moshi) :Retrofit =
         Builder()
             .baseUrl(APIConstants.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshiProvider))
             .addConverterFactory(StringConverterFactory())
             .addConverterFactory(BooleanConverterFactory())
+            .addConverterFactory(MoshiConverterFactory.create(moshiProvider))
         .build()
 
     @Provides

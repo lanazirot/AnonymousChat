@@ -15,9 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.android.play.integrity.internal.z
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.lanazirot.anonymouschat.ui.screens.drawer.TopBar
+import com.lanazirot.anonymouschat.ui.components.TopBar
 import com.lanazirot.anonymouschat.ui.screens.rooms.list.CustomRoomList
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
 import io.getstream.chat.android.compose.ui.channels.list.ChannelList
@@ -25,11 +26,13 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 @Composable
 fun RoomsScreen(openDrawer: () -> Unit) {
-    val roomsViewModel : RoomsViewModel = hiltViewModel()
+    val roomsViewModel: RoomsViewModel = hiltViewModel()
     val email = Firebase.auth.currentUser?.email ?: ""
     val user = roomsViewModel.getCurrentUser()
 
     roomsViewModel.connectUser(email)
+
+
 
     ChatTheme {
         Column {
@@ -43,18 +46,36 @@ fun RoomsScreen(openDrawer: () -> Unit) {
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    //TODO: Create new room
+                    roomsViewModel.createRoom()
                 }
             ) {
                 Text(text = "Crear nueva sala", color = Color.Black)
             }
+
             Spacer(modifier = Modifier.height(20.dp))
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .height(500.dp), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                Text(text = "Buscando salas", fontFamily = Anonymous, fontWeight = FontWeight.Normal, fontSize = 26.sp, color = Color.White)
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(500.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Buscando salas",
+                    fontFamily = Anonymous,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 26.sp,
+                    color = Color.White
+                )
                 Spacer(modifier = Modifier.height(15.dp))
-                Text(text = "🤫", fontFamily = Anonymous, fontWeight = FontWeight.Normal, fontSize = 50.sp, color = Color.White)
+                Text(
+                    text = "🤫",
+                    fontFamily = Anonymous,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 50.sp,
+                    color = Color.White
+                )
                 Spacer(modifier = Modifier.height(15.dp))
                 ChannelList(
                     itemContent = { channelItem ->

@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.ui.screens.drawer
+package com.lanazirot.anonymouschat.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size

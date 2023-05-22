@@ -38,7 +38,6 @@ class LoginViewModel @Inject constructor(
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         toHome()
-                        //TODO Guardar token global, generar token Stream
                     }
                 }
                 .addOnFailureListener { exception ->
@@ -73,7 +72,6 @@ class LoginViewModel @Inject constructor(
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             toHome()
-                            //TODO Crear usuario en Stream
                         }
 
                         _loading.value = false

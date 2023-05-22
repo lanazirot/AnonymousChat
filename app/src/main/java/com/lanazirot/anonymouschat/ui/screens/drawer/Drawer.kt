@@ -23,12 +23,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.screens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
+import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 
 @Composable
 fun Drawer (
@@ -36,8 +38,9 @@ fun Drawer (
     onDestinationClicked: (route: String) -> Unit,
     onCloseDrawer: () -> Unit
 ) {
-    var name = Firebase.auth.currentUser?.displayName ?: ""
+    val name = Firebase.auth.currentUser?.displayName ?: ""
     val navController = GlobalProvider.current.navController
+    val loginViewModel: LoginViewModel = hiltViewModel()
 
     Column(
         modifier
@@ -55,7 +58,7 @@ fun Drawer (
                     .padding(end = 16.dp)
             )
             Text(
-                text = "${name}",
+                text = name,
                 color = Color.White,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
@@ -84,6 +87,7 @@ fun Drawer (
         Button(
             onClick = {
                 onCloseDrawer()
+                loginViewModel.logout()
                 navController.navigate(AppScreens.Login.route) {
                     popUpTo(AppScreens.Login.route) {
                         inclusive = true

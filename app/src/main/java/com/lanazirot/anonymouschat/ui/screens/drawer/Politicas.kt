@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.domain.models.drawer.ScrollableScreen
+import com.lanazirot.anonymouschat.ui.components.TopBar
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 
 @Composable
