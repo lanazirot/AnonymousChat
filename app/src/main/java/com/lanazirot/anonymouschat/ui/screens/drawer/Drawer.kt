@@ -83,7 +83,6 @@ fun Drawer (
             }
             Spacer(modifier = Modifier.height(25.dp))
         }
-
         Button(
             onClick = {
                 onCloseDrawer()
@@ -107,6 +106,5 @@ fun Drawer (
             },
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
         )
-
     }
 }

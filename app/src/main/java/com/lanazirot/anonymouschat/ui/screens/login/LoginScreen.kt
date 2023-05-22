@@ -148,6 +148,5 @@ fun LoginScreen() {
         ) {
             Text(text = "Registrarme", color = Color.White, fontFamily = Anonymous, fontSize = 20.sp, fontWeight = FontWeight.Normal)
         }
-
     }
 }
