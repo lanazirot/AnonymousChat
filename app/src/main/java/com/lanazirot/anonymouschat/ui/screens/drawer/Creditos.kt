@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.TopBar
+import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 
 @Composable
@@ -26,7 +27,7 @@ fun Creditos() {
 
             icon = painterResource(R.drawable.icreditos),
             buttonIcon = Icons.Filled.ArrowBack
-        ) { navController.popBackStack() }
+        ) { navController.navigate(DrawerScreens.Main.route) }
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,

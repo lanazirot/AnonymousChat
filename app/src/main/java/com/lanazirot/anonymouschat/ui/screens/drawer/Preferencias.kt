@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.TopBar
+import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 
 @Composable
@@ -23,7 +24,7 @@ fun Preferencias() {
             title = "Preferencias",
             icon = painterResource(R.drawable.ipreferencias),
             buttonIcon = Icons.Filled.ArrowBack
-        ) { navController.popBackStack() }
+        ) { navController.navigate(DrawerScreens.Main.route) }
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
