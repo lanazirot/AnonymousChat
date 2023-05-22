@@ -8,6 +8,10 @@ import retrofit2.http.DELETE
 import retrofit2.http.POST
 
 interface IChannelAPI {
+
+    //ESTAN MAL xd
+    //PERO CREO QUE NO SON NECESARIAS
+    //TODO: VERIFICAR
     @POST("channel/")
     suspend fun createChannel(@Body channelDTO: CreateChannelDTO): Response<CreateChannelDTO>
 

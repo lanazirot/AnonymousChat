@@ -1,15 +1,18 @@
 package com.lanazirot.anonymouschat.domain.services.interfaces.api
 
-import io.getstream.chat.android.client.models.User
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import com.lanazirot.anonymouschat.domain.constants.APIConstants
+import retrofit2.http.*
 
 interface IUserAPI {
     @GET("user/connect-user")
-    suspend fun generateToken(@Query("email") email: String): Response<String>
+    @Headers("X-API-Key: ${APIConstants.API_KEY}")
+    suspend fun generateToken(
+        @Query("email") email: String
+    ): String
 
     @POST("user/create-user")
-    suspend fun createUser(@Query("email") email: String): Response<Unit>
+    @Headers("X-API-Key: ${APIConstants.API_KEY}")
+    suspend fun createUser(
+        @Query("email") email: String
+    ): String
 }

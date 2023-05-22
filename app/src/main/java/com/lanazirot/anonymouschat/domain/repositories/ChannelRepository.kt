@@ -14,30 +14,8 @@ import javax.inject.Singleton;
 class ChannelRepository @Inject constructor(
     private val channelAPI: IChannelAPI
 ) {
-    fun createChannel(channelDTO: CreateChannelDTO) : Flow<CreateChannelDTO> = flow {
-        val response = channelAPI.createChannel(channelDTO)
-        if (response.isSuccessful) {
-            emit(response.body()!!)
-        } else {
-            throw Exception("Error creating channel")
-        }
-    }.flowOn(Dispatchers.IO)
-
-    fun addMemberToChannel(channelDTO: AddMemberToChannelDTO) : Flow<AddMemberToChannelDTO> = flow {
-        val response = channelAPI.addMemberToChannel(channelDTO)
-        if (response.isSuccessful) {
-            emit(response.body()!!)
-        } else {
-            throw Exception("Error adding member to channel")
-        }
-    }.flowOn(Dispatchers.IO)
-
-    fun deleteChannel(channelID: String) : Flow<Boolean> = flow {
-        val response = channelAPI.deleteChannel(channelID)
-        if (response.isSuccessful) {
-            emit(response.body()!!)
-        } else {
-            throw Exception("Error deleting channel")
-        }
-    }.flowOn(Dispatchers.IO)
+    //ES NECESARIO???
+    //Crear canal
+    //Agregar miembro al canal
+    //Eliminar canal
 }

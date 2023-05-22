@@ -55,7 +55,6 @@ class LoginViewModel @Inject constructor(
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         toHome()
-                        //TODO Guardar token global, generar token Stream
                     }
                 }
                 .addOnFailureListener { exception ->
