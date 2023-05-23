@@ -32,6 +32,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
 
     roomsViewModel.connectUser(email)
 
+    roomsViewModel.startLocationServices()
 
 
     ChatTheme {
