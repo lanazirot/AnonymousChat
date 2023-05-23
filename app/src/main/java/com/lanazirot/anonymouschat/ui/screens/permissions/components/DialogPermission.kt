@@ -1,0 +1,99 @@
+package com.lanazirot.anonymouschat.ui.screens.permissions.components
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+
+@Composable
+fun DialogPermission(
+    title: String? = "Title",
+    desc: String? = "Default dialog description",
+    enableLocation: MutableState<Boolean>,
+    onClick: () -> Unit
+) {
+    Dialog(
+        onDismissRequest = { enableLocation.value = false }
+    ) {
+        Box(
+            modifier = Modifier
+                .padding(top = 20.dp, bottom = 20.dp)
+                .background(
+                    color = MaterialTheme.colors.primary,
+                    shape = RoundedCornerShape(25.dp, 5.dp, 25.dp, 5.dp)
+                )
+                .verticalScroll(rememberScrollState())
+        ) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = title!!,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                    letterSpacing = 2.sp,
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.h3,
+                    color = MaterialTheme.colors.primary,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = desc!!,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(top = 10.dp, start = 25.dp, end = 25.dp)
+                        .fillMaxWidth(),
+                    letterSpacing = 1.sp,
+                    style = MaterialTheme.typography.h3,
+                    color = MaterialTheme.colors.secondary,
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 32.dp, end = 32.dp),
+                    onClick = onClick,
+                    contentPadding = PaddingValues(),
+                    colors = ButtonDefaults.buttonColors(
+                        contentColor = Color.White,
+                    ),
+                    shape = RoundedCornerShape(topStart = 30.dp, bottomEnd = 30.dp)
+                ) {
+                    Text(
+                        text = "Aceptar",
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth(),
+                        letterSpacing = 2.sp,
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.h3,
+                        color = Color.White,
+                    )
+                }
+            }
+        }
+    }
+}

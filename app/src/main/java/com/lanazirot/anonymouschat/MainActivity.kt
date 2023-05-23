@@ -14,9 +14,13 @@ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.splashscreen.App
 import com.lanazirot.anonymouschat.ui.theme.AnonymousChatTheme
 import dagger.hilt.android.AndroidEntryPoint
+import android.Manifest
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.lanazirot.anonymouschat.ui.screens.permissions.RequestPermission
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalPermissionsApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,7 +36,9 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = Color.Black
                     ) {
-                        App(navController)
+                        RequestPermission(permission = Manifest.permission.ACCESS_FINE_LOCATION){
+                            App(navController)
+                        }
                     }
                 }
             }
