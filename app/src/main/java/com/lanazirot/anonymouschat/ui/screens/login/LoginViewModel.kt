@@ -28,6 +28,19 @@ class LoginViewModel @Inject constructor(
     private val _userState = MutableStateFlow(UserState())
     var userState: StateFlow<UserState> = _userState.asStateFlow()
 
+
+    private  var _flagErrorOnCard = MutableStateFlow(false)
+    var flagErrorOnCard : StateFlow<Boolean> = _flagErrorOnCard.asStateFlow()
+
+
+
+    fun updateFlagErrorOnCard(flag: Boolean) {
+        _flagErrorOnCard.value = flag
+    }
+
+    fun isFlagOn(): Boolean {
+        return _flagErrorOnCard.value
+    }
     fun updateUser(newUser: UserLogin) {
         _userState.value = _userState.value.copy(user = newUser)
     }
@@ -47,6 +60,8 @@ class LoginViewModel @Inject constructor(
             Log.d("LoginViewModel", e.toString())
         }
     }
+
+
 
     fun signInWithGoogle(credential: AuthCredential, toHome: () -> Unit) {
         try {
