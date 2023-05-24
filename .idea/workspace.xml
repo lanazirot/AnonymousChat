@@ -12,13 +12,22 @@
     <list default="true" id="8d1ca69e-3efa-4747-95e2-0b7a0bf91fb6" name="Changes" comment="Vista de rooms y chat. Hardcodeada pero funcional.">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt" afterDir="false" />
+>>>>>>> main-lalo
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Usuario\.android\avd\Pixel_6_API_30.avd]" />
+=======
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RF8N80M4W5A]" />
+>>>>>>> main-lalo
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -52,6 +61,7 @@
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -61,8 +71,20 @@
     &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/Users/Usuario/Documents/Octavo semestre/AnonymousChat/app/src/main/res/drawable&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Documents/Octavo semestre/AnonymousChat/app/src/main/res/drawable&quot;
+=======
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "C:/Users/ejare/Desktop/Repo/ProgramacionAndroidJetpackCompose2023/Unidad2/Ejercicios/curpmovil",
+    "show.migrate.to.gradle.popup": "false"
+>>>>>>> main-lalo
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Usuario\Documents\Octavo semestre\AnonymousChat\app\src\main\res\drawable" />
