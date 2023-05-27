@@ -50,11 +50,11 @@ class StreamService @Inject constructor(
     }
 
     override fun getAnonymousUser(email: String): Response<User> {
-        try {
+        return try {
             val emailForStream = email.replace(".", "-").replace("@", "-")
             val randomUser = authRepository.getRandomUser(emailForStream)
 
-            return Response.Success(
+            Response.Success(
                 User(
                     id = emailForStream,
                     name = randomUser.username,
@@ -62,21 +62,21 @@ class StreamService @Inject constructor(
                 )
             )
         } catch (e: Exception) {
-            return Response.Failure(e)
+            Response.Failure(e)
         }
     }
 
     override fun createUser(email: String): Boolean {
-        try {
+        return try {
             val emailForStream = email.replace(".", "-").replace("@", "-")
-            return userRepository.createUser(emailForStream)
+            userRepository.createUser(emailForStream)
         } catch (e: Exception) {
-            return false
+            false
         }
     }
 
     override fun createChannel(email: String): Response<Boolean> {
-        try {
+        return try {
             val response = channelRepository.createChannel(
                 CreateChannelDTO(
                     email = email,
@@ -84,26 +84,26 @@ class StreamService @Inject constructor(
             )
 
             if (response) {
-                return Response.Success(true)
+                Response.Success(true)
             } else {
-                return Response.Failure(Exception())
+                Response.Failure(Exception())
             }
         } catch (e: Exception) {
-            return Response.Failure(e)
+            Response.Failure(e)
         }
     }
 
     override fun deleteChannel(channelID: String): Response<Boolean> {
-        try {
+        return try {
             val response = channelRepository.deleteChannel(channelID)
 
             if (response) {
-                return Response.Success(true)
+                Response.Success(true)
             } else {
-                return Response.Failure(Exception())
+                Response.Failure(Exception())
             }
         } catch (e: Exception) {
-            return Response.Failure(e)
+            Response.Failure(e)
         }
     }
 

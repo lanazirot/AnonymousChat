@@ -14,11 +14,43 @@
       },
       "oauth_client": [
         {
+          "client_id": "284051697851-0dhq4llmsv50nvmelddmif1ccsfrsnu1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.anonymouschat",
+            "certificate_hash": "76647ee155e690f73790546aa4427488325457e8"
+          }
+        },
+        {
+          "client_id": "284051697851-20nb5j85h6fn7a665ggnc6akdi8k1v8v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.anonymouschat",
+            "certificate_hash": "c45a247c2c14510a5ccb28e7cdb120562982789c"
+          }
+        },
+        {
+          "client_id": "284051697851-b443spj50ec7koft6mag0a9dsm2pc1oh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.anonymouschat",
+            "certificate_hash": "c44685096d11843d0489ff2a318a201b6393de34"
+          }
+        },
+        {
           "client_id": "284051697851-hnrgjhelq7m74u85ttlac6qf57lushth.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.lanazirot.anonymouschat",
             "certificate_hash": "1e163af468019e4a04e375b59362bf384a6281c8"
+          }
+        },
+        {
+          "client_id": "284051697851-q3ghje2vgdk6ikasgpnjmn0umtag9pba.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lanazirot.anonymouschat",
+            "certificate_hash": "07bf010b07ee672512d99dbb49e91c57700bedc9"
           }
         },
         {
