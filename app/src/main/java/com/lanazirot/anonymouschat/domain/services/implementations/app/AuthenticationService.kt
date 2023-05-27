@@ -1,9 +1,9 @@
-package com.lanazirot.anonymouschat.domain.services.implementations
+package com.lanazirot.anonymouschat.domain.services.implementations.app
 
 import android.content.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.lanazirot.anonymouschat.R
-import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
+import com.lanazirot.anonymouschat.domain.services.interfaces.app.IAuthenticationService
 import io.getstream.chat.android.client.ChatClient
 import io.getstream.chat.android.client.logger.ChatLogLevel
 

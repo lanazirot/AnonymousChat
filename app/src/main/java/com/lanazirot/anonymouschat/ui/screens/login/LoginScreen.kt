@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.ui.screens.appScreen
+package com.lanazirot.anonymouschat.ui.screens.login
 
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -30,7 +30,6 @@ import com.lanazirot.anonymouschat.domain.models.app.StyledText
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
-import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 @Composable

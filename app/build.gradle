@@ -91,7 +91,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.accompanist:accompanist-permissions:0.25.1'
-    
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
 }
 
 kapt {

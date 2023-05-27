@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.domain.services.implementations
+package com.lanazirot.anonymouschat.domain.services.implementations.app
 
 import com.lanazirot.anonymouschat.domain.models.api.AddMemberToChannelDTO
 import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
@@ -6,9 +6,10 @@ import com.lanazirot.anonymouschat.domain.models.chat.Response
 import com.lanazirot.anonymouschat.domain.repositories.AuthRepository
 import com.lanazirot.anonymouschat.domain.repositories.ChannelRepository
 import com.lanazirot.anonymouschat.domain.repositories.UserRepository
-import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
-import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
+import com.lanazirot.anonymouschat.domain.services.interfaces.app.IAuthenticationService
+import com.lanazirot.anonymouschat.domain.services.interfaces.app.IStreamService
 import io.getstream.chat.android.client.models.User
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class StreamService @Inject constructor(
@@ -21,24 +22,27 @@ class StreamService @Inject constructor(
         return streamClient.getChatClient().getCurrentUser()
     }
 
-    override fun connectUser(user: User, lastAttempt: Boolean): Response<Boolean> {
+    override fun connectUser(user: User, tokenLocal:String, lastAttempt: Boolean): Response<String> {
         try {
-            var response: Response<Boolean> = Response.Failure(Exception())
-            val token = userRepository.generateToken(user.id)
+            var response: Response<String> = Response.Failure(Exception())
+            val token = userRepository.generateToken(user.id, tokenLocal)
 
             streamClient.getChatClient().connectUser(
                 user = user,
                 token = token
             ).enqueue { result ->
                 if (result.isSuccess) { //Si te lograste conectar, adelante..
-                    response = Response.Success(true)
+                    response = Response.Success(token) //Regresa el token para guardarlo localmente
                 } else { //Si no lo lograste, es porque el usuario aun no existe en Stream, entonces lo creamos y volvemos a intentar
                     if (!lastAttempt) { //Siempre y cuando no haya intentado crearlo anteriormente
                         if (createUser(user.id)) //Si logro crear el usuario, volvemos a intentar
-                            response = connectUser(
-                                user,
-                                true
-                            ) //Intentamos de nuevo y regresamos la respuesta
+                            runBlocking {
+                                response = connectUser(
+                                    user = user,
+                                    tokenLocal = token,
+                                    lastAttempt = true
+                                ) //Intentamos de nuevo y regresamos la respuesta
+                            }
                     } //Si no logro crear el usuario, regresamos la respuesta erronea
                 }
             }

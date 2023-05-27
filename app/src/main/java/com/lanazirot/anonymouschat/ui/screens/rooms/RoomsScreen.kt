@@ -15,9 +15,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.android.play.integrity.internal.z
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.lanazirot.anonymouschat.ui.components.TopBar
 import com.lanazirot.anonymouschat.ui.screens.rooms.list.CustomRoomList
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
@@ -27,13 +24,7 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 @Composable
 fun RoomsScreen(openDrawer: () -> Unit) {
     val roomsViewModel: RoomsViewModel = hiltViewModel()
-    val email = Firebase.auth.currentUser?.email ?: ""
-    val user = roomsViewModel.getCurrentUser()
-
-    roomsViewModel.connectUser(email)
-
     roomsViewModel.startLocationServices()
-
 
     ChatTheme {
         Column {
@@ -80,7 +71,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
                 Spacer(modifier = Modifier.height(15.dp))
                 ChannelList(
                     itemContent = { channelItem ->
-                        CustomRoomList(channelItem = channelItem, user = user)
+                        CustomRoomList(channelItem = channelItem)
                     }
                 )
             }

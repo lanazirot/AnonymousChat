@@ -1,12 +1,11 @@
-package com.lanazirot.anonymouschat.domain.services.interfaces
+package com.lanazirot.anonymouschat.domain.services.interfaces.app
 
-import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
 import com.lanazirot.anonymouschat.domain.models.chat.Response
 import io.getstream.chat.android.client.models.User
 
 interface IStreamService {
     //UserAPI
-    fun connectUser(user : User, lastAttempt: Boolean) : Response<Boolean>
+    fun connectUser(user :User, tokenLocal: String, lastAttempt: Boolean) : Response<String>
     fun getCurrentUser() : User?
     fun createUser(email: String): Boolean
 

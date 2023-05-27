@@ -1,15 +1,17 @@
 package com.lanazirot.anonymouschat.ui.screens.rooms
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lanazirot.anonymouschat.domain.models.chat.Response
-import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
+import com.lanazirot.anonymouschat.domain.services.implementations.app.LocalStoreService
+import com.lanazirot.anonymouschat.domain.services.interfaces.app.ILocalStoreService
+import com.lanazirot.anonymouschat.domain.services.interfaces.app.IStreamService
 import com.lanazirot.anonymouschat.domain.services.interfaces.location.ILocationClient
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -18,26 +20,12 @@ import javax.inject.Inject
 @HiltViewModel
 class RoomsViewModel @Inject constructor(
     private val streamService: IStreamService,
-    private val locationClient: ILocationClient
+    private val locationClient: ILocationClient,
 ) : ViewModel() {
-
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
-    //region Users
+
+    //region Stream
     fun getCurrentUser() = streamService.getCurrentUser()
-    fun connectUser(email: String) {
-        val userResponse = streamService.getAnonymousUser(email)
-        if (userResponse is Response.Success) {
-            val user = userResponse.data
-            if (user != null) {
-                val connectionResponse = streamService.connectUser(user, false)
-                if (connectionResponse is Response.Success) {
-                    Log.d("StreamService", "User connected")
-                } else {
-                    Log.d("StreamService", "User not connected")
-                }
-            }
-        }
-    }
 
     fun createRoom() {
         streamService.createChannel(getCurrentUser()!!.id)

@@ -8,13 +8,15 @@ import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.di.RepositoriesModule.provideAuthRepository
 import com.lanazirot.anonymouschat.di.RepositoriesModule.provideChannelRepository
 import com.lanazirot.anonymouschat.di.RepositoriesModule.provideUserRepository
-import com.lanazirot.anonymouschat.domain.services.implementations.AuthenticationService
-import com.lanazirot.anonymouschat.domain.services.implementations.StreamService
-import com.lanazirot.anonymouschat.domain.services.interfaces.IAuthenticationService
-import com.lanazirot.anonymouschat.domain.services.interfaces.IStreamService
+import com.lanazirot.anonymouschat.domain.services.implementations.app.AuthenticationService
+import com.lanazirot.anonymouschat.domain.services.implementations.app.LocalStoreService
+import com.lanazirot.anonymouschat.domain.services.implementations.app.StreamService
+import com.lanazirot.anonymouschat.domain.services.interfaces.app.IAuthenticationService
+import com.lanazirot.anonymouschat.domain.services.interfaces.app.IStreamService
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IAuthAPI
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IUserAPI
+import com.lanazirot.anonymouschat.domain.services.interfaces.app.ILocalStoreService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -77,4 +79,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
+    @Provides
+    @Singleton
+    fun provideLocalStoreService(@ApplicationContext context: Context) :ILocalStoreService = LocalStoreService(context)
 }
