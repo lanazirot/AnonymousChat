@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.ui.screens.login
+package com.lanazirot.anonymouschat.ui.screens.login.states
 
 import com.lanazirot.anonymouschat.domain.models.chat.UserLogin
 

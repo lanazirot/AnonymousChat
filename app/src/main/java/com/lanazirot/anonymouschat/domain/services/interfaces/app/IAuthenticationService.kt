@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.domain.services.interfaces
+package com.lanazirot.anonymouschat.domain.services.interfaces.app
 
 import com.google.firebase.auth.FirebaseAuth
 import io.getstream.chat.android.client.ChatClient

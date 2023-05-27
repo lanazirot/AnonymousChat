@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.ui.screens.appScreen
+package com.lanazirot.anonymouschat.ui.screens.login
 
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -8,12 +8,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,40 +24,67 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.domain.models.app.StyledText
+import com.lanazirot.anonymouschat.ui.components.dialogs.CustomAlertDialog
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
-import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
+import com.lanazirot.anonymouschat.ui.screens.loading.LoadingScreen
+import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 @Composable
 fun LoginScreen() {
     val loginViewModel: LoginViewModel = hiltViewModel()
+    val navController = GlobalProvider.current.navController
+    val uiState by loginViewModel.uiState.collectAsState()
+
+    when (uiState) {
+        is LoginUIState.Success -> {
+            navController.navigate(DrawerScreens.Main.route)
+        }
+        is LoginUIState.Loading -> {
+            LoadingScreen()
+        }
+        else -> {
+            LoginData()
+        }
+    }
+}
+
+@Composable
+fun LoginData() {
+    val loginViewModel: LoginViewModel = hiltViewModel()
     val googleToken = stringResource(id = R.string.google_token)
-    val context = androidx.compose.ui.platform.LocalContext.current
+    val context = LocalContext.current
     val navController = GlobalProvider.current.navController
     val userAux by loginViewModel.userState.collectAsState()
 
-    val launcher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
-        val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+    val openDialog = remember { mutableStateOf(false) }
+    val errorMessage by loginViewModel.errorMessage.collectAsState()
 
-        try {
-            val account = task.getResult(ApiException::class.java)!!
-            val credential = com.google.firebase.auth.GoogleAuthProvider.getCredential(account.idToken, null)
-            loginViewModel.signInWithGoogle(
-                credential = credential,
-                toHome = {
-                    navController.navigate(DrawerScreens.Main.route)
-                }
-            )
-        } catch (ignore: ApiException) {
-            Log.d("LoginScreen", ignore.toString())
-        }
+    LaunchedEffect(errorMessage) {
+        if (errorMessage.isNotEmpty())
+            openDialog.value = true
     }
 
-    //Columna centrada verticalmente
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult()) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(it.data)
+
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                loginViewModel.signInWithGoogle(
+                    credential = credential
+                )
+            } catch (e: Exception) {
+                Log.d("LoginScreen", e.message ?: "Error al iniciar sesion con Google")
+            }
+        }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -78,9 +104,11 @@ fun LoginScreen() {
         StyledText(
             value = userAux.user.email,
             text = "Correo electrónico",
-            onValueChange = { loginViewModel.updateUser(
-                userAux.user.copy(email = it)
-            ) },
+            onValueChange = {
+                loginViewModel.updateUser(
+                    userAux.user.copy(email = it)
+                )
+            },
             visualTransformation = VisualTransformation.None
         )
 
@@ -88,9 +116,11 @@ fun LoginScreen() {
 
         StyledText(
             value = userAux.user.password,
-            onValueChange = { loginViewModel.updateUser(
-                userAux.user.copy(password = it)
-            ) },
+            onValueChange = {
+                loginViewModel.updateUser(
+                    userAux.user.copy(password = it)
+                )
+            },
             text = "Contraseña",
             visualTransformation = PasswordVisualTransformation()
         )
@@ -100,40 +130,56 @@ fun LoginScreen() {
         Button(
             onClick = {
                 try {
-                    loginViewModel.signInWithCredentials(
-                        toHome = { navController.navigate("${DrawerScreens.Main.route}/${userAux.user.email}") },
-                    )
+                    loginViewModel.signInWithCredentials()
                 } catch (e: Exception) {
-                    Log.d("LoginScreen", e.toString())
+                    Log.d("LoginScreen", e.message ?: "Error al iniciar sesion")
                 }
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(147, 46, 61
-            ))
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(
+                    147, 46, 61
+                )
+            )
         ) {
-            Text(text = "Iniciar sesión", color = Color.White, fontFamily = Anonymous, fontSize = 20.sp, fontWeight = FontWeight.Normal)
+            Text(
+                text = "Iniciar sesión",
+                color = Color.White,
+                fontFamily = Anonymous,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Normal
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = {
-              val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                  .requestIdToken(googleToken)
-                  .requestEmail()
-                  .build()
+                val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(googleToken)
+                    .requestEmail()
+                    .build()
                 val client = GoogleSignIn.getClient(context, options)
                 launcher.launch(client.signInIntent)
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(147, 46, 61
-            ))
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(
+                    147, 46, 61
+                )
+            )
         ) {
-            Text(text = "Iniciar sesión con Google", color = Color.White, fontFamily = Anonymous, fontSize = 20.sp, fontWeight = FontWeight.Normal)
+            Text(
+                text = "Iniciar sesión con Google",
+                color = Color.White,
+                fontFamily = Anonymous,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Normal
+            )
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -143,10 +189,26 @@ fun LoginScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(147, 46, 61
-            ))
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(
+                    147, 46, 61
+                )
+            )
         ) {
-            Text(text = "Registrarme", color = Color.White, fontFamily = Anonymous, fontSize = 20.sp, fontWeight = FontWeight.Normal)
+            Text(
+                text = "Registrarme",
+                color = Color.White,
+                fontFamily = Anonymous,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Normal
+            )
+        }
+
+        if (openDialog.value) {
+            CustomAlertDialog(message = errorMessage) {
+                openDialog.value = false
+                loginViewModel.setError("")
+            }
         }
     }
 }

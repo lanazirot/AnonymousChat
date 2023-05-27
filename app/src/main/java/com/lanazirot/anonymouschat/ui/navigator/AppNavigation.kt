@@ -19,8 +19,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
-import com.lanazirot.anonymouschat.ui.screens.appScreen.LoginScreen
-import com.lanazirot.anonymouschat.ui.screens.appScreen.RegisterScreen
+import com.lanazirot.anonymouschat.ui.screens.login.LoginScreen
+import com.lanazirot.anonymouschat.ui.screens.register.RegisterScreen
 import com.lanazirot.anonymouschat.ui.screens.chat.ChatScreen
 import com.lanazirot.anonymouschat.ui.screens.drawer.*
 import com.lanazirot.anonymouschat.ui.screens.rooms.RoomsScreen

@@ -11,26 +11,19 @@ class UserRepository @Inject constructor(
     private val userAPI: IUserAPI
 ) {
     @OptIn(DelicateCoroutinesApi::class)
-    fun generateToken(email: String) : String {
-        //Obtenemos el token desde nuestro almacenamiento local
-        var token = ""
-
-        //Si tengo un token almacenado en mi local, utiliza ese token
-        if (token != "") {
-            return token
-        }
+    fun generateToken(email: String, tokenLocal:String) : String {
+        var token = tokenLocal
 
         runBlocking {
             val job = GlobalScope.launch {
-                //Generamos el token
-                token = userAPI.generateToken(email)
+                if (token == "") { //Si no, entonces generamos el token
+                    token = userAPI.generateToken(email)
 
-                if(token != "") {
-                    Log.d("StreamService", "Token generated")
-                    //Guardamos el token en local
-
-                } else {
-                    Log.d("StreamService", "Token not generated")
+                    if (token != "") {
+                        Log.d("StreamService", "Token generated")
+                    } else {
+                        Log.d("StreamService", "Token not generated")
+                    }
                 }
             }
             job.join()
