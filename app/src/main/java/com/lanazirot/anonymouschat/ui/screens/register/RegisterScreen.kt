@@ -1,19 +1,8 @@
-package com.lanazirot.anonymouschat.ui.screens.appScreen
+package com.lanazirot.anonymouschat.ui.screens.register
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,29 +11,52 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.domain.models.app.StyledText
+import com.lanazirot.anonymouschat.ui.components.dialogs.CustomAlertDialog
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
+import com.lanazirot.anonymouschat.ui.screens.loading.LoadingScreen
 import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
+import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
 
 @Composable
 fun RegisterScreen() {
     val loginViewModel: LoginViewModel = hiltViewModel()
     val navController = GlobalProvider.current.navController
 
+    val uiState by loginViewModel.uiState.collectAsState()
+
+    when (uiState) {
+        is LoginUIState.Success -> {
+            navController.navigate(DrawerScreens.Main.route)
+        }
+        is LoginUIState.Loading -> {
+            LoadingScreen()
+        }
+        else -> {
+            RegisterData()
+        }
+    }
+}
+
+@Composable
+fun RegisterData() {
+    val navController = GlobalProvider.current.navController
+    val loginViewModel: LoginViewModel = hiltViewModel()
     val userAux by loginViewModel.userState.collectAsState()
-
     val imagePainter = painterResource(R.drawable.user)
-    val warning = painterResource(R.drawable.warning)
 
-    val openDialog = remember { mutableStateOf(false)  }
-    val errorMessage = remember { mutableStateOf("Algo ha salido mal, intentalo mas tarde.") }
+    val openDialog = remember { mutableStateOf(false) }
+    val errorMessage by loginViewModel.errorMessage.collectAsState()
+
+    LaunchedEffect(errorMessage) {
+        if (errorMessage.isNotEmpty())
+            openDialog.value = true
+    }
 
     Column(
         modifier = Modifier
@@ -64,9 +76,11 @@ fun RegisterScreen() {
         StyledText(
             value = userAux.user.email,
             text = "Correo electrónico",
-            onValueChange = { loginViewModel.updateUser(
-                userAux.user.copy(email = it)
-            ) },
+            onValueChange = {
+                loginViewModel.updateUser(
+                    userAux.user.copy(email = it)
+                )
+            },
             visualTransformation = VisualTransformation.None
         )
 
@@ -74,9 +88,11 @@ fun RegisterScreen() {
 
         StyledText(
             value = userAux.user.password,
-            onValueChange = { loginViewModel.updateUser(
-                userAux.user.copy(password = it)
-            ) },
+            onValueChange = {
+                loginViewModel.updateUser(
+                    userAux.user.copy(password = it)
+                )
+            },
             text = "Contraseña",
             visualTransformation = PasswordVisualTransformation()
         )
@@ -85,9 +101,11 @@ fun RegisterScreen() {
 
         StyledText(
             value = userAux.user.confirmPassword,
-            onValueChange = { loginViewModel.updateUser(
-                userAux.user.copy(confirmPassword = it)
-            ) },
+            onValueChange = {
+                loginViewModel.updateUser(
+                    userAux.user.copy(confirmPassword = it)
+                )
+            },
             text = "Confirmar contraseña",
             visualTransformation = PasswordVisualTransformation()
         )
@@ -97,27 +115,29 @@ fun RegisterScreen() {
             onClick = {
                 if (validatePasswords(userAux.user.password, userAux.user.confirmPassword)) {
                     try {
-                        loginViewModel.createUserWithCredentials(
-                            userAux.user.email,
-                            userAux.user.password,
-                            { navController.navigate(DrawerScreens.Main.route) }
-                        )
+                        loginViewModel.createUserWithCredentials()
                     } catch (e: Exception) {
-                        errorMessage.value = e.message.toString()
-                        openDialog.value = true
+                        loginViewModel.setError(e.message.toString())
                     }
                 } else {
-                    errorMessage.value = "Las contraseñas no coinciden."
-                    openDialog.value = true
+                    loginViewModel.setError("Las contraseñas no coinciden.")
                 }
             },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(147, 46, 61
-            ))
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(
+                    147, 46, 61
+                )
+            )
         ) {
-            Text(text = "Registrarse", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(
+                text = "Registrarse",
+                color = Color.White,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -127,54 +147,25 @@ fun RegisterScreen() {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(45.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(147, 46, 61
-            ))
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = Color(
+                    147, 46, 61
+                )
+            )
         ) {
-            Text(text = "Volver", color = Color.White, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+            Text(
+                text = "Volver",
+                color = Color.White,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
         }
 
-
         if (openDialog.value) {
-            AlertDialog(
-                onDismissRequest = {
-                    openDialog.value = false
-                },
-                title = {
-                    Column(Modifier.fillMaxWidth()) {
-                        Image(
-                            painter = warning,
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .size(150.dp),
-                            contentDescription = "Warning"
-                        )
-                    }
-                },
-                text = {
-                    Text(
-                        text = errorMessage.value,
-                        color = Color.Black,
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h4.copy(
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                },
-                confirmButton = {
-                    Column(Modifier.fillMaxWidth()){
-                        Button(
-                            onClick = {
-                                openDialog.value = false
-                            },
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)) {
-                            Text("De acuerdo")
-                        }
-                    }
-                },
-                modifier = Modifier.align(Alignment.CenterHorizontally)
-            )
+            CustomAlertDialog(message = errorMessage) {
+                openDialog.value = false
+                loginViewModel.setError("")
+            }
         }
     }
 }

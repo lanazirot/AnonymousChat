@@ -13,6 +13,8 @@ import com.lanazirot.anonymouschat.domain.models.chat.UserLogin
 import com.lanazirot.anonymouschat.domain.services.interfaces.app.IAuthenticationService
 import com.lanazirot.anonymouschat.domain.services.interfaces.app.ILocalStoreService
 import com.lanazirot.anonymouschat.domain.services.interfaces.app.IStreamService
+import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
+import com.lanazirot.anonymouschat.ui.screens.login.states.UserState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,11 +33,19 @@ class LoginViewModel @Inject constructor(
     private val _auth = authenticationService.getFirebaseAuth()
     private val _loading = MutableLiveData(false)
     private val _accessToken = MutableLiveData<String>()
+
+    private val _errorMessage = MutableStateFlow("")
+    val errorMessage: StateFlow<String> = _errorMessage.asStateFlow()
+
     private val _userState = MutableStateFlow(UserState())
     var userState: StateFlow<UserState> = _userState.asStateFlow()
 
+    private val _uiState = MutableStateFlow<LoginUIState>(LoginUIState.Waiting)
+    var uiState: StateFlow<LoginUIState> = _uiState.asStateFlow()
+
     init {
         viewModelScope.launch {
+            _uiState.value = LoginUIState.Waiting
             localStoreService.getStreamTokenAuth.collect { token ->
                 _accessToken.value = token
             }
@@ -47,50 +57,54 @@ class LoginViewModel @Inject constructor(
     }
 
     //region Firebase
-    fun signInWithCredentials(toHome: () -> Unit) = viewModelScope.launch {
+    fun signInWithCredentials() = viewModelScope.launch {
         try {
+            _uiState.value = LoginUIState.Loading
             _auth.signInWithEmailAndPassword(_userState.value.user.email, _userState.value.user.password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        toHome()
+                        connectUser(_userState.value.user.email)
+                        _uiState.value = LoginUIState.Success
                     }
                 }
                 .addOnFailureListener { exception ->
                     throw exception
                 }
         } catch (e: Exception) {
-            Log.d("LoginViewModel", e.toString())
+            _errorMessage.value = e.message ?: "Error al iniciar sesion"
+            _uiState.value = LoginUIState.Error
         }
     }
 
-    fun signInWithGoogle(credential: AuthCredential, toHome: () -> Unit) {
+    fun signInWithGoogle(credential: AuthCredential) {
         try {
+            _uiState.value = LoginUIState.Loading
             _auth.signInWithCredential(credential)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        //TODO: Manipular viewmodel state
-
-                        val token = connectUser(task.result?.user?.email ?: "")
-
-                        toHome()
+                        connectUser(task.result?.user?.email ?: "")
+                        _uiState.value = LoginUIState.Success
                     }
                 }
                 .addOnFailureListener { exception ->
                     throw exception
                 }
         } catch (e: Exception) {
-            Log.d("LoginViewModel", e.toString())
+            _errorMessage.value = e.message ?: "Error al iniciar sesion"
+            _uiState.value = LoginUIState.Error
         }
     }
 
-    fun createUserWithCredentials(email: String, password: String, toHome: () -> Unit) {
+    fun createUserWithCredentials() {
         try {
+            _uiState.value = LoginUIState.Loading
             if(!_loading.value!!) {
                 _loading.value = true
-                _auth.createUserWithEmailAndPassword(email, password)
+                _auth.createUserWithEmailAndPassword(_userState.value.user.email, _userState.value.user.password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            toHome()
+                            updateUser(UserLogin(_userState.value.user.email, _userState.value.user.password))
+                            signInWithCredentials()
                         }
 
                         _loading.value = false
@@ -100,7 +114,8 @@ class LoginViewModel @Inject constructor(
                     }
             }
         } catch (e: Exception) {
-            throw e
+            _errorMessage.value = e.message ?: "Error al crear usuario"
+            _uiState.value = LoginUIState.Error
         }
     }
     //endregion
@@ -140,5 +155,10 @@ class LoginViewModel @Inject constructor(
         googleSignInClient.revokeAccess().addOnCompleteListener {
             Firebase.auth.signOut()
         }
+    }
+
+    fun setError(message: String) {
+        _errorMessage.value = message
+        _uiState.value = LoginUIState.Error
     }
 }
