@@ -2,6 +2,9 @@ package com.lanazirot.anonymouschat.domain.services.implementations.app
 
 import com.lanazirot.anonymouschat.domain.models.api.AddMemberToChannelDTO
 import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
+import com.lanazirot.anonymouschat.domain.models.api.channel.CreateChannelResponseDTO
+import com.lanazirot.anonymouschat.domain.models.api.location.LatLongDTO
+import com.lanazirot.anonymouschat.domain.models.api.location.UserCoordinatesDTO
 import com.lanazirot.anonymouschat.domain.models.chat.Response
 import com.lanazirot.anonymouschat.domain.repositories.AuthRepository
 import com.lanazirot.anonymouschat.domain.repositories.ChannelRepository
@@ -79,16 +82,17 @@ class StreamService @Inject constructor(
         }
     }
 
-    override fun createChannel(email: String): Response<Boolean> {
+    override fun createChannel(email: String, latLongDTO: LatLongDTO): Response<CreateChannelResponseDTO> {
         return try {
             val response = channelRepository.createChannel(
                 CreateChannelDTO(
                     email = email,
+                    coords = latLongDTO
                 )
             )
 
-            if (response) {
-                Response.Success(true)
+            if (response != null) {
+                Response.Success(response)
             } else {
                 Response.Failure(Exception())
             }
@@ -111,6 +115,22 @@ class StreamService @Inject constructor(
         }
     }
 
+    override fun checkIfUserStillInTheRoomByItsCurrentLocation(
+        channelID: String,
+        userCoordinates: UserCoordinatesDTO,
+    ): Response<Boolean> {
+        return try {
+            val response = channelRepository.checkIfUserStillInTheRoomByItsCurrentLocation(
+                channelID = channelID,
+                userCoordinatesDTO = userCoordinates
+            )
+            if (response) Response.Success(true) else Response.Failure(Exception())
+            Response.Success(true)
+        }catch (e: Exception) {
+            Response.Failure(e)
+        }
+    }
+
     override fun addMemberToChannel(channelID: String, email: String): Response<Boolean> {
         try {
             val response = channelRepository.addMemberToChannel(
@@ -120,10 +140,10 @@ class StreamService @Inject constructor(
                 )
             )
 
-            if (response) {
-                return Response.Success(true)
+            return if (response) {
+                Response.Success(true)
             } else {
-                return Response.Failure(Exception())
+                Response.Failure(Exception())
             }
         } catch (e: Exception) {
             return Response.Failure(e)
