@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d1ca69e-3efa-4747-95e2-0b7a0bf91fb6" name="Changes" comment="Vista de rooms y chat. Hardcodeada pero funcional.">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
@@ -17,6 +18,16 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginScreen.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt" afterDir="false" />
 >>>>>>> main-lalo
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/components/Scroll.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/components/common/Scroll.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/components/StyledText.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/components/common/StyledText.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/components/TopBar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/components/common/TopBar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/UserState.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/states/UserState.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/register/RegisterScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/register/RegisterScreen.kt" afterDir="false" />
+>>>>>>> main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,17 +47,22 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Interface" />
         <option value="Class" />
+        <option value="resourceFile" />
+        <option value="Kotlin Interface" />
         <option value="Kotlin Object" />
         <option value="Kotlin File" />
-        <option value="resourceFile" />
         <option value="Kotlin Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -69,6 +85,7 @@
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+<<<<<<< HEAD
     &quot;last_directory_selection&quot;: &quot;C:/Users/Usuario/Documents/Octavo semestre/AnonymousChat/app/src/main/res/drawable&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Documents/Octavo semestre/AnonymousChat/app/src/main/res/drawable&quot;
 =======
@@ -83,6 +100,9 @@
     "last_opened_file_path": "C:/Users/ejare/Desktop/Repo/ProgramacionAndroidJetpackCompose2023/Unidad2/Ejercicios/curpmovil",
     "show.migrate.to.gradle.popup": "false"
 >>>>>>> main-lalo
+=======
+    &quot;last_opened_file_path&quot;: &quot;D:/Codes/ProyectosKotlin/NotificacionTest&quot;
+>>>>>>> main
   }
 }]]></component>
   <component name="RecentsManager">
@@ -95,10 +115,11 @@
       <recent name="D:\Codes\AnonymousChat\app" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.lanazirot.anonymouschat.ui.screens.login.states" />
+      <recent name="com.lanazirot.anonymouschat.domain.services.interfaces.app" />
+      <recent name="com.lanazirot.anonymouschat.domain.services.implementations.app" />
       <recent name="com.lanazirot.anonymouschat.domain.models.chat" />
       <recent name="com.lanazirot.anonymouschat.ui.navigator.routes" />
-      <recent name="com.lanazirot.anonymouschat.domain.services.interfaces" />
-      <recent name="com.lanazirot.anonymouschat.ui.navigator" />
     </key>
     <key name="android.template.487473305">
       <recent name="com.lanazirot.anonymouschat" />
@@ -225,5 +246,16 @@
     <MESSAGE value="Autenticacion por correo, comun" />
     <MESSAGE value="Vista de rooms y chat. Hardcodeada pero funcional." />
     <option name="LAST_COMMIT_MESSAGE" value="Vista de rooms y chat. Hardcodeada pero funcional." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt</url>
+          <line>103</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
