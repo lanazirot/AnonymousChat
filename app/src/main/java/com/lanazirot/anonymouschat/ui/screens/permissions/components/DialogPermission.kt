@@ -40,7 +40,7 @@ fun DialogPermission(
             modifier = Modifier
                 .padding(top = 20.dp, bottom = 20.dp)
                 .background(
-                    color = MaterialTheme.colors.primary,
+                    color = Color.Black,
                     shape = RoundedCornerShape(25.dp, 5.dp, 25.dp, 5.dp)
                 )
                 .verticalScroll(rememberScrollState())
@@ -55,7 +55,7 @@ fun DialogPermission(
                     modifier = Modifier.fillMaxWidth(),
                     letterSpacing = 2.sp,
                     fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.h3,
+                    style = MaterialTheme.typography.body2,
                     color = MaterialTheme.colors.primary,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -67,8 +67,8 @@ fun DialogPermission(
                         .padding(top = 10.dp, start = 25.dp, end = 25.dp)
                         .fillMaxWidth(),
                     letterSpacing = 1.sp,
-                    style = MaterialTheme.typography.h3,
-                    color = MaterialTheme.colors.secondary,
+                    style = MaterialTheme.typography.body2,
+                    color = Color.Red,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
 
@@ -89,8 +89,8 @@ fun DialogPermission(
                         modifier = Modifier.fillMaxWidth(),
                         letterSpacing = 2.sp,
                         fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.h3,
-                        color = Color.White,
+                        style = MaterialTheme.typography.button,
+                        color = Color.Gray,
                     )
                 }
             }

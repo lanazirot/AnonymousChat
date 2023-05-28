@@ -173,13 +173,25 @@ fun LoginData() {
                 )
             )
         ) {
-            Text(
-                text = "Iniciar sesión con Google",
-                color = Color.White,
-                fontFamily = Anonymous,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Normal
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.google),
+                    contentDescription = "Google Logo",
+                    modifier = Modifier.size(15.dp)
+                )
+                Text(
+                    text = "Iniciar sesión con Google",
+                    color = Color.White,
+                    fontFamily = Anonymous,
+                    fontSize = 19.sp,
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+
+
         }
 
         Spacer(modifier = Modifier.height(16.dp))
