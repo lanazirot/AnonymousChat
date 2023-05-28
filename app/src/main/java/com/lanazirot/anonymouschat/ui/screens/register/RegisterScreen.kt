@@ -113,6 +113,18 @@ fun RegisterData() {
 
         Button(
             onClick = {
+                if(userAux.user.email.isEmpty()) {
+                    loginViewModel.setError("El correo electrónico no puede estar vacío.")
+                    return@Button
+                }
+                if (userAux.user.password.isEmpty()) {
+                    loginViewModel.setError("La contraseña no puede estar vacía.")
+                    return@Button
+                }
+                if (userAux.user.confirmPassword.isEmpty()) {
+                    loginViewModel.setError("La confirmación de la contraseña no puede estar vacía.")
+                    return@Button
+                }
                 if (validatePasswords(userAux.user.password, userAux.user.confirmPassword)) {
                     try {
                         loginViewModel.createUserWithCredentials()
