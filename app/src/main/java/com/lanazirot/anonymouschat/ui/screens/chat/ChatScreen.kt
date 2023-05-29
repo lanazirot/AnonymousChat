@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
@@ -27,6 +30,20 @@ import io.getstream.chat.android.compose.viewmodel.messages.MessagesViewModelFac
 fun ChatScreen(channelId : String) {
     val context = LocalContext.current
     val navController = GlobalProvider.current.navController
+    val chatViewModel: ChatViewModel = hiltViewModel()
+
+    val chatState = chatViewModel.chatState.collectAsState().value
+
+    LaunchedEffect(Unit){
+        chatViewModel.initChat(channelId)
+    }
+
+    LaunchedEffect(chatState){
+        if(!chatState.alive){
+            navController.popBackStack()
+        }
+    }
+
 
     val factory by lazy {
         MessagesViewModelFactory(
