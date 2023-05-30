@@ -33,7 +33,7 @@ fun CustomRoomList(channelItem: ChannelItemState) {
         },
         centerContent = {
             Text(
-                text = ChatTheme.channelNameFormatter.formatChannelName(it.channel, user),
+                text = it.channel.name + " " + it.channel.id,
                 style = ChatTheme.typography.bodyBold,
                 color = Color.White
             )
