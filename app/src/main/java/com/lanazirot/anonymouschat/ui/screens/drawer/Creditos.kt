@@ -12,8 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.lanazirot.anonymouschat.R
-import com.lanazirot.anonymouschat.ui.components.TopBar
+import com.lanazirot.anonymouschat.ui.components.common.TopBar
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 
 @Composable
@@ -22,7 +23,7 @@ fun Creditos() {
 
     Column(modifier = Modifier.fillMaxSize().background(Color.Black)) {
         TopBar(
-            title = "Creditos",
+            title = stringResource(R.string.credits),
 
             icon = painterResource(R.drawable.icreditos),
             buttonIcon = Icons.Filled.ArrowBack
@@ -30,8 +31,9 @@ fun Creditos() {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(text = "Home Page content here.")
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = stringResource(R.string.home_page_content))
         }
     }
 }

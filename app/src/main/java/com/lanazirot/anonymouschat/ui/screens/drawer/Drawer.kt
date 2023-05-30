@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -48,8 +49,10 @@ fun Drawer (
             .width(300.dp)
             .background(Color(83, 83, 83))
     ) {
-        Row(modifier = Modifier.fillMaxWidth().background(Color.Black).padding(start = 25.dp),
-            verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.fillMaxWidth().background(Color.Black).padding(start = 25.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Image(
                 painter = painterResource(R.drawable.iusuario),
                 contentDescription = null,
@@ -66,7 +69,10 @@ fun Drawer (
         }
         Spacer(modifier = Modifier.height(24.dp))
         screens.forEach { screen ->
-            Row(modifier= Modifier.padding(start = 25.dp),verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                modifier = Modifier.padding(start = 25.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Image(
                     painter = painterResource(screen.icon),
                     contentDescription = "null",
@@ -98,12 +104,12 @@ fun Drawer (
             content = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
-                        painter = painterResource(R.drawable.isalir), // Reemplaza con el recurso de imagen adecuado
-                        contentDescription = "Logout",
+                        painter = painterResource(R.drawable.isalir),
+                        contentDescription = stringResource(R.string.logout),
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = "Logout",color = Color.White)
+                    Text(text = stringResource(R.string.logout), color = Color.White)
                 }
             },
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)

@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.domain.models.app
+package com.lanazirot.anonymouschat.ui.components.common
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,9 +31,6 @@ fun StyledText(value: String, text : String, onValueChange: (String) -> Unit, vi
                     text = text,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-//                    style = Anonymous,
-//                    fontSize = 24.sp,
-//                    fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.h2.copy(
                         fontSize = 24.sp,
                         fontWeight = FontWeight.Normal

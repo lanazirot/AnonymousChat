@@ -30,7 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.lanazirot.anonymouschat.R
-import com.lanazirot.anonymouschat.domain.models.app.StyledText
+import com.lanazirot.anonymouschat.ui.components.common.StyledText
 import com.lanazirot.anonymouschat.ui.components.dialogs.CustomAlertDialog
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
@@ -110,7 +110,7 @@ fun LoginData() {
 
         StyledText(
             value = userAux.user.email,
-            text = "Correo electrónico",
+            text = stringResource(R.string.email),
             onValueChange = {
                 loginViewModel.updateUser(
                     userAux.user.copy(email = it)
@@ -128,7 +128,7 @@ fun LoginData() {
                     userAux.user.copy(password = it)
                 )
             },
-            text = "Contraseña",
+            text = stringResource(R.string.password),
             visualTransformation = PasswordVisualTransformation()
         )
 
@@ -153,7 +153,7 @@ fun LoginData() {
             )
         ) {
             Text(
-                text = "Iniciar sesión",
+                text = stringResource(R.string.login),
                 color = Color.White,
                 fontFamily = Anonymous,
                 fontSize = 20.sp,
@@ -167,8 +167,7 @@ fun LoginData() {
             onClick = {
                 try {
                     IniciarSesionConGoogle(googleToken, context, launcher)
-                }
-                catch (e: Exception) {
+                } catch (e: Exception) {
                     Log.d("LoginScreen", e.message ?: "Error al iniciar sesion con Google")
                 }
 
@@ -191,7 +190,7 @@ fun LoginData() {
                     modifier = Modifier.size(15.dp)
                 )
                 Text(
-                    text = "Iniciar sesión con Google",
+                    text = stringResource(R.string.login_google),
                     color = Color.White,
                     fontFamily = Anonymous,
                     fontSize = 19.sp,
@@ -217,7 +216,7 @@ fun LoginData() {
             )
         ) {
             Text(
-                text = "Registrarme",
+                text = stringResource(R.string.register),
                 color = Color.White,
                 fontFamily = Anonymous,
                 fontSize = 20.sp,
@@ -246,5 +245,4 @@ fun IniciarSesionConGoogle(
         .build()
     val client = GoogleSignIn.getClient(context, options)
     launcher.launch(client.signInIntent)
-
 }
