@@ -25,8 +25,6 @@ fun ChatHeader(channel: Channel, onBack : () -> Unit) {
     ) {
         Row {
             Button(onClick = {
-
-
                 onBack()
             }) {
                 Icon(
@@ -36,7 +34,7 @@ fun ChatHeader(channel: Channel, onBack : () -> Unit) {
                 )
             }
             Text(
-                text = channel.name,
+                text = channel.id,
                 style = TextStyle(
                     fontFamily = Anonymous,
                     fontSize = 16.sp,

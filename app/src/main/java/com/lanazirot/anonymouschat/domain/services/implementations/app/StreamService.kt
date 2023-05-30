@@ -91,11 +91,7 @@ class StreamService @Inject constructor(
                 )
             )
 
-            if (response != null) {
-                Response.Success(response)
-            } else {
-                Response.Failure(Exception())
-            }
+            Response.Success(response)
         } catch (e: Exception) {
             Response.Failure(e)
         }
