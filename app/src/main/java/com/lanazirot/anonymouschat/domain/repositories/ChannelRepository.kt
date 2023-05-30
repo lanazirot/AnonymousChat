@@ -2,22 +2,20 @@ package com.lanazirot.anonymouschat.domain.repositories;
 
 import com.lanazirot.anonymouschat.domain.models.api.AddMemberToChannelDTO
 import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
-import com.lanazirot.anonymouschat.domain.models.api.RandomUserDTO
-import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI;
+import com.lanazirot.anonymouschat.domain.models.api.channel.CreateChannelResponseDTO
+import com.lanazirot.anonymouschat.domain.models.api.location.UserCoordinatesDTO
+import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class ChannelRepository @Inject constructor(
-    private val channelAPI: IChannelAPI
+    private val channelAPI: IChannelAPI,
 ) {
     @OptIn(DelicateCoroutinesApi::class)
-    fun createChannel(channelDTO: CreateChannelDTO): Boolean {
-        var response :CreateChannelDTO? = null
+    fun createChannel(channelDTO: CreateChannelDTO): CreateChannelResponseDTO {
+        var response: CreateChannelResponseDTO? = null
 
         runBlocking {
             val job = GlobalScope.launch {
@@ -27,12 +25,12 @@ class ChannelRepository @Inject constructor(
             job.join()
         }
 
-        return response != null
+        return response!!
     }
 
     @OptIn(DelicateCoroutinesApi::class)
     fun addMemberToChannel(channelDTO: AddMemberToChannelDTO): Boolean {
-        var response :AddMemberToChannelDTO? = null
+        var response: AddMemberToChannelDTO? = null
 
         runBlocking {
             val job = GlobalScope.launch {
@@ -47,11 +45,31 @@ class ChannelRepository @Inject constructor(
 
     @OptIn(DelicateCoroutinesApi::class)
     fun deleteChannel(channelID: String): Boolean {
-        var response :Boolean? = null
+        var response: Boolean? = null
 
         runBlocking {
             val job = GlobalScope.launch {
                 response = channelAPI.deleteChannel(channelID)
+            }
+
+            job.join()
+        }
+
+        return response != null
+    }
+
+    @OptIn(DelicateCoroutinesApi::class)
+    fun checkIfUserStillInTheRoomByItsCurrentLocation(
+        channelID: String,
+        userCoordinatesDTO: UserCoordinatesDTO,
+    ): Boolean {
+        var response: Boolean? = null
+        runBlocking {
+            val job = GlobalScope.launch {
+                response = channelAPI.checkIfUserStillInTheRoomByItsCurrentLocation(
+                    channelID,
+                    userCoordinatesDTO
+                )
             }
 
             job.join()
