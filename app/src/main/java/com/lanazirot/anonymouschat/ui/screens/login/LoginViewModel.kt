@@ -59,6 +59,12 @@ class LoginViewModel @Inject constructor(
     //region Firebase
     fun signInWithCredentials() = viewModelScope.launch {
         try {
+            if (_userState.value.user.email.isEmpty())
+                throw Exception("Email vacio")
+            if (_userState.value.user.password.isEmpty())
+                throw Exception("Contraseña vacia")
+            if(!android.util.Patterns.EMAIL_ADDRESS.matcher(_userState.value.user.email).matches())
+                throw Exception("Email invalido")
             _uiState.value = LoginUIState.Loading
             _auth.signInWithEmailAndPassword(_userState.value.user.email, _userState.value.user.password)
                 .addOnCompleteListener { task ->

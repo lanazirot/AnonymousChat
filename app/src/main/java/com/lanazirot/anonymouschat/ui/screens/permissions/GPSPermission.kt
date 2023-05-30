@@ -78,7 +78,7 @@ fun PermissionDeniedContent(
         onDismissRequest = {},
         title = {
             Text(
-                text = "Peticion de permiso",
+                text = "Petición de permiso",
                 style = TextStyle(
                     fontSize = MaterialTheme.typography.h5.fontSize,
                     fontWeight = FontWeight.Bold
@@ -90,7 +90,7 @@ fun PermissionDeniedContent(
         },
         confirmButton = {
             Button(onClick = onRequestPermission) {
-                Text("Otorgrar permiso")
+                Text("Otorgar permiso")
             }
         }
     )
