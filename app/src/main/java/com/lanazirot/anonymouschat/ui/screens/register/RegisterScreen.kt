@@ -113,6 +113,30 @@ fun RegisterData() {
 
         Button(
             onClick = {
+                if(userAux.user.email.isEmpty()) {
+                    loginViewModel.setError("El correo electrónico no puede estar vacío.")
+                    return@Button
+                }
+                if (userAux.user.password.isEmpty()) {
+                    loginViewModel.setError("La contraseña no puede estar vacía.")
+                    return@Button
+                }
+                if (userAux.user.confirmPassword.isEmpty()) {
+                    loginViewModel.setError("La confirmación de la contraseña no puede estar vacía.")
+                    return@Button
+                }
+                if(!android.util.Patterns.EMAIL_ADDRESS.matcher(userAux.user.email).matches()) {
+                    loginViewModel.setError("El correo electrónico no es válido.")
+                    return@Button
+                }
+                if(userAux.user.password.length < 8) {
+                    loginViewModel.setError("La contraseña debe tener al menos 8 caracteres.")
+                    return@Button
+                }
+                if (userAux.user.confirmPassword.length < 8) {
+                    loginViewModel.setError("La confirmación de la contraseña debe tener al menos 8 caracteres.")
+                    return@Button
+                }
                 if (validatePasswords(userAux.user.password, userAux.user.confirmPassword)) {
                     try {
                         loginViewModel.createUserWithCredentials()

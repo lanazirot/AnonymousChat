@@ -1,5 +1,7 @@
 package com.lanazirot.anonymouschat.ui.screens.rooms
 
+import android.os.Build
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,10 +13,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import coil.request.ImageRequest
+import coil.size.Size
+import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.TopBar
 import com.lanazirot.anonymouschat.ui.screens.rooms.list.CustomRoomList
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
@@ -25,6 +35,17 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 fun RoomsScreen(openDrawer: () -> Unit) {
     val roomsViewModel: RoomsViewModel = hiltViewModel()
     roomsViewModel.startLocationServices()
+
+    val context = LocalContext.current
+    val imageLoader = ImageLoader.Builder(context)
+        .components {
+            if (Build.VERSION.SDK_INT >= 28) {
+                add(ImageDecoderDecoder.Factory())
+            } else {
+                add(GifDecoder.Factory())
+            }
+        }
+        .build()
 
     ChatTheme {
         Column {
@@ -53,26 +74,24 @@ fun RoomsScreen(openDrawer: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                Text(
-                    text = "Buscando salas",
-                    fontFamily = Anonymous,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 26.sp,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                Text(
-                    text = "🤫",
-                    fontFamily = Anonymous,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 50.sp,
-                    color = Color.White
-                )
-                Spacer(modifier = Modifier.height(15.dp))
                 ChannelList(
                     itemContent = { channelItem ->
                         CustomRoomList(channelItem = channelItem)
                     }
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+                Image(
+                    painter = rememberAsyncImagePainter(
+                        ImageRequest.Builder(context)
+                            .data(data = R.drawable.buscandosala)
+                            .apply {
+                                size(Size(432, 432))
+                            }
+                            .build(),
+                        imageLoader = imageLoader
+                    ),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
                 )
             }
         }

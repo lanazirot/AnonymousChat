@@ -1,7 +1,11 @@
 package com.lanazirot.anonymouschat.ui.screens.login
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
+import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -45,14 +49,17 @@ fun LoginScreen() {
         is LoginUIState.Success -> {
             navController.navigate(DrawerScreens.Main.route)
         }
+
         is LoginUIState.Loading -> {
             LoadingScreen()
         }
+
         else -> {
             LoginData()
         }
     }
 }
+
 
 @Composable
 fun LoginData() {
@@ -129,6 +136,7 @@ fun LoginData() {
 
         Button(
             onClick = {
+
                 try {
                     loginViewModel.signInWithCredentials()
                 } catch (e: Exception) {
@@ -157,12 +165,13 @@ fun LoginData() {
 
         Button(
             onClick = {
-                val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(googleToken)
-                    .requestEmail()
-                    .build()
-                val client = GoogleSignIn.getClient(context, options)
-                launcher.launch(client.signInIntent)
+                try {
+                    IniciarSesionConGoogle(googleToken, context, launcher)
+                }
+                catch (e: Exception) {
+                    Log.d("LoginScreen", e.message ?: "Error al iniciar sesion con Google")
+                }
+
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -173,13 +182,25 @@ fun LoginData() {
                 )
             )
         ) {
-            Text(
-                text = "Iniciar sesión con Google",
-                color = Color.White,
-                fontFamily = Anonymous,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Normal
-            )
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.google),
+                    contentDescription = "Google Logo",
+                    modifier = Modifier.size(15.dp)
+                )
+                Text(
+                    text = "Iniciar sesión con Google",
+                    color = Color.White,
+                    fontFamily = Anonymous,
+                    fontSize = 19.sp,
+                    fontWeight = FontWeight.Normal,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+
+
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -211,4 +232,19 @@ fun LoginData() {
             }
         }
     }
+}
+
+
+fun IniciarSesionConGoogle(
+    googleToken: String,
+    context: Context,
+    launcher: ManagedActivityResultLauncher<Intent, ActivityResult>
+) {
+    val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        .requestIdToken(googleToken)
+        .requestEmail()
+        .build()
+    val client = GoogleSignIn.getClient(context, options)
+    launcher.launch(client.signInIntent)
+
 }
