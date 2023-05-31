@@ -1,5 +1,6 @@
 package com.lanazirot.anonymouschat.domain.services.interfaces.app
 
+import com.lanazirot.anonymouschat.domain.models.api.channel.ChannelMemberDTO
 import com.lanazirot.anonymouschat.domain.models.api.channel.CreateChannelResponseDTO
 import com.lanazirot.anonymouschat.domain.models.api.location.LatLongDTO
 import com.lanazirot.anonymouschat.domain.models.api.location.UserCoordinatesDTO
@@ -19,6 +20,7 @@ interface IStreamService {
     fun createChannel(email: String, latLongDTO: LatLongDTO) : Response<CreateChannelResponseDTO>
     fun addMemberToChannel(channelID: String, email: String) : Response<Boolean>
     fun deleteChannel(channelID: String) : Response<Boolean>
+    fun revealNewsChatsForCurrentUser(channelDTO: ChannelMemberDTO): Boolean
 
     //LocationAPI
     fun checkIfUserStillInTheRoomByItsCurrentLocation(channelID: String, userCoordinates: UserCoordinatesDTO) : Response<Boolean>

@@ -32,7 +32,7 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 @Composable
 fun RoomsScreen(openDrawer: () -> Unit) {
     val roomsViewModel: RoomsViewModel = hiltViewModel()
-    roomsViewModel.startLocationServices()
+    roomsViewModel.revealNewsChatsForCurrentUser()
 
     val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(context)
