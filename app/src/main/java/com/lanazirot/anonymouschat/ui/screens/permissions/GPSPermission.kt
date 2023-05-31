@@ -8,6 +8,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -86,13 +88,14 @@ fun PermissionDeniedContent(
             )
         },
         text = {
-            Text(text = rationaleMessage)
+            Text(text = rationaleMessage, modifier = Modifier.testTag("dialog_description"))
         },
         confirmButton = {
-            Button(onClick = onRequestPermission) {
+            Button(onClick = onRequestPermission, modifier = Modifier.testTag("dialog_otorgar_button")) {
                 Text("Otorgar permiso")
             }
-        }
+        },
+
     )
 
 } else {

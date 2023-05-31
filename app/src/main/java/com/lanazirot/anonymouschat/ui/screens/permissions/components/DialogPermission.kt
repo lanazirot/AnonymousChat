@@ -20,6 +20,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -52,7 +53,8 @@ fun DialogPermission(
                 Text(
                     text = title!!,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth()
+                        .testTag("dialog_title"),
                     letterSpacing = 2.sp,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.body2,
@@ -65,7 +67,8 @@ fun DialogPermission(
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .padding(top = 10.dp, start = 25.dp, end = 25.dp)
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .testTag("dialog_desc"),
                     letterSpacing = 1.sp,
                     style = MaterialTheme.typography.body2,
                     color = Color.Red,
