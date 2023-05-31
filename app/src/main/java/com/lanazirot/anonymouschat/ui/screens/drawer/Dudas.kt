@@ -16,10 +16,11 @@ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 fun Dudas() {
     val navController = GlobalProvider.current.navController
 
-    val listItems = listOf("General", "¿Que es Anonymous Chat?", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris elementum porttitor dapibus."
-        , "¿Quienes pueden enviarme mensaje?", "Praesent suscipit semper risus non aliquam. Aenean non ante eu ligula vehicula vehicula. Quisque sodales tincidunt mattis."
-        , "¿Como se maneja la privacidad en  Anonymous Chat?", "Cras varius lacus ac eros vulputate vulputate. Nunc nec blandit quam, vitae convallis elit. Sed rutrum placerat justo eget rutrum."
-        ,"¿Que son los nombres de usuario? ¿Como se eligen?","Cras varius lacus ac eros vulputate vulputate. Nunc nec blandit quam, vitae convallis elit. Sed rutrum placerat justo eget rutrum.")
+    val listItems = listOf("General", "¿Que es Anonymous Chat?", "Anonymous Chat es una aplicación móvil que permite la creación de salas de chat comunitarias a las que cualquier individuo con la aplicación y a una distancia de x metros de quien creó la sala puede unirse."
+        , "¿Quienes pueden enviarme mensaje?", "La gente cercana a tu ubicación"
+        ,"¿Es posible que alguien me rastree a través de la ubicación que proporciono?", "No, tus datos no son revelados a otros usuarios."
+        ,"¿La aplicación permite el intercambio de archivos o imágenes en los chats?","Anonymous Chat solo permite el intercambio de mensajes de texto"
+        ,"¿Cómo puedo evitar que mi ubicación sea compartida con otros usuarios después de cerrar sesión en la aplicación?","Su ubicación no será compartida a otros usuarios y solo se usará mientras la app se encuentre activa")
 
     Column(modifier = Modifier.fillMaxSize()) {
         TopBar(

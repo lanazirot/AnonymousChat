@@ -30,7 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import com.lanazirot.anonymouschat.R
-import com.lanazirot.anonymouschat.domain.models.app.StyledText
+import com.lanazirot.anonymouschat.ui.components.common.StyledText
 import com.lanazirot.anonymouschat.ui.components.dialogs.CustomAlertDialog
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens

@@ -96,6 +96,9 @@ dependencies {
     //Implementacion para el gif
     implementation "io.coil-kt:coil-compose:2.1.0"
     implementation "io.coil-kt:coil-gif:2.1.0"
+
+    //KeyboardAwareColumn
+    implementation "com.google.accompanist:accompanist-insets:0.18.0"
 }
 
 kapt {
