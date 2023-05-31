@@ -11,10 +11,12 @@ import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
 import io.getstream.chat.android.client.models.Channel
 
@@ -29,7 +31,7 @@ fun ChatHeader(channel: Channel, onBack : () -> Unit) {
             }) {
                 Icon(
                     imageVector = Icons.Outlined.ArrowBack,
-                    contentDescription = "Back",
+                    contentDescription = stringResource(R.string.back),
                     tint = Color.Red
                 )
             }

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="warning">Warning</string>
+    <string name="ok">Agree</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="chat">Chat</string>
+    <string name="share_with_friends">Share with friends</string>
+    <string name="back">Back</string>
+    <string name="home_page_content">Home Page content here.</string>
+    <string name="logout">Logout</string>
+    <string name="dudes">Dudes</string>
+    <string name="dudes_1">¿What is Anonymous Chat?</string>
+    <string name="general">General</string>
+    <string name="dudes_3">¿What about privacy in Anonymous Chat?</string>
+    <string name="dudes_4">¿What are usernames? ¿How can I choose it?</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_google">Login with Google</string>
+    <string name="gps_warning">For this funtionality, we need your permission to use your ubication.</string>
+    <string name="gps_turn_on">Turn on GPS</string>
+    <string name="gps_info">AnonymousChat needs to know your real-time location. Don\'t worry, we won\'t share your location with anyone. We will only use it to show you people near you.</string>
+    <string name="permission">Request for permission</string>
+    <string name="allow_permission">Allow permission</string>
+    <string name="val_email_empty">Email cannot be empty</string>
+    <string name="val_pass_dif">Passwords does not match</string>
+    <string name="val_email_invalid">Invalid mail</string>
+    <string name="val_pass_weak">The password must be at least 8 characters long</string>
+    <string name="new_room">New room</string>
+    <string name="about_app">About the app</string>
+    <string name="preferences_app">App preferences</string>
+    <string name="politics_priv">Privacy politics</string>
+    <string name="credits">Credits</string>
+    <string name="dudes_2">Who can send me messages?</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="val_pass_empty">Password cannot be empty</string>
+    <string name="language">Language:</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
+</resources>
