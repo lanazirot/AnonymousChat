@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.getstream.sdk.chat.utils.Utils.locale
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -37,6 +38,8 @@ import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.loading.LoadingScreen
 import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
+import com.lanazirot.anonymouschat.ui.screens.preferences.PreferencesViewModel
+import com.lanazirot.anonymouschat.ui.screens.preferences.components.ToggleButtonLanguage
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 @Composable
@@ -59,7 +62,6 @@ fun LoginScreen() {
         }
     }
 }
-
 
 @Composable
 fun LoginData() {
@@ -198,8 +200,6 @@ fun LoginData() {
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
-
-
         }
 
         Spacer(modifier = Modifier.height(16.dp))

@@ -23,6 +23,7 @@ import com.lanazirot.anonymouschat.ui.screens.login.LoginScreen
 import com.lanazirot.anonymouschat.ui.screens.register.RegisterScreen
 import com.lanazirot.anonymouschat.ui.screens.chat.ChatScreen
 import com.lanazirot.anonymouschat.ui.screens.drawer.*
+import com.lanazirot.anonymouschat.ui.screens.preferences.PreferencesScreen
 import com.lanazirot.anonymouschat.ui.screens.rooms.RoomsScreen
 import kotlinx.coroutines.launch
 
@@ -153,7 +154,7 @@ fun AppNavigation(navController: NavHostController) {
                 }
 
                 composable(DrawerScreens.Preferences.route) {
-                    Preferencias()
+                    PreferencesScreen()
                 }
 
                 composable(DrawerScreens.Politics.route) {

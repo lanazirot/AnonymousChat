@@ -34,4 +34,7 @@
     <string name="dudes_2">¿Quienes pueden enviarme mensaje?</string>
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="val_pass_empty">La contraseña no puede estar vacía.</string>
+    <string name="language">Idioma:</string>
+    <string name="spanish">Español</string>
+    <string name="english">Inglés</string>
 </resources>
