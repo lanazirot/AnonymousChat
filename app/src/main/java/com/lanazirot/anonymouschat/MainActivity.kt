@@ -21,6 +21,7 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.lanazirot.anonymouschat.ui.screens.permissions.RequestPermission
 import com.lanazirot.anonymouschat.ui.screens.preferences.PreferencesViewModel
+import com.lanazirot.anonymouschat.ui.screens.preferences.ThemeViewModel
 import java.util.*
 
 @AndroidEntryPoint
@@ -37,7 +38,10 @@ class MainActivity : ComponentActivity() {
                 val preferencesViewModel : PreferencesViewModel = hiltViewModel()
                 val language = preferencesViewModel.appLocale.collectAsState().value
 
-                AnonymousChatTheme(darkTheme = true) {
+                val themeViewModel: ThemeViewModel = hiltViewModel()
+                val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
+
+                AnonymousChatTheme(darkTheme = isDarkThemeEnabled) {
                     CompositionLocalProvider(
                         GlobalProvider provides gp
                     ) {

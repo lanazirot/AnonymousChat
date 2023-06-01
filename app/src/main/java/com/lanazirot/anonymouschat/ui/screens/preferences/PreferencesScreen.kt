@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -24,7 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.common.TopBar
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
-import com.lanazirot.anonymouschat.ui.screens.preferences.components.SwitchComponent
+import com.lanazirot.anonymouschat.ui.screens.preferences.components.DarkThemeSwitch
 import com.lanazirot.anonymouschat.ui.screens.preferences.components.ToggleButtonLanguage
 
 @Composable
@@ -32,6 +33,7 @@ fun PreferencesScreen() {
     val navController = GlobalProvider.current.navController
     val preferencesViewModel :PreferencesViewModel = hiltViewModel()
     val language by preferencesViewModel.appLocale.collectAsState()
+    val themeViewModel: ThemeViewModel = hiltViewModel()
 
     Column(modifier = Modifier.fillMaxWidth()) {
         TopBar(
@@ -67,7 +69,7 @@ fun PreferencesScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = stringResource(R.string.theme), color = MaterialTheme.colors.primary, fontSize = 23.sp)
-                SwitchComponent()
+                DarkThemeSwitch(themeViewModel)
             }
         }
     }

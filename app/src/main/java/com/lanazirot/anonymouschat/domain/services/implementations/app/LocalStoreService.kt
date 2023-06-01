@@ -20,7 +20,7 @@ class LocalStoreService(private val context: Context) : ILocalStoreService {
             preferences[StorageConstants.STREAM_TOKEN_AUTH] ?: ""
         }
 
-    override suspend fun setStreamTokenAuth(token: String)  {
+    override suspend fun setStreamTokenAuth(token: String) {
         context.dataStore.edit { preferences ->
             preferences[StorageConstants.STREAM_TOKEN_AUTH] = token
         }
@@ -31,9 +31,20 @@ class LocalStoreService(private val context: Context) : ILocalStoreService {
             preferences[StorageConstants.APP_LOCALE] ?: ""
         }
 
-    override suspend fun setAppLocale(locale: String)  {
+    override suspend fun setAppLocale(locale: String) {
         context.dataStore.edit { preferences ->
             preferences[StorageConstants.APP_LOCALE] = locale
+        }
+    }
+
+    override val getDarkThemeState: Flow<Boolean> =
+        context.dataStore.data.map { preferences ->
+            preferences[StorageConstants.DARK_THEME_ENABLED] ?: false
+        }
+
+    override suspend fun setDarkThemeState(enabled: Boolean) {
+        context.dataStore.edit { preferences ->
+            preferences[StorageConstants.DARK_THEME_ENABLED] = enabled
         }
     }
 }
