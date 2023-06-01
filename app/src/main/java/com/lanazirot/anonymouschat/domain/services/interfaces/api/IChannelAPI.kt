@@ -27,9 +27,9 @@ interface IChannelAPI {
 
     @POST("channel/check-if-user-still-in-the-room")
     @Headers("X-API-Key: ${APIConstants.API_KEY}")
-    suspend fun checkIfUserStillInTheRoomByItsCurrentLocation(@Query("ChannelID") channelID: String, @Body userCoordinatesDTO: UserCoordinatesDTO): Boolean
+    suspend fun checkIfUserStillInTheRoomByItsCurrentLocation(@Body userCoordinatesDTO: UserCoordinatesDTO): Boolean
 
-    @POST("reveal-chats-for-user")
+    @POST("channel/reveal-chats-for-user")
     @Headers("X-API-Key: ${APIConstants.API_KEY}")
-    suspend fun revealNewsChatsForCurrentUser(@Body channelDTO: ChannelMemberDTO): String
+    suspend fun revealNewsChatsForCurrentUser(@Body channelDTO: ChannelMemberDTO)
 }

@@ -4,5 +4,5 @@ import com.lanazirot.anonymouschat.domain.models.api.location.LatLongDTO
 
 data class ChannelMemberDTO (
     val email:String,
-    val coordinates: LatLongDTO
+    val currentCoords: LatLongDTO
 )

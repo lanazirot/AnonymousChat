@@ -20,8 +20,8 @@ interface IStreamService {
     fun createChannel(email: String, latLongDTO: LatLongDTO) : Response<CreateChannelResponseDTO>
     fun addMemberToChannel(channelID: String, email: String) : Response<Boolean>
     fun deleteChannel(channelID: String) : Response<Boolean>
-    fun revealNewsChatsForCurrentUser(channelDTO: ChannelMemberDTO): Boolean
+    fun revealNewsChatsForCurrentUser(channelDTO: ChannelMemberDTO)
 
     //LocationAPI
-    fun checkIfUserStillInTheRoomByItsCurrentLocation(channelID: String, userCoordinates: UserCoordinatesDTO) : Response<Boolean>
+    fun checkIfUserStillInTheRoomByItsCurrentLocation(userCoordinates: UserCoordinatesDTO) : Response<Boolean>
 }

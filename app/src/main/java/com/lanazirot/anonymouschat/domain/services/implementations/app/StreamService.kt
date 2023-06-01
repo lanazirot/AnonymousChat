@@ -113,12 +113,10 @@ class StreamService @Inject constructor(
     }
 
     override fun checkIfUserStillInTheRoomByItsCurrentLocation(
-        channelID: String,
         userCoordinates: UserCoordinatesDTO,
     ): Response<Boolean> {
         return try {
             val response = channelRepository.checkIfUserStillInTheRoomByItsCurrentLocation(
-                channelID = channelID,
                 userCoordinatesDTO = userCoordinates
             )
             if (response) Response.Success(true) else Response.Failure(Exception())
@@ -147,11 +145,11 @@ class StreamService @Inject constructor(
         }
     }
 
-    override fun revealNewsChatsForCurrentUser(channelDTO: ChannelMemberDTO): Boolean {
-        return try {
+    override fun revealNewsChatsForCurrentUser(channelDTO: ChannelMemberDTO) {
+        try {
             channelRepository.revealNewsChatsForCurrentUser(channelDTO)
         } catch (e: Exception) {
-            false
+            e.printStackTrace()
         }
     }
 }

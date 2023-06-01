@@ -61,14 +61,12 @@ class ChannelRepository @Inject constructor(
 
     @OptIn(DelicateCoroutinesApi::class)
     fun checkIfUserStillInTheRoomByItsCurrentLocation(
-        channelID: String,
         userCoordinatesDTO: UserCoordinatesDTO,
     ): Boolean {
         var response: Boolean? = null
         runBlocking {
             val job = GlobalScope.launch {
                 response = channelAPI.checkIfUserStillInTheRoomByItsCurrentLocation(
-                    channelID,
                     userCoordinatesDTO
                 )
             }
@@ -80,19 +78,13 @@ class ChannelRepository @Inject constructor(
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    fun revealNewsChatsForCurrentUser(
-        channelDTO: ChannelMemberDTO
-    ) :Boolean {
+    fun revealNewsChatsForCurrentUser(channelDTO: ChannelMemberDTO)  {
         runBlocking {
             val job = GlobalScope.launch {
-                channelAPI.revealNewsChatsForCurrentUser(
-                    channelDTO
-                )
+                channelAPI.revealNewsChatsForCurrentUser(channelDTO)
             }
 
             job.join()
         }
-
-        return true
     }
 }
