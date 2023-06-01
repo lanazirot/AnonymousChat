@@ -1,0 +1,601 @@
+Index: app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/PreferencesScreen.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lanazirot.anonymouschat.ui.screens.preferences\r\n\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.layout.Arrangement\r\nimport androidx.compose.foundation.layout.Column\r\nimport androidx.compose.foundation.layout.Row\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.material.MaterialTheme\r\nimport androidx.compose.material.Text\r\nimport androidx.compose.material.icons.Icons\r\nimport androidx.compose.material.icons.filled.ArrowBack\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.runtime.collectAsState\r\nimport androidx.compose.runtime.getValue\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.input.key.Key.Companion.Ro\r\nimport androidx.compose.ui.res.painterResource\r\nimport androidx.compose.ui.res.stringResource\r\nimport androidx.hilt.navigation.compose.hiltViewModel\r\nimport com.lanazirot.anonymouschat.R\r\nimport com.lanazirot.anonymouschat.ui.components.common.TopBar\r\nimport com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens\r\nimport com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens\r\nimport com.lanazirot.anonymouschat.ui.providers.GlobalProvider\r\nimport com.lanazirot.anonymouschat.ui.screens.preferences.components.ToggleButtonLanguage\r\n\r\n@Composable\r\nfun PreferencesScreen() {\r\n    val navController = GlobalProvider.current.navController\r\n    val preferencesViewModel :PreferencesViewModel = hiltViewModel()\r\n    val language by preferencesViewModel.appLocale.collectAsState()\r\n\r\n    Column(modifier = Modifier.fillMaxSize()) {\r\n        TopBar(\r\n            title = stringResource(R.string.preferences_app),\r\n            icon = painterResource(R.drawable.ipreferencias),\r\n            buttonIcon = Icons.Filled.ArrowBack\r\n        ) { navController.popBackStack() }\r\n        Column(\r\n            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant),\r\n            verticalArrangement = Arrangement.Center,\r\n            horizontalAlignment = Alignment.CenterHorizontally\r\n        ) {\r\n            Column {\r\n                Text(text = stringResource(R.string.language), color = Color.White)\r\n                ToggleButtonLanguage(currentLanguage = language, onChange = { locale ->\r\n                    preferencesViewModel.setLocale(locale)\r\n //                   navController.navigate(DrawerScreens.Main.route)\r\n                })\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/PreferencesScreen.kt b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/PreferencesScreen.kt
+--- a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/PreferencesScreen.kt	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/PreferencesScreen.kt	(date 1685650861036)
+@@ -5,6 +5,8 @@
+ import androidx.compose.foundation.layout.Column
+ import androidx.compose.foundation.layout.Row
+ import androidx.compose.foundation.layout.fillMaxSize
++import androidx.compose.foundation.layout.fillMaxWidth
++import androidx.compose.foundation.layout.height
+ import androidx.compose.material.MaterialTheme
+ import androidx.compose.material.Text
+ import androidx.compose.material.icons.Icons
+@@ -12,19 +14,27 @@
+ import androidx.compose.runtime.Composable
+ import androidx.compose.runtime.collectAsState
+ import androidx.compose.runtime.getValue
++import androidx.compose.runtime.mutableStateOf
++import androidx.compose.runtime.remember
++import androidx.compose.runtime.rememberCoroutineScope
+ import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.graphics.Color
+ import androidx.compose.ui.input.key.Key.Companion.Ro
+ import androidx.compose.ui.res.painterResource
+ import androidx.compose.ui.res.stringResource
++import androidx.compose.ui.unit.dp
++import androidx.compose.ui.unit.sp
+ import androidx.hilt.navigation.compose.hiltViewModel
+ import com.lanazirot.anonymouschat.R
+ import com.lanazirot.anonymouschat.ui.components.common.TopBar
+ import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
+ import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
+ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
++import com.lanazirot.anonymouschat.ui.screens.preferences.components.SwipeButton
+ import com.lanazirot.anonymouschat.ui.screens.preferences.components.ToggleButtonLanguage
++import kotlinx.coroutines.delay
++import kotlinx.coroutines.launch
+ 
+ @Composable
+ fun PreferencesScreen() {
+@@ -32,24 +42,60 @@
+     val preferencesViewModel :PreferencesViewModel = hiltViewModel()
+     val language by preferencesViewModel.appLocale.collectAsState()
+ 
+-    Column(modifier = Modifier.fillMaxSize()) {
++    Column(modifier = Modifier.fillMaxWidth()) {
+         TopBar(
+             title = stringResource(R.string.preferences_app),
+             icon = painterResource(R.drawable.ipreferencias),
+             buttonIcon = Icons.Filled.ArrowBack
+         ) { navController.popBackStack() }
+         Column(
+-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant),
++            modifier = Modifier
++                .fillMaxSize()
++                .background(MaterialTheme.colors.primaryVariant),
+             verticalArrangement = Arrangement.Center,
+             horizontalAlignment = Alignment.CenterHorizontally
+         ) {
+-            Column {
+-                Text(text = stringResource(R.string.language), color = Color.White)
++            Row(modifier = Modifier
++                .height(60.dp)
++                .fillMaxWidth()
++                .background(MaterialTheme.colors.secondary),
++                verticalAlignment = Alignment.CenterVertically,
++                horizontalArrangement = Arrangement.SpaceBetween
++            ) {
++                Text(text = stringResource(R.string.language), color = MaterialTheme.colors.primary, fontSize = 23.sp)
+                 ToggleButtonLanguage(currentLanguage = language, onChange = { locale ->
+                     preferencesViewModel.setLocale(locale)
+  //                   navController.navigate(DrawerScreens.Main.route)
+                 })
+             }
++            Row(modifier = Modifier
++                .height(60.dp)
++                .fillMaxWidth()
++                .background(MaterialTheme.colors.secondary),
++                verticalAlignment = Alignment.CenterVertically,
++                horizontalArrangement = Arrangement.SpaceBetween
++            ) {
++                Text(text = stringResource(R.string.theme), color = MaterialTheme.colors.primary, fontSize = 23.sp)
++                SwipeButtonSample()
++            }
+         }
+     }
++}
++@Composable
++fun SwipeButtonSample() {
++    val coroutineScope = rememberCoroutineScope()
++    val (isComplete, setIsComplete) = remember {
++        mutableStateOf(false)
++    }
++
++    SwipeButton(
++        text = "",
++        isComplete = isComplete,
++        onSwipe = {
++            coroutineScope.launch {
++                delay(2000)
++                setIsComplete(true)
++            }
++        },
++    )
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/ToggleButtonLanguage.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lanazirot.anonymouschat.ui.screens.preferences.components\r\n\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.clickable\r\nimport androidx.compose.foundation.layout.*\r\nimport androidx.compose.foundation.shape.RoundedCornerShape\r\nimport androidx.compose.material.MaterialTheme.typography\r\nimport androidx.compose.material.Text\r\nimport androidx.compose.runtime.*\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.draw.clip\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.res.stringResource\r\nimport androidx.compose.ui.unit.dp\r\nimport com.lanazirot.anonymouschat.R\r\n\r\n@Composable\r\nfun ToggleButtonLanguage(\r\n    currentLanguage: String,\r\n    onChange: (locale: String) -> Unit\r\n) {\r\n    val languages = listOf(\r\n        listOf(\"es\", stringResource(R.string.spanish)),\r\n        listOf(\"en\", stringResource(R.string.english)),\r\n    )\r\n\r\n    var selectedOption by remember { mutableStateOf(currentLanguage) }\r\n    val onSelectionChange = { id: String ->\r\n        selectedOption = id\r\n        onChange(id)\r\n    }\r\n\r\n    Column(\r\n        verticalArrangement = Arrangement.Center,\r\n        horizontalAlignment = Alignment.CenterHorizontally,\r\n        modifier = Modifier.fillMaxSize(),\r\n    ) {\r\n        languages.forEach { lan ->\r\n            Row(\r\n                modifier = Modifier\r\n                    .padding(\r\n                        all = 8.dp,\r\n                    ),\r\n            ) {\r\n                Text(\r\n                    text = lan[1],\r\n                    style = typography.body1.merge(),\r\n                    color = if (lan[0] == selectedOption) {\r\n                        Color.Black\r\n                    } else {\r\n                        Color.White\r\n                    },\r\n                    modifier = Modifier\r\n                        .clip(\r\n                            shape = RoundedCornerShape(\r\n                                size = 12.dp,\r\n                            ),\r\n                        )\r\n                        .clickable {\r\n                            onSelectionChange(lan[0])\r\n                        }\r\n                        .background(\r\n                            if (lan[0] == selectedOption) {\r\n                                Color.White\r\n                            } else {\r\n                                Color.LightGray\r\n                            }\r\n                        )\r\n                        .padding(\r\n                            vertical = 12.dp,\r\n                            horizontal = 16.dp,\r\n                        ),\r\n                )\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/ToggleButtonLanguage.kt b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/ToggleButtonLanguage.kt
+--- a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/ToggleButtonLanguage.kt	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/ToggleButtonLanguage.kt	(date 1685650362039)
+@@ -31,10 +31,10 @@
+         onChange(id)
+     }
+ 
+-    Column(
+-        verticalArrangement = Arrangement.Center,
+-        horizontalAlignment = Alignment.CenterHorizontally,
+-        modifier = Modifier.fillMaxSize(),
++    Row(
++        verticalAlignment = Alignment.CenterVertically,
++        horizontalArrangement = Arrangement.SpaceBetween
++        //modifier = Modifier.fillMaxSize(),
+     ) {
+         languages.forEach { lan ->
+             Row(
+Index: app/src/main/res/values-en/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <string name=\"warning\">Warning</string>\r\n    <string name=\"ok\">Agree</string>\r\n    <string name=\"login\">Login</string>\r\n    <string name=\"register\">Register</string>\r\n    <string name=\"chat\">Chat</string>\r\n    <string name=\"share_with_friends\">Share with friends</string>\r\n    <string name=\"back\">Back</string>\r\n    <string name=\"home_page_content\">Home Page content here.</string>\r\n    <string name=\"logout\">Logout</string>\r\n    <string name=\"general\">General</string>\r\n    <string name=\"dudes\">Dudes</string>\r\n    <string name=\"dudes_1\">What is Anonymous Chat?</string>\r\n    <string name=\"dudes_2\">How is privacy managed in Anonymous Chat?</string>\r\n    <string name=\"dudes_3\">Why can not I choose the chat name?</string>\r\n    <string name=\"dudes_4\">Is there any hidden reason behind the application?</string>\r\n    <string name=\"dudes_R1\">Anonymous Chat is an application designed to meet and chat with nearby people anonymously through community chat rooms created based on the user\\'s location.</string>\r\n    <string name=\"dudes_R2\">All user information is used solely for account management purposes and is not provided to third parties nor can it be accessed by external individuals.</string>\r\n    <string name=\"dudes_R3\">This is done to better maintain anonymity, as a customized name could provide clues to your identity.</string>\r\n    <string name=\"dudes_R4\">None. The Anonymous Chat team only considers the benefit of its users, and we hope you enjoy the application :]</string>\r\n    <string name=\"email\">Email</string>\r\n    <string name=\"password\">Password</string>\r\n    <string name=\"login_google\">Login with Google</string>\r\n    <string name=\"gps_warning\">For this funtionality, we need your permission to use your ubication.</string>\r\n    <string name=\"gps_turn_on\">Turn on GPS</string>\r\n    <string name=\"gps_info\">AnonymousChat needs to know your real-time location. Don\\'t worry, we won\\'t share your location with anyone. We will only use it to show you people near you.</string>\r\n    <string name=\"permission\">Request for permission</string>\r\n    <string name=\"allow_permission\">Allow permission</string>\r\n    <string name=\"val_email_empty\">Email cannot be empty</string>\r\n    <string name=\"val_pass_dif\">Passwords does not match</string>\r\n    <string name=\"val_email_invalid\">Invalid mail</string>\r\n    <string name=\"val_pass_weak\">The password must be at least 8 characters long</string>\r\n    <string name=\"new_room\">New room</string>\r\n    <string name=\"about_app\">About the app</string>\r\n    <string name=\"preferences_app\">App preferences</string>\r\n    <string name=\"politics_priv\">Privacy politics</string>\r\n    <string name=\"credits\">Credits</string>\r\n    <string name=\"confirm_password\">Confirm password</string>\r\n    <string name=\"val_pass_empty\">Password cannot be empty</string>\r\n    <string name=\"language\">Language:</string>\r\n    <string name=\"spanish\">Spanish</string>\r\n    <string name=\"english\">English</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values-en/strings.xml b/app/src/main/res/values-en/strings.xml
+--- a/app/src/main/res/values-en/strings.xml	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/res/values-en/strings.xml	(date 1685646757641)
+@@ -39,6 +39,7 @@
+     <string name="confirm_password">Confirm password</string>
+     <string name="val_pass_empty">Password cannot be empty</string>
+     <string name="language">Language:</string>
++    <string name="theme">Light Mode:</string>
+     <string name="spanish">Spanish</string>
+     <string name="english">English</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/values-es/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <string name=\"warning\">Advertencia</string>\r\n    <string name=\"ok\">De acuerdo</string>\r\n    <string name=\"login\">Iniciar sesion</string>\r\n    <string name=\"register\">Registrarse</string>\r\n    <string name=\"chat\">Mensajes</string>\r\n    <string name=\"share_with_friends\">Invitar amigos</string>\r\n    <string name=\"back\">Volver</string>\r\n    <string name=\"home_page_content\">Contenido principal</string>\r\n    <string name=\"logout\">Cerrar sesión</string>\r\n    <string name=\"general\">General</string>\r\n    <string name=\"dudes\">Dudas</string>\r\n    <string name=\"dudes_1\">¿Qué es Anonymous Chat?</string>\r\n    <string name=\"dudes_2\">¿Como se maneja la privacidad en  Anonymous Chat?</string>\r\n    <string name=\"dudes_3\">¿Por que no puedo elegir el nombre del chat?</string>\r\n    <string name=\"dudes_4\">¿Hay alguna razón oculta detrás de la aplicación?</string>\r\n    <string name=\"dudes_R1\">Anonymous Chat es una aplicación diseñada para conocer y chatear con personas cercanas de forma anónima a traves de salas de chat comunitarias creadas en base a la ubicación del usuario.</string>\r\n    <string name=\"dudes_R2\">Toda la información de los usuarios es utilizada solo con fines de gestión de cuenta y no es proporcionada a terceros ni puede ser consultada por personas externas</string>\r\n    <string name=\"dudes_R3\">Esto sucede para mantener de mejor manera el anonimato, ya que un nombre personalizado puede dar indicios de tu identidad.</string>\r\n    <string name=\"dudes_R4\">Ninguna. El equipo de Anonymous Chat solo piensa en el beneficio de sus usuarios y esperamos que disfruten de la aplicación :]</string>\r\n    <string name=\"email\">Correo electrónico</string>\r\n    <string name=\"password\">Contraseña</string>\r\n    <string name=\"login_google\">Iniciar sesión con Google</string>\r\n    <string name=\"gps_warning\">Para usar esta funcionalidad necesitamos que nos des permiso para acceder a tu ubicación.</string>\r\n    <string name=\"gps_turn_on\">Enciende el GPS</string>\r\n    <string name=\"gps_info\">AnonymousChat necesita saber tu ubicación en tiempo real. Tranquilo, no compartiremos tu ubicación con nadie. Solo la usaremos para mostrarte personas cercanas a ti.</string>\r\n    <string name=\"permission\">Petición de permiso</string>\r\n    <string name=\"allow_permission\">Otorgar permiso</string>\r\n    <string name=\"val_email_empty\">El correo electrónico no puede estar vacío.</string>\r\n    <string name=\"val_pass_dif\">Las contraseñas no coinciden.</string>\r\n    <string name=\"val_email_invalid\">El correo electrónico no es válido.</string>\r\n    <string name=\"val_pass_weak\">La contraseña debe tener al menos 8 caracteres.</string>\r\n    <string name=\"new_room\">Crear nueva sala</string>\r\n    <string name=\"about_app\">Acerca de la aplicación</string>\r\n    <string name=\"preferences_app\">Preferencias de la app</string>\r\n    <string name=\"politics_priv\">Políticas de privacidad</string>\r\n    <string name=\"credits\">Créditos</string>\r\n    <string name=\"confirm_password\">Confirmar contraseña</string>\r\n    <string name=\"val_pass_empty\">La contraseña no puede estar vacía.</string>\r\n    <string name=\"language\">Idioma:</string>\r\n    <string name=\"spanish\">Español</string>\r\n    <string name=\"english\">Inglés</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values-es/strings.xml b/app/src/main/res/values-es/strings.xml
+--- a/app/src/main/res/values-es/strings.xml	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/res/values-es/strings.xml	(date 1685646757690)
+@@ -39,6 +39,7 @@
+     <string name="confirm_password">Confirmar contraseña</string>
+     <string name="val_pass_empty">La contraseña no puede estar vacía.</string>
+     <string name="language">Idioma:</string>
++    <string name="theme">Tema claro:</string>
+     <string name="spanish">Español</string>
+     <string name="english">Inglés</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Drawer.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lanazirot.anonymouschat.ui.screens.drawer\r\n\r\nimport androidx.compose.foundation.Image\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.clickable\r\nimport androidx.compose.foundation.layout.Column\r\nimport androidx.compose.foundation.layout.Row\r\nimport androidx.compose.foundation.layout.Spacer\r\nimport androidx.compose.foundation.layout.fillMaxHeight\r\nimport androidx.compose.foundation.layout.fillMaxWidth\r\nimport androidx.compose.foundation.layout.height\r\nimport androidx.compose.foundation.layout.padding\r\nimport androidx.compose.foundation.layout.size\r\nimport androidx.compose.foundation.layout.width\r\nimport androidx.compose.material.Button\r\nimport androidx.compose.material.ButtonDefaults\r\nimport androidx.compose.material.MaterialTheme\r\nimport androidx.compose.material.Text\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.res.painterResource\r\nimport androidx.compose.ui.res.stringResource\r\nimport androidx.compose.ui.text.font.FontWeight\r\nimport androidx.compose.ui.unit.dp\r\nimport androidx.compose.ui.unit.sp\r\nimport androidx.hilt.navigation.compose.hiltViewModel\r\nimport com.google.firebase.auth.ktx.auth\r\nimport com.google.firebase.ktx.Firebase\r\nimport com.lanazirot.anonymouschat.R\r\nimport com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens\r\nimport com.lanazirot.anonymouschat.ui.navigator.routes.screens\r\nimport com.lanazirot.anonymouschat.ui.providers.GlobalProvider\r\nimport com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel\r\n\r\n@Composable\r\nfun Drawer (\r\n    modifier: Modifier = Modifier,\r\n    onDestinationClicked: (route: String) -> Unit,\r\n    onCloseDrawer: () -> Unit\r\n) {\r\n    val loginViewModel: LoginViewModel = hiltViewModel()\r\n    val name = Firebase.auth.currentUser?.displayName ?: \"\"\r\n    val navController = GlobalProvider.current.navController\r\n\r\n    Column(\r\n        modifier\r\n            .fillMaxHeight()\r\n            .width(300.dp)\r\n            .background(MaterialTheme.colors.secondary)\r\n    ) {\r\n        Row(\r\n            modifier = Modifier.fillMaxWidth().background(Color.Black).padding(start = 25.dp),\r\n            verticalAlignment = Alignment.CenterVertically\r\n        ) {\r\n            Image(\r\n                painter = painterResource(R.drawable.iusuario),\r\n                contentDescription = null,\r\n                modifier = Modifier\r\n                    .size(50.dp)\r\n                    .padding(end = 16.dp)\r\n            )\r\n            Text(\r\n                text = name,\r\n                color = Color.White,\r\n                fontSize = 20.sp,\r\n                fontWeight = FontWeight.Bold\r\n            )\r\n        }\r\n        Spacer(modifier = Modifier.height(24.dp))\r\n        screens.forEach { screen ->\r\n            Row(\r\n                modifier = Modifier.padding(start = 25.dp),\r\n                verticalAlignment = Alignment.CenterVertically\r\n            ) {\r\n                Image(\r\n                    painter = painterResource(screen.icon),\r\n                    contentDescription = \"null\",\r\n                    modifier = Modifier.size(22.dp)\r\n                )\r\n                Spacer(modifier = Modifier.width(10.dp))\r\n                Text(\r\n                    text = screen.title,\r\n                    color = Color.White,\r\n                    fontSize = 21.sp,\r\n                    modifier = Modifier.clickable {\r\n                        onDestinationClicked(screen.route)\r\n                    }\r\n                )\r\n            }\r\n            Spacer(modifier = Modifier.height(25.dp))\r\n        }\r\n        Button(\r\n            onClick = {\r\n                onCloseDrawer()\r\n                loginViewModel.logout()\r\n                navController.navigate(AppScreens.Login.route) {\r\n                    popUpTo(AppScreens.Login.route) {\r\n                        inclusive = true\r\n                    }\r\n                }\r\n            },\r\n            modifier = Modifier.padding(8.dp).fillMaxWidth(),\r\n            content = {\r\n                Row(verticalAlignment = Alignment.CenterVertically) {\r\n                    Image(\r\n                        painter = painterResource(R.drawable.isalir),\r\n                        contentDescription = stringResource(R.string.logout),\r\n                        modifier = Modifier.size(24.dp)\r\n                    )\r\n                    Spacer(modifier = Modifier.width(8.dp))\r\n                    Text(text = stringResource(R.string.logout), color = MaterialTheme.colors.primary)\r\n                }\r\n            },\r\n            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)\r\n        )\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Drawer.kt b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Drawer.kt
+--- a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Drawer.kt	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Drawer.kt	(date 1685647366666)
+@@ -33,6 +33,7 @@
+ import com.lanazirot.anonymouschat.ui.navigator.routes.screens
+ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
+ import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
++import com.lanazirot.anonymouschat.ui.theme.Anonymous
+ 
+ @Composable
+ fun Drawer (
+@@ -107,13 +108,13 @@
+                     Image(
+                         painter = painterResource(R.drawable.isalir),
+                         contentDescription = stringResource(R.string.logout),
+-                        modifier = Modifier.size(24.dp)
++                        modifier = Modifier.size(30.dp)
+                     )
+                     Spacer(modifier = Modifier.width(8.dp))
+-                    Text(text = stringResource(R.string.logout), color = MaterialTheme.colors.primary)
++                    Text(text = stringResource(R.string.logout), color = MaterialTheme.colors.primary, fontFamily = Anonymous, fontWeight = FontWeight.Normal, fontSize = 18.sp)
+                 }
+             },
+-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
++            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
+         )
+     }
+ }
+\ No newline at end of file
+Index: app/src/main/java/com/lanazirot/anonymouschat/ui/components/common/TopBar.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lanazirot.anonymouschat.ui.components.common\r\n\r\nimport androidx.compose.foundation.Image\r\nimport androidx.compose.foundation.layout.size\r\nimport androidx.compose.material.Icon\r\nimport androidx.compose.material.IconButton\r\nimport androidx.compose.material.Text\r\nimport androidx.compose.material.TopAppBar\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.graphics.painter.Painter\r\nimport androidx.compose.ui.graphics.vector.ImageVector\r\nimport androidx.compose.ui.text.font.FontWeight\r\nimport androidx.compose.ui.unit.dp\r\nimport androidx.compose.ui.unit.sp\r\nimport com.lanazirot.anonymouschat.ui.theme.Anonymous\r\n\r\n@Composable\r\nfun TopBar(title: String = \"\", buttonIcon: ImageVector, icon: Painter?, onButtonClicked: () -> Unit) {\r\n    val tittleStyled = if (icon != null) \"      $title\" else title\r\n\r\n    TopAppBar(\r\n        title = {\r\n            if (icon != null) {\r\n                Image(\r\n                    painter = icon,\r\n                    contentDescription = \"null\",\r\n                    modifier = Modifier.size(25.dp)\r\n                )\r\n            }\r\n\r\n            Text(\r\n                text = tittleStyled,\r\n                color = Color.White,\r\n                fontFamily = Anonymous,\r\n                fontWeight = FontWeight.Black,\r\n                fontSize = 21.sp\r\n            )\r\n        },\r\n        navigationIcon = {\r\n            IconButton(onClick = { onButtonClicked() } ) {\r\n                Icon(buttonIcon, contentDescription = \"\", tint = Color.White)\r\n            }\r\n        },\r\n        backgroundColor = Color.Black\r\n    )\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lanazirot/anonymouschat/ui/components/common/TopBar.kt b/app/src/main/java/com/lanazirot/anonymouschat/ui/components/common/TopBar.kt
+--- a/app/src/main/java/com/lanazirot/anonymouschat/ui/components/common/TopBar.kt	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/java/com/lanazirot/anonymouschat/ui/components/common/TopBar.kt	(date 1685647210696)
+@@ -35,7 +35,7 @@
+                 color = Color.White,
+                 fontFamily = Anonymous,
+                 fontWeight = FontWeight.Black,
+-                fontSize = 21.sp
++                fontSize = 25.sp
+             )
+         },
+         navigationIcon = {
+Index: app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Dudas.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lanazirot.anonymouschat.ui.screens.drawer\r\n\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.layout.Column\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.material.MaterialTheme\r\nimport androidx.compose.material.icons.Icons\r\nimport androidx.compose.material.icons.filled.ArrowBack\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.res.painterResource\r\nimport androidx.compose.ui.res.stringResource\r\nimport com.lanazirot.anonymouschat.R\r\nimport com.lanazirot.anonymouschat.ui.components.common.ScrollableScreen\r\nimport com.lanazirot.anonymouschat.ui.components.common.TopBar\r\nimport com.lanazirot.anonymouschat.ui.providers.GlobalProvider\r\n\r\n@Composable\r\nfun Dudas() {\r\n    val navController = GlobalProvider.current.navController\r\n\r\n    val listItems = listOf(\r\n        stringResource(R.string.general),\r\n        stringResource(R.string.dudes_1),\r\n        stringResource(R.string.dudes_R1),\r\n        stringResource(R.string.dudes_2),\r\n        stringResource(R.string.dudes_R2),\r\n        stringResource(R.string.dudes_3),\r\n        stringResource(R.string.dudes_R3),\r\n        stringResource(R.string.dudes_4),\r\n        stringResource(R.string.dudes_R4)\r\n    )\r\n\r\n    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant)) {\r\n        TopBar(\r\n            title = stringResource(R.string.dudes),\r\n            icon = painterResource(R.drawable.idudas),\r\n            buttonIcon = Icons.Filled.ArrowBack\r\n        ) { navController.popBackStack() }\r\n        ScrollableScreen(listItems)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Dudas.kt b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Dudas.kt
+--- a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Dudas.kt	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Dudas.kt	(date 1685647270507)
+@@ -1,12 +1,14 @@
+ package com.lanazirot.anonymouschat.ui.screens.drawer
+ 
+ import androidx.compose.foundation.background
++import androidx.compose.foundation.layout.Arrangement
+ import androidx.compose.foundation.layout.Column
+ import androidx.compose.foundation.layout.fillMaxSize
+ import androidx.compose.material.MaterialTheme
+ import androidx.compose.material.icons.Icons
+ import androidx.compose.material.icons.filled.ArrowBack
+ import androidx.compose.runtime.Composable
++import androidx.compose.ui.Alignment
+ import androidx.compose.ui.Modifier
+ import androidx.compose.ui.res.painterResource
+ import androidx.compose.ui.res.stringResource
+@@ -31,7 +33,7 @@
+         stringResource(R.string.dudes_R4)
+     )
+ 
+-    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant)) {
++    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+         TopBar(
+             title = stringResource(R.string.dudes),
+             icon = painterResource(R.drawable.idudas),
+Index: app/src/main/java/com/lanazirot/anonymouschat/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lanazirot.anonymouschat\r\n\r\nimport android.os.Bundle\r\nimport androidx.activity.ComponentActivity\r\nimport androidx.activity.compose.setContent\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.material.Surface\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.navigation.compose.rememberNavController\r\nimport com.lanazirot.anonymouschat.ui.providers.AppProvider\r\nimport com.lanazirot.anonymouschat.ui.providers.GlobalProvider\r\nimport com.lanazirot.anonymouschat.ui.screens.splashscreen.App\r\nimport com.lanazirot.anonymouschat.ui.theme.AnonymousChatTheme\r\nimport dagger.hilt.android.AndroidEntryPoint\r\nimport android.Manifest\r\nimport android.annotation.SuppressLint\r\nimport androidx.compose.material.MaterialTheme\r\nimport androidx.compose.runtime.*\r\nimport androidx.hilt.navigation.compose.hiltViewModel\r\nimport com.google.accompanist.insets.ProvideWindowInsets\r\nimport com.google.accompanist.permissions.ExperimentalPermissionsApi\r\nimport com.lanazirot.anonymouschat.ui.screens.permissions.RequestPermission\r\nimport com.lanazirot.anonymouschat.ui.screens.preferences.PreferencesViewModel\r\nimport java.util.*\r\n\r\n@AndroidEntryPoint\r\nclass MainActivity : ComponentActivity() {\r\n    @SuppressLint(\"StateFlowValueCalledInComposition\")\r\n    @OptIn(ExperimentalPermissionsApi::class)\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        super.onCreate(savedInstanceState)\r\n\r\n        setContent {\r\n            ProvideWindowInsets{\r\n                val navController = rememberNavController()\r\n                val gp = AppProvider(navController = navController)\r\n                val preferencesViewModel : PreferencesViewModel = hiltViewModel()\r\n                val language = preferencesViewModel.appLocale.collectAsState().value\r\n\r\n                AnonymousChatTheme(darkTheme = true) {\r\n                    CompositionLocalProvider(\r\n                        GlobalProvider provides gp\r\n                    ) {\r\n                        Surface(\r\n                            modifier = Modifier.fillMaxSize(),\r\n                            //color = Color.Black\r\n                            color = MaterialTheme.colors.primaryVariant\r\n                        ) {\r\n                            LaunchedEffect(language) {\r\n                                updateLocale(language)\r\n                            }\r\n                            RequestPermission(permission = Manifest.permission.ACCESS_FINE_LOCATION){\r\n                                App(navController)\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n\r\n    private fun updateLocale(locale: String) {\r\n        resources.configuration.setLocale(Locale(locale))\r\n        resources.configuration.locale = Locale(locale)\r\n        resources.updateConfiguration(resources.configuration, resources.displayMetrics)\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lanazirot/anonymouschat/MainActivity.kt b/app/src/main/java/com/lanazirot/anonymouschat/MainActivity.kt
+--- a/app/src/main/java/com/lanazirot/anonymouschat/MainActivity.kt	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/java/com/lanazirot/anonymouschat/MainActivity.kt	(date 1685647615662)
+@@ -38,7 +38,7 @@
+                 val preferencesViewModel : PreferencesViewModel = hiltViewModel()
+                 val language = preferencesViewModel.appLocale.collectAsState().value
+ 
+-                AnonymousChatTheme(darkTheme = true) {
++                AnonymousChatTheme(darkTheme = false) {
+                     CompositionLocalProvider(
+                         GlobalProvider provides gp
+                     ) {
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\" translatable=\"false\">AnonymousChat</string>\r\n    <string name=\"google_token\" translatable=\"false\">284051697851-lro474aenbne24s7cten8eu6suvvfjam.apps.googleusercontent.com</string>\r\n    <string name=\"stream_app_key\" translatable=\"false\">g86vvadnsr44</string>\r\n    <string name=\"warning\">Advertencia</string>\r\n    <string name=\"ok\">De acuerdo</string>\r\n    <string name=\"login\">Iniciar sesion</string>\r\n    <string name=\"register\">Registrarse</string>\r\n    <string name=\"chat\">Mensajes</string>\r\n    <string name=\"share_with_friends\">Invitar amigos</string>\r\n    <string name=\"about_app\">Acerca de la aplicación</string>\r\n    <string name=\"preferences_app\">Preferencias de la app</string>\r\n    <string name=\"politics_priv\">Políticas de privacidad</string>\r\n    <string name=\"credits\">Créditos</string>\r\n    <string name=\"back\">Volver</string>\r\n    <string name=\"home_page_content\">Contenido principal</string>\r\n    <string name=\"logout\">Cerrar sesión</string>\r\n    <string name=\"general\">General</string>\r\n    <string name=\"dudes\">Dudas</string>\r\n    <string name=\"dudes_1\">¿Qué es Anonymous Chat?</string>\r\n    <string name=\"dudes_2\">¿Como se maneja la privacidad en  Anonymous Chat?</string>\r\n    <string name=\"dudes_3\">¿Por que no puedo elegir el nombre del chat?</string>\r\n    <string name=\"dudes_4\">¿Hay alguna razón oculta detrás de la aplicación?</string>\r\n    <string name=\"dudes_R1\">Anonymous Chat es una aplicación diseñada para conocer y chatear con personas cercanas de forma anónima a traves de salas de chat comunitarias creadas en base a la ubicación del usuario.</string>\r\n    <string name=\"dudes_R2\">Toda la información de los usuarios es utilizada solo con fines de gestión de cuenta y no es proporcionada a terceros ni puede ser consultada por personas externas</string>\r\n    <string name=\"dudes_R3\">Esto sucede para mantener de mejor manera el anonimato, ya que un nombre personalizado puede dar indicios de tu identidad.</string>\r\n    <string name=\"dudes_R4\">Ninguna. El equipo de Anonymous Chat solo piensa en el beneficio de sus usuarios y esperamos que disfruten de la aplicación :]</string>\r\n    <string name=\"email\">Correo electrónico</string>\r\n    <string name=\"password\">Contraseña</string>\r\n    <string name=\"login_google\">Iniciar sesión con Google</string>\r\n    <string name=\"gps_warning\">Para usar esta funcionalidad necesitamos que nos des permiso para acceder a tu ubicación.</string>\r\n    <string name=\"gps_turn_on\">Enciende el GPS</string>\r\n    <string name=\"gps_info\">AnonymousChat necesita saber tu ubicación en tiempo real. Tranquilo, no compartiremos tu ubicación con nadie. Solo la usaremos para mostrarte personas cercanas a ti.</string>\r\n    <string name=\"permission\">Petición de permiso</string>\r\n    <string name=\"allow_permission\">Otorgar permiso</string>\r\n    <string name=\"confirm_password\">Confirmar contraseña</string>\r\n    <string name=\"val_email_empty\">El correo electrónico no puede estar vacío.</string>\r\n    <string name=\"val_pass_empty\">La contraseña no puede estar vacía.</string>\r\n    <string name=\"val_pass_dif\">Las contraseñas no coinciden.</string>\r\n    <string name=\"val_email_invalid\">El correo electrónico no es válido.</string>\r\n    <string name=\"val_pass_weak\">La contraseña debe tener al menos 8 caracteres.</string>\r\n    <string name=\"new_room\">Crear nueva sala</string>\r\n    <string name=\"language\">Idioma:</string>\r\n    <string name=\"spanish\">Español</string>\r\n    <string name=\"english\">Inglés</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/res/values/strings.xml	(date 1685646757710)
+@@ -41,6 +41,7 @@
+     <string name="val_pass_weak">La contraseña debe tener al menos 8 caracteres.</string>
+     <string name="new_room">Crear nueva sala</string>
+     <string name="language">Idioma:</string>
++    <string name="theme">Tema claro:</string>
+     <string name="spanish">Español</string>
+     <string name="english">Inglés</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Creditos.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.lanazirot.anonymouschat.ui.screens.drawer\r\n\r\nimport androidx.compose.animation.AnimatedVisibility\r\nimport androidx.compose.animation.core.RepeatMode\r\nimport androidx.compose.animation.core.animateFloatAsState\r\nimport androidx.compose.animation.core.infiniteRepeatable\r\nimport androidx.compose.animation.core.tween\r\nimport androidx.compose.animation.fadeIn\r\nimport androidx.compose.animation.fadeOut\r\nimport androidx.compose.foundation.background\r\nimport androidx.compose.foundation.layout.Arrangement\r\nimport androidx.compose.foundation.layout.Column\r\nimport androidx.compose.foundation.layout.fillMaxSize\r\nimport androidx.compose.foundation.layout.padding\r\nimport androidx.compose.material.MaterialTheme\r\nimport androidx.compose.material.Text\r\nimport androidx.compose.material.icons.Icons\r\nimport androidx.compose.material.icons.filled.ArrowBack\r\nimport androidx.compose.runtime.Composable\r\nimport androidx.compose.runtime.getValue\r\nimport androidx.compose.runtime.mutableStateOf\r\nimport androidx.compose.runtime.remember\r\nimport androidx.compose.runtime.setValue\r\nimport androidx.compose.ui.Alignment\r\nimport androidx.compose.ui.Modifier\r\nimport androidx.compose.ui.draw.rotate\r\nimport androidx.compose.ui.graphics.Color\r\nimport androidx.compose.ui.res.painterResource\r\nimport androidx.compose.ui.res.stringResource\r\nimport androidx.compose.ui.unit.dp\r\nimport com.lanazirot.anonymouschat.R\r\nimport com.lanazirot.anonymouschat.ui.components.common.TopBar\r\nimport com.lanazirot.anonymouschat.ui.providers.GlobalProvider\r\n\r\n@Composable\r\nfun Creditos() {\r\n    val navController = GlobalProvider.current.navController\r\n\r\n    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant)) {\r\n        TopBar(\r\n            title = stringResource(R.string.credits),\r\n            icon = painterResource(R.drawable.icreditos),\r\n            buttonIcon = Icons.Filled.ArrowBack\r\n        ) { navController.popBackStack() }\r\n        Column(\r\n            modifier = Modifier.fillMaxSize(),\r\n            verticalArrangement = Arrangement.Center,\r\n            horizontalAlignment = Alignment.CenterHorizontally\r\n        ) {\r\n            Text(\r\n                text = \"Créditos:\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.h6,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n            Text(\r\n                text = \"- Backend -\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.subtitle1,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n            Text(\r\n                text = \"Alan Peña Ortiz\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.body1,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n            Text(\r\n                text = \"Alan Castro Cruz\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.body1,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n            Text(\r\n                text = \"- Frontend -\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.subtitle1,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n            Text(\r\n                text = \"Ezequiel Cantu\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.body1,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n            Text(\r\n                text = \"Andrea Martinez\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.body1,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n            Text(\r\n                text = \"- Fullstack -\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.subtitle1,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n            Text(\r\n                text = \"Eduardo Jared\",\r\n                color = Color.White,\r\n                style = MaterialTheme.typography.body1,\r\n                modifier = Modifier.padding(16.dp)\r\n            )\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Creditos.kt b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Creditos.kt
+--- a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Creditos.kt	(revision 086c6da49b2b4edec8fbfad2c04dab8bfa93dbad)
++++ b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/drawer/Creditos.kt	(date 1685647797737)
+@@ -47,59 +47,59 @@
+             verticalArrangement = Arrangement.Center,
+             horizontalAlignment = Alignment.CenterHorizontally
+         ) {
+-            Text(
+-                text = "Créditos:",
+-                color = Color.White,
+-                style = MaterialTheme.typography.h6,
+-                modifier = Modifier.padding(16.dp)
+-            )
++//            Text(
++//                text = "Créditos:",
++//                color = MaterialTheme.colors.primary,
++//                style = MaterialTheme.typography.h6,
++//                modifier = Modifier.padding(16.dp)
++//            )
+             Text(
+                 text = "- Backend -",
+-                color = Color.White,
++                color = MaterialTheme.colors.secondary,
+                 style = MaterialTheme.typography.subtitle1,
+-                modifier = Modifier.padding(16.dp)
++                modifier = Modifier.padding(20.dp)
+             )
+             Text(
+                 text = "Alan Peña Ortiz",
+-                color = Color.White,
++                color = MaterialTheme.colors.primary,
+                 style = MaterialTheme.typography.body1,
+-                modifier = Modifier.padding(16.dp)
++                modifier = Modifier.padding(18.dp)
+             )
+             Text(
+                 text = "Alan Castro Cruz",
+-                color = Color.White,
++                color = MaterialTheme.colors.primary,
+                 style = MaterialTheme.typography.body1,
+-                modifier = Modifier.padding(16.dp)
++                modifier = Modifier.padding(18.dp)
+             )
+             Text(
+                 text = "- Frontend -",
+-                color = Color.White,
++                color = MaterialTheme.colors.secondary,
+                 style = MaterialTheme.typography.subtitle1,
+-                modifier = Modifier.padding(16.dp)
++                modifier = Modifier.padding(20.dp)
+             )
+             Text(
+                 text = "Ezequiel Cantu",
+-                color = Color.White,
++                color = MaterialTheme.colors.primary,
+                 style = MaterialTheme.typography.body1,
+-                modifier = Modifier.padding(16.dp)
++                modifier = Modifier.padding(18.dp)
+             )
+             Text(
+                 text = "Andrea Martinez",
+-                color = Color.White,
++                color = MaterialTheme.colors.primary,
+                 style = MaterialTheme.typography.body1,
+-                modifier = Modifier.padding(16.dp)
++                modifier = Modifier.padding(18.dp)
+             )
+             Text(
+                 text = "- Fullstack -",
+-                color = Color.White,
++                color = MaterialTheme.colors.secondary,
+                 style = MaterialTheme.typography.subtitle1,
+-                modifier = Modifier.padding(16.dp)
++                modifier = Modifier.padding(20.dp)
+             )
+             Text(
+                 text = "Eduardo Jared",
+-                color = Color.White,
++                color = MaterialTheme.colors.primary,
+                 style = MaterialTheme.typography.body1,
+-                modifier = Modifier.padding(16.dp)
++                modifier = Modifier.padding(18.dp)
+             )
+         }
+     }
+Index: app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/SwipeButton.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/SwipeButton.kt b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/SwipeButton.kt
+new file mode 100644
+--- /dev/null	(date 1685651052964)
++++ b/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/preferences/components/SwipeButton.kt	(date 1685651052964)
+@@ -0,0 +1,196 @@
++package com.lanazirot.anonymouschat.ui.screens.preferences.components
++
++import androidx.compose.animation.AnimatedVisibility
++import androidx.compose.animation.animateContentSize
++import androidx.compose.animation.core.LinearEasing
++import androidx.compose.animation.core.animateFloatAsState
++import androidx.compose.animation.core.tween
++import androidx.compose.animation.fadeIn
++import androidx.compose.animation.fadeOut
++import androidx.compose.foundation.background
++import androidx.compose.foundation.gestures.Orientation
++import androidx.compose.foundation.layout.Box
++import androidx.compose.foundation.layout.aspectRatio
++import androidx.compose.foundation.layout.fillMaxHeight
++import androidx.compose.foundation.layout.fillMaxSize
++import androidx.compose.foundation.layout.fillMaxWidth
++import androidx.compose.foundation.layout.offset
++import androidx.compose.foundation.layout.padding
++import androidx.compose.foundation.layout.requiredHeight
++import androidx.compose.foundation.layout.size
++import androidx.compose.foundation.layout.width
++import androidx.compose.foundation.shape.CircleShape
++import androidx.compose.material.CircularProgressIndicator
++import androidx.compose.material.ExperimentalMaterialApi
++import androidx.compose.material.FractionalThreshold
++import androidx.compose.material.Icon
++import androidx.compose.material.MaterialTheme
++import androidx.compose.material.SnackbarDefaults.backgroundColor
++import androidx.compose.material.Text
++import androidx.compose.material.icons.Icons
++import androidx.compose.material.icons.rounded.ChevronRight
++import androidx.compose.material.icons.rounded.Done
++import androidx.compose.material.rememberSwipeableState
++import androidx.compose.material.swipeable
++import androidx.compose.runtime.Composable
++import androidx.compose.runtime.LaunchedEffect
++import androidx.compose.runtime.getValue
++import androidx.compose.runtime.mutableStateOf
++import androidx.compose.runtime.remember
++import androidx.compose.runtime.rememberCoroutineScope
++import androidx.compose.runtime.setValue
++import androidx.compose.ui.Alignment
++import androidx.compose.ui.Modifier
++import androidx.compose.ui.draw.alpha
++import androidx.compose.ui.draw.clip
++import androidx.compose.ui.graphics.Color
++import androidx.compose.ui.graphics.Color.Companion.White
++import androidx.compose.ui.graphics.vector.ImageVector
++import androidx.compose.ui.platform.LocalDensity
++import androidx.compose.ui.res.stringResource
++import androidx.compose.ui.text.font.FontWeight
++import androidx.compose.ui.text.style.TextAlign
++import androidx.compose.ui.unit.IntOffset
++import androidx.compose.ui.unit.dp
++import com.lanazirot.anonymouschat.R
++import kotlinx.coroutines.delay
++import kotlinx.coroutines.launch
++import kotlin.math.roundToInt
++
++@Composable
++fun SwipeIndicator(
++    modifier: Modifier = Modifier,
++    backgroundColor: Color,
++) {
++    Box(
++        contentAlignment = Alignment.Center,
++        modifier = modifier
++            .fillMaxHeight()
++            .padding(2.dp)
++            .clip(CircleShape)
++            .aspectRatio(
++                ratio = 1.0F,
++                matchHeightConstraintsFirst = true,
++            )
++            .background(Color.White),
++    ) {
++        Icon(
++            imageVector = Icons.Rounded.ChevronRight,
++            contentDescription = null,
++            tint = backgroundColor,
++            modifier = Modifier.size(36.dp),
++        )
++    }
++}
++
++@OptIn(ExperimentalMaterialApi::class)
++@Composable
++fun SwipeButton(
++    text: String,
++    isComplete: Boolean,
++    doneImageVector: ImageVector = Icons.Rounded.Done,
++    modifier: Modifier = Modifier,
++    backgroundColor: Color = Color(0xFF03A9F4),
++    onSwipe: () -> Unit,
++) {
++    val width = 200.dp
++    val widthInPx = with(LocalDensity.current) {
++        width.toPx()
++    }
++    val anchors = mapOf(
++        0F to 0,
++        widthInPx to 1,
++    )
++    val swipeableState = rememberSwipeableState(0)
++    val (swipeComplete, setSwipeComplete) = remember {
++        mutableStateOf(false)
++    }
++    val alpha: Float by animateFloatAsState(
++        targetValue = if (swipeComplete) {
++            0F
++        } else {
++            1F
++        },
++        animationSpec = tween(
++            durationMillis = 300,
++            easing = LinearEasing,
++        )
++    )
++
++    LaunchedEffect(
++        key1 = swipeableState.currentValue,
++    ) {
++        if (swipeableState.currentValue == 1) {
++            setSwipeComplete(true)
++            onSwipe()
++        }
++    }
++
++    Box(
++        contentAlignment = Alignment.Center,
++        modifier = modifier
++            .padding(
++                  horizontal = 28.dp,
++//                vertical = 16.dp,
++            )
++            .clip(CircleShape)
++            .background(backgroundColor)
++            .animateContentSize()
++            .then(
++                if (swipeComplete) {
++                    Modifier
++                        .fillMaxWidth()
++//                        .width(20.dp)
++                } else {
++                    Modifier
++//                        .fillMaxWidth()
++                        .width(60.dp)
++                }
++            )
++            .requiredHeight(30.dp),
++    ) {
++        SwipeIndicator(
++            modifier = Modifier
++                .align(Alignment.CenterStart)
++                .alpha(alpha)
++                .offset {
++                    IntOffset(swipeableState.offset.value.roundToInt(), 0)
++                }
++                .swipeable(
++                    state = swipeableState,
++                    anchors = anchors,
++                    thresholds = { _, _ ->
++                        FractionalThreshold(0.3F)
++                    },
++                    orientation = Orientation.Horizontal,
++                ),
++            backgroundColor = backgroundColor,
++        )
++        AnimatedVisibility(
++            visible = swipeComplete && !isComplete,
++        ) {
++            CircularProgressIndicator(
++                color = White,
++                strokeWidth = 1.dp,
++                modifier = Modifier
++                    .fillMaxSize()
++                    .padding(4.dp),
++            )
++        }
++        AnimatedVisibility(
++            visible = isComplete,
++            enter = fadeIn(),
++            exit = fadeOut(),
++        ) {
++            Icon(
++                imageVector = doneImageVector,
++                contentDescription = null,
++                tint = White,
++                modifier = Modifier
++                    .align(Alignment.Center)
++                    .size(4.dp),
++            )
++        }
++    }
++}
++

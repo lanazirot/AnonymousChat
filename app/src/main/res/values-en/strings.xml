@@ -39,6 +39,7 @@
     <string name="confirm_password">Confirm password</string>
     <string name="val_pass_empty">Password cannot be empty</string>
     <string name="language">Language:</string>
+    <string name="theme">Dark Mode:</string>
     <string name="spanish">Spanish</string>
     <string name="english">English</string>
 </resources>

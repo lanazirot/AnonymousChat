@@ -34,8 +34,8 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 @Composable
 fun RoomsScreen(openDrawer: () -> Unit) {
-    val roomsViewModel: RoomsViewModel = hiltViewModel()
-    roomsViewModel.startLocationServices()
+//    val roomsViewModel: RoomsViewModel = hiltViewModel()
+//    roomsViewModel.startLocationServices()
 
     val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(context)
@@ -62,7 +62,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    roomsViewModel.createRoom()
+ //                   roomsViewModel.createRoom()
                 }
             ) {
                 Text(text = stringResource(R.string.new_room), color = MaterialTheme.colors.surface)

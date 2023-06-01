@@ -39,6 +39,7 @@
     <string name="confirm_password">Confirmar contraseña</string>
     <string name="val_pass_empty">La contraseña no puede estar vacía.</string>
     <string name="language">Idioma:</string>
+    <string name="theme">Tema Oscuro:</string>
     <string name="spanish">Español</string>
     <string name="english">Inglés</string>
 </resources>

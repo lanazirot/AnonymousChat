@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -12,19 +14,27 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key.Companion.Ro
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.common.TopBar
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
+import com.lanazirot.anonymouschat.ui.screens.preferences.components.SwipeButton
 import com.lanazirot.anonymouschat.ui.screens.preferences.components.ToggleButtonLanguage
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun PreferencesScreen() {
@@ -32,24 +42,60 @@ fun PreferencesScreen() {
     val preferencesViewModel :PreferencesViewModel = hiltViewModel()
     val language by preferencesViewModel.appLocale.collectAsState()
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         TopBar(
             title = stringResource(R.string.preferences_app),
             icon = painterResource(R.drawable.ipreferencias),
             buttonIcon = Icons.Filled.ArrowBack
         ) { navController.popBackStack() }
         Column(
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.primaryVariant),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.Start
         ) {
-            Column {
-                Text(text = stringResource(R.string.language), color = Color.White)
+            Row(modifier = Modifier
+                .height(60.dp)
+                .fillMaxWidth(),
+    //            .background(MaterialTheme.colors.secondary),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = stringResource(R.string.language), color = MaterialTheme.colors.primary, fontSize = 23.sp)
                 ToggleButtonLanguage(currentLanguage = language, onChange = { locale ->
                     preferencesViewModel.setLocale(locale)
  //                   navController.navigate(DrawerScreens.Main.route)
                 })
             }
+            Row(modifier = Modifier
+                .height(60.dp)
+                .fillMaxWidth(),
+    //            .background(MaterialTheme.colors.secondary),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = stringResource(R.string.theme), color = MaterialTheme.colors.primary, fontSize = 23.sp)
+                SwipeButtonSample()
+            }
         }
     }
+}
+@Composable
+fun SwipeButtonSample() {
+    val coroutineScope = rememberCoroutineScope()
+    val (isComplete, setIsComplete) = remember {
+        mutableStateOf(false)
+    }
+
+    SwipeButton(
+        text = "",
+        isComplete = isComplete,
+        onSwipe = {
+            coroutineScope.launch {
+                delay(2000)
+                setIsComplete(true)
+            }
+        },
+    )
 }

@@ -38,6 +38,7 @@ import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.screens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
+import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 @Composable
 fun Drawer (
@@ -133,13 +134,13 @@ fun Drawer (
                     Image(
                         painter = painterResource(R.drawable.isalir),
                         contentDescription = stringResource(R.string.logout),
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(30.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.logout), color = MaterialTheme.colors.primary)
+                    Text(text = stringResource(R.string.logout), color = MaterialTheme.colors.primary, fontFamily = Anonymous, fontWeight = FontWeight.Normal, fontSize = 18.sp)
                 }
             },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
         )
     }
 }

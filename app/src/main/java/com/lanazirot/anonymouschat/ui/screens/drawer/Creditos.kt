@@ -47,59 +47,59 @@ fun Creditos() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = "Créditos:",
-                color = Color.White,
-                style = MaterialTheme.typography.h6,
-                modifier = Modifier.padding(16.dp)
-            )
+//            Text(
+//                text = "Créditos:",
+//                color = MaterialTheme.colors.primary,
+//                style = MaterialTheme.typography.h6,
+//                modifier = Modifier.padding(16.dp)
+//            )
             Text(
                 text = "- Backend -",
-                color = Color.White,
+                color = MaterialTheme.colors.secondary,
                 style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(20.dp)
             )
             Text(
                 text = "Alan Peña Ortiz",
-                color = Color.White,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(18.dp)
             )
             Text(
                 text = "Alan Castro Cruz",
-                color = Color.White,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(18.dp)
             )
             Text(
                 text = "- Frontend -",
-                color = Color.White,
+                color = MaterialTheme.colors.secondary,
                 style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(20.dp)
             )
             Text(
                 text = "Ezequiel Cantu",
-                color = Color.White,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(18.dp)
             )
             Text(
                 text = "Andrea Martinez",
-                color = Color.White,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(18.dp)
             )
             Text(
                 text = "- Fullstack -",
-                color = Color.White,
+                color = MaterialTheme.colors.secondary,
                 style = MaterialTheme.typography.subtitle1,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(20.dp)
             )
             Text(
                 text = "Eduardo Jared",
-                color = Color.White,
+                color = MaterialTheme.colors.primary,
                 style = MaterialTheme.typography.body1,
-                modifier = Modifier.padding(16.dp)
+                modifier = Modifier.padding(18.dp)
             )
         }
     }

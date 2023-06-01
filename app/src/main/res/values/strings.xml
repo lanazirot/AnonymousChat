@@ -41,6 +41,7 @@
     <string name="val_pass_weak">La contraseña debe tener al menos 8 caracteres.</string>
     <string name="new_room">Crear nueva sala</string>
     <string name="language">Idioma:</string>
+    <string name="theme">Tema Oscuro:</string>
     <string name="spanish">Español</string>
     <string name="english">Inglés</string>
 </resources>
