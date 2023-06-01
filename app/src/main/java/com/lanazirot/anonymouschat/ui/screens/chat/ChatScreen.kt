@@ -101,7 +101,7 @@ fun ChatScreen(channelId : String) {
                 MessageList(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(MaterialTheme.colors.primary)
+                        .background(MaterialTheme.colors.primaryVariant)
                         .padding(it),
                     viewModel = listViewModel,
                     onThreadClick = { message ->
