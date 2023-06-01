@@ -17,6 +17,10 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -90,6 +94,7 @@ fun Drawer (
             )
         }
         Spacer(modifier = Modifier.height(25.dp))
+
         screens.forEach { screen ->
             Row(
                 modifier = Modifier.padding(start = 25.dp),
@@ -102,7 +107,7 @@ fun Drawer (
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = screen.title,
+                    text = stringResource(screen.title),
                     color = Color.White,
                     fontSize = 21.sp,
                     modifier = Modifier.clickable {
