@@ -1,5 +1,6 @@
 package com.lanazirot.anonymouschat.ui.navigator.routes
 
+import androidx.compose.ui.res.stringResource
 import com.lanazirot.anonymouschat.MainApp.Companion.context
 import com.lanazirot.anonymouschat.R
 

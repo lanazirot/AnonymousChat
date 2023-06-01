@@ -104,7 +104,6 @@ fun LoginData() {
             modifier = Modifier
                 .statusBarsPadding()
                 .navigationBarsWithImePadding()
-                .systemBarsPadding()
                 .verticalScroll(rememberScrollState())
                 .height(LocalConfiguration.current.screenHeightDp.dp)
                 .padding(horizontal = 16.dp),
