@@ -20,9 +20,13 @@ fun Dudas() {
     val listItems = listOf(
         stringResource(R.string.general),
         stringResource(R.string.dudes_1),
+        stringResource(R.string.dudes_R1),
         stringResource(R.string.dudes_2),
+        stringResource(R.string.dudes_R2),
         stringResource(R.string.dudes_3),
+        stringResource(R.string.dudes_R3),
         stringResource(R.string.dudes_4),
+        stringResource(R.string.dudes_R4)
     )
 
     Column(modifier = Modifier.fillMaxSize()) {

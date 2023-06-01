@@ -11,6 +11,7 @@
     <application
         android:name=".MainApp"
         android:allowBackup="true"
+        android:windowSoftInputMode="adjustResize"
         android:appCategory="social"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
