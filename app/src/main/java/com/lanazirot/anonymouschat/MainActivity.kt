@@ -15,6 +15,7 @@ import com.lanazirot.anonymouschat.ui.theme.AnonymousChatTheme
 import dagger.hilt.android.AndroidEntryPoint
 import android.Manifest
 import android.annotation.SuppressLint
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.ProvideWindowInsets
@@ -37,13 +38,14 @@ class MainActivity : ComponentActivity() {
                 val preferencesViewModel : PreferencesViewModel = hiltViewModel()
                 val language = preferencesViewModel.appLocale.collectAsState().value
 
-                AnonymousChatTheme {
+                AnonymousChatTheme(darkTheme = true) {
                     CompositionLocalProvider(
                         GlobalProvider provides gp
                     ) {
                         Surface(
                             modifier = Modifier.fillMaxSize(),
-                            color = Color.Black
+                            //color = Color.Black
+                            color = MaterialTheme.colors.primaryVariant
                         ) {
                             LaunchedEffect(language) {
                                 updateLocale(language)

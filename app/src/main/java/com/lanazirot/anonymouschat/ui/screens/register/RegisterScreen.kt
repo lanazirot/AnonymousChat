@@ -1,11 +1,13 @@
 package com.lanazirot.anonymouschat.ui.screens.register
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -35,6 +37,7 @@ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.loading.LoadingScreen
 import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
+import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 
 @Composable
@@ -81,6 +84,7 @@ fun RegisterData() {
     ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
         Column(
             modifier = Modifier
+                .background(MaterialTheme.colors.primaryVariant)
                 .statusBarsPadding()
                 .navigationBarsWithImePadding()
                 .verticalScroll(rememberScrollState())
@@ -171,7 +175,7 @@ fun RegisterData() {
                     .fillMaxWidth()
                     .height(45.dp),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color(
+                    Color(
                         147, 46, 61
                     )
                 )
@@ -180,7 +184,8 @@ fun RegisterData() {
                     text = "Registrarse",
                     color = Color.White,
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontFamily = Anonymous,
+                    fontWeight = FontWeight.Normal
                 )
             }
 
@@ -192,7 +197,7 @@ fun RegisterData() {
                     .fillMaxWidth()
                     .height(45.dp),
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = Color(
+                    Color(
                         147, 46, 61
                     )
                 )
@@ -201,7 +206,8 @@ fun RegisterData() {
                     text = "Volver",
                     color = Color.White,
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontFamily = Anonymous,
+                    fontWeight = FontWeight.Normal
                 )
             }
 

@@ -36,7 +36,7 @@ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 fun Creditos() {
     val navController = GlobalProvider.current.navController
 
-    Column(modifier = Modifier.fillMaxSize().background(Color.Black)) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant)) {
         TopBar(
             title = stringResource(R.string.credits),
             icon = painterResource(R.drawable.icreditos),

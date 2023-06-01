@@ -2,8 +2,10 @@ package com.lanazirot.anonymouschat.ui.screens.loading
 
 import android.os.Build.VERSION.SDK_INT
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -39,6 +41,6 @@ fun LoadingScreen() {
             imageLoader = imageLoader
         ),
         contentDescription = null,
-        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
+        modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant).wrapContentSize(Alignment.Center)
     )
 }

@@ -1,9 +1,11 @@
 package com.lanazirot.anonymouschat.ui.screens.preferences
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -37,7 +39,7 @@ fun PreferencesScreen() {
             buttonIcon = Icons.Filled.ArrowBack
         ) { navController.popBackStack() }
         Column(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -45,7 +47,7 @@ fun PreferencesScreen() {
                 Text(text = stringResource(R.string.language), color = Color.White)
                 ToggleButtonLanguage(currentLanguage = language, onChange = { locale ->
                     preferencesViewModel.setLocale(locale)
-                    navController.navigate(DrawerScreens.Main.route)
+ //                   navController.navigate(DrawerScreens.Main.route)
                 })
             }
         }

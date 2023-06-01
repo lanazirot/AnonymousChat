@@ -1,7 +1,9 @@
 package com.lanazirot.anonymouschat.ui.screens.drawer
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -29,7 +31,7 @@ fun Dudas() {
         stringResource(R.string.dudes_R4)
     )
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant)) {
         TopBar(
             title = stringResource(R.string.dudes),
             icon = painterResource(R.drawable.idudas),

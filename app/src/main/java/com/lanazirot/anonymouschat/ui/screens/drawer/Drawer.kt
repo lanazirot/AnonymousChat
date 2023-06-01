@@ -39,9 +39,9 @@ fun Drawer (
     onDestinationClicked: (route: String) -> Unit,
     onCloseDrawer: () -> Unit
 ) {
+    val loginViewModel: LoginViewModel = hiltViewModel()
     val name = Firebase.auth.currentUser?.displayName ?: ""
     val navController = GlobalProvider.current.navController
-    val loginViewModel: LoginViewModel = hiltViewModel()
 
     Column(
         modifier

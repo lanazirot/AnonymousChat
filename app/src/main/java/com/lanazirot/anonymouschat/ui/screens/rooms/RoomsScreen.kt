@@ -2,10 +2,13 @@ package com.lanazirot.anonymouschat.ui.screens.rooms
 
 import android.os.Build
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -45,9 +48,11 @@ fun RoomsScreen(openDrawer: () -> Unit) {
         }
         .build()
 
-    ChatTheme {
-        Column {
-            Spacer(modifier = Modifier.height(10.dp))
+    ChatTheme {Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.primaryVariant
+    ){
+        Column(modifier = Modifier.background(MaterialTheme.colors.primaryVariant)) {
             TopBar(
                 title = "Anonymous Chat",
                 icon = null,
@@ -60,7 +65,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
                     roomsViewModel.createRoom()
                 }
             ) {
-                Text(text = stringResource(R.string.new_room), color = Color.Black)
+                Text(text = stringResource(R.string.new_room), color = MaterialTheme.colors.surface)
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -93,6 +98,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
                 )
             }
         }
+    }
     }
 }
 

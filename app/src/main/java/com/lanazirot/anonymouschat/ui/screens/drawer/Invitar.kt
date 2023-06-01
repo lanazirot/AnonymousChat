@@ -1,8 +1,10 @@
 package com.lanazirot.anonymouschat.ui.screens.drawer
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -19,7 +21,7 @@ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 fun Invitar() {
     val navController = GlobalProvider.current.navController
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.background)) {
         TopBar(
             title = stringResource(R.string.share_with_friends),
             icon = painterResource(R.drawable.iinvitar),
