@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.rememberNavController
 import com.lanazirot.anonymouschat.ui.providers.AppProvider
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
@@ -51,7 +50,7 @@ class MainActivity : ComponentActivity() {
                                 updateLocale(language)
                             }
                             RequestPermission(permission = Manifest.permission.ACCESS_FINE_LOCATION){
-                                App(navController)
+                                App(navController,this@MainActivity)
                             }
                         }
                     }

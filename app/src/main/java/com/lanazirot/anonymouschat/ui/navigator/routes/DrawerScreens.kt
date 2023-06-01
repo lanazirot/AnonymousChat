@@ -14,7 +14,6 @@ sealed class DrawerScreens(val title: String, val route: String, val icon: Int) 
 }
 
 val screens = listOf(
-    DrawerScreens.Share,
     DrawerScreens.About,
     DrawerScreens.Preferences,
     DrawerScreens.Politics,
