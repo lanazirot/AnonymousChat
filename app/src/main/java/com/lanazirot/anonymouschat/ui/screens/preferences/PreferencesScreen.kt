@@ -14,13 +14,8 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key.Companion.Ro
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -28,13 +23,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.common.TopBar
-import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
-import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
-import com.lanazirot.anonymouschat.ui.screens.preferences.components.SwipeButton
+import com.lanazirot.anonymouschat.ui.screens.preferences.components.SwitchComponent
 import com.lanazirot.anonymouschat.ui.screens.preferences.components.ToggleButtonLanguage
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @Composable
 fun PreferencesScreen() {
@@ -76,26 +67,8 @@ fun PreferencesScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = stringResource(R.string.theme), color = MaterialTheme.colors.primary, fontSize = 23.sp)
-                SwipeButtonSample()
+                SwitchComponent()
             }
         }
     }
-}
-@Composable
-fun SwipeButtonSample() {
-    val coroutineScope = rememberCoroutineScope()
-    val (isComplete, setIsComplete) = remember {
-        mutableStateOf(false)
-    }
-
-    SwipeButton(
-        text = "",
-        isComplete = isComplete,
-        onSwipe = {
-            coroutineScope.launch {
-                delay(2000)
-                setIsComplete(true)
-            }
-        },
-    )
 }

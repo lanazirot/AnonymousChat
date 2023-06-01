@@ -48,7 +48,8 @@ fun RoomsScreen(openDrawer: () -> Unit) {
         }
         .build()
 
-    ChatTheme {Surface(
+    ChatTheme {
+        Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colors.primaryVariant
     ){
