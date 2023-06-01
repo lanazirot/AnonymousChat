@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -47,7 +48,7 @@ fun Drawer (
         modifier
             .fillMaxHeight()
             .width(300.dp)
-            .background(Color(83, 83, 83))
+            .background(MaterialTheme.colors.secondary)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().background(Color.Black).padding(start = 25.dp),
@@ -100,7 +101,7 @@ fun Drawer (
                     }
                 }
             },
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp).fillMaxWidth(),
             content = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
@@ -109,10 +110,10 @@ fun Drawer (
                         modifier = Modifier.size(24.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.logout), color = Color.White)
+                    Text(text = stringResource(R.string.logout), color = MaterialTheme.colors.primary)
                 }
             },
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black)
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
         )
     }
 }
