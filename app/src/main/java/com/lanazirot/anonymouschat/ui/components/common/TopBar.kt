@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.ui.components
+package com.lanazirot.anonymouschat.ui.components.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size

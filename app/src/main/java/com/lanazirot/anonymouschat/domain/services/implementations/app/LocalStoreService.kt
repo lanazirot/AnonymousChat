@@ -25,4 +25,15 @@ class LocalStoreService(private val context: Context) : ILocalStoreService {
             preferences[StorageConstants.STREAM_TOKEN_AUTH] = token
         }
     }
+
+    override val getAppLocale: Flow<String> =
+        context.dataStore.data.map { preferences ->
+            preferences[StorageConstants.APP_LOCALE] ?: ""
+        }
+
+    override suspend fun setAppLocale(locale: String)  {
+        context.dataStore.edit { preferences ->
+            preferences[StorageConstants.APP_LOCALE] = locale
+        }
+    }
 }

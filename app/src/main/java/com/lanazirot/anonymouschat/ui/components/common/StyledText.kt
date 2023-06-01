@@ -33,6 +33,7 @@ fun StyledText(value: String, text: String, onValueChange: (String) -> Unit, vis
         value = value,
         onValueChange = { onValueChange(it) },
         label = {
+<<<<<<< HEAD
             if (!isTextFieldFocused.value && value.isEmpty()) {
                 Box(
                     modifier = Modifier.fillMaxWidth(),
@@ -46,6 +47,19 @@ fun StyledText(value: String, text: String, onValueChange: (String) -> Unit, vis
                             fontSize = 24.sp,
                             fontWeight = FontWeight.Normal
                         )
+=======
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = text,
+                    color = Color.Black,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.h2.copy(
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Normal
+>>>>>>> nuevodiseño
                     )
                 }
             }

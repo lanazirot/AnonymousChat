@@ -14,9 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
@@ -25,9 +24,8 @@ import coil.decode.ImageDecoderDecoder
 import coil.request.ImageRequest
 import coil.size.Size
 import com.lanazirot.anonymouschat.R
-import com.lanazirot.anonymouschat.ui.components.TopBar
+import com.lanazirot.anonymouschat.ui.components.common.TopBar
 import com.lanazirot.anonymouschat.ui.screens.rooms.list.CustomRoomList
-import com.lanazirot.anonymouschat.ui.theme.Anonymous
 import io.getstream.chat.android.compose.ui.channels.list.ChannelList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
@@ -62,7 +60,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
                     roomsViewModel.createRoom()
                 }
             ) {
-                Text(text = "Crear nueva sala", color = Color.Black)
+                Text(text = stringResource(R.string.new_room), color = Color.Black)
             }
 
             Spacer(modifier = Modifier.height(20.dp))
