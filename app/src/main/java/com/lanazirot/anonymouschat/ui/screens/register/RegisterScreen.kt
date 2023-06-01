@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -67,7 +68,7 @@ fun RegisterData() {
     ) {
         Image(
             painter = imagePainter,
-            modifier = Modifier.size(200.dp),
+            modifier = Modifier.size(200.dp).testTag("RegisterScreenLogo"),
             contentDescription = "Anonymous"
         )
 
@@ -149,7 +150,8 @@ fun RegisterData() {
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(45.dp),
+                .height(45.dp)
+                .testTag("RegisterScreenRegisterButton"),
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Color(
                     147, 46, 61

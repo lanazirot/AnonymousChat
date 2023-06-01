@@ -106,6 +106,7 @@ fun LoginData() {
             Modifier
                 .width(150.dp)
                 .height(150.dp)
+                .testTag("loginImage")
         )
         Spacer(modifier = Modifier.height(32.dp))
 
