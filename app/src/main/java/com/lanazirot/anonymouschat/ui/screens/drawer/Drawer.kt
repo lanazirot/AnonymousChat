@@ -113,7 +113,7 @@ fun Drawer (
                     Text(text = stringResource(R.string.logout), color = MaterialTheme.colors.primary)
                 }
             },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.primaryVariant)
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary)
         )
     }
 }
