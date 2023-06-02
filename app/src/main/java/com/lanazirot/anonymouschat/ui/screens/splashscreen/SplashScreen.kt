@@ -15,12 +15,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
+import com.lanazirot.anonymouschat.MainActivity
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.navigator.AppNavigation
 import kotlinx.coroutines.delay
 
 @Composable
-fun App(navController: NavHostController) {
+fun App(navController: NavHostController, mainActivity: MainActivity) {
     val isLoaded = remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -29,7 +30,7 @@ fun App(navController: NavHostController) {
     }
 
     if (isLoaded.value) {
-        AppNavigation(navController)
+        AppNavigation(navController,mainActivity)
     } else {
         SplashScreen()
     }

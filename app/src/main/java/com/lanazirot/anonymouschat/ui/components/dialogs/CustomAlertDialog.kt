@@ -16,6 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.AlertDialog
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import com.lanazirot.anonymouschat.R
 
@@ -34,7 +35,7 @@ fun CustomAlertDialog(message: String, dismissDialog: () -> Unit) {
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .size(150.dp),
-                    contentDescription = "Warning"
+                    contentDescription = stringResource(R.string.warning)
                 )
             }
         },
@@ -58,7 +59,7 @@ fun CustomAlertDialog(message: String, dismissDialog: () -> Unit) {
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                 ) {
-                    Text("De acuerdo")
+                    Text(stringResource(R.string.ok))
                 }
             }
         },

@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -34,12 +35,12 @@ fun ChatScreen(channelId : String) {
 
     val chatState = chatViewModel.chatState.collectAsState().value
 
-    LaunchedEffect(Unit){
+    LaunchedEffect(Unit) {
         chatViewModel.initChat(channelId)
     }
 
-    LaunchedEffect(chatState){
-        if(!chatState.alive){
+    LaunchedEffect(chatState) {
+        if (!chatState.alive) {
             navController.popBackStack()
         }
     }
@@ -57,7 +58,8 @@ fun ChatScreen(channelId : String) {
 
     val listViewModel = viewModel(MessageListViewModel::class.java, factory = factory)
     val composerViewModel = viewModel(MessageComposerViewModel::class.java, factory = factory)
-    val attachmentsPickerViewModel = viewModel(AttachmentsPickerViewModel::class.java, factory = factory)
+    val attachmentsPickerViewModel =
+        viewModel(AttachmentsPickerViewModel::class.java, factory = factory)
 
     val backAction = {
         val isInThread = listViewModel.isInThread
@@ -77,7 +79,7 @@ fun ChatScreen(channelId : String) {
     }
 
     ChatTheme {
-        Box(modifier = Modifier.fillMaxSize()) {
+        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant)) {
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 topBar = {
@@ -99,7 +101,7 @@ fun ChatScreen(channelId : String) {
                 MessageList(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(ChatTheme.colors.appBackground)
+                        .background(MaterialTheme.colors.primaryVariant)
                         .padding(it),
                     viewModel = listViewModel,
                     onThreadClick = { message ->

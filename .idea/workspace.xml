@@ -10,37 +10,84 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1409d561-c97b-45ae-b80e-34a7597321b7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/androidTestResultsUserPreferences.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/androidTestResultsUserPreferences.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/lanazirot/anonymouschat/LoginTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/lanazirot/anonymouschat/LoginTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/lanazirot/anonymouschat/RegisterTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/lanazirot/anonymouschat/RegisterTest.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/MainApp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/MainApp.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/loading/LoadingScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/loading/LoadingScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/constants/APIConstants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/constants/APIConstants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/models/api/channel/ChannelMemberDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/models/api/channel/ChannelMemberDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/models/api/location/UserCoordinatesDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/models/api/location/UserCoordinatesDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/repositories/ChannelRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/repositories/ChannelRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/services/implementations/app/StreamService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/services/implementations/app/StreamService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/services/interfaces/api/IChannelAPI.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/services/interfaces/api/IChannelAPI.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/services/interfaces/app/IStreamService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/domain/services/interfaces/app/IStreamService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/chat/ChatViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/chat/ChatViewModel.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/register/RegisterScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/register/RegisterScreen.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/splashscreen/SplashScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/splashscreen/SplashScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/login/LoginViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/rooms/RoomsScreen.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/rooms/RoomsScreen.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/rooms/RoomsViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lanazirot/anonymouschat/ui/screens/rooms/RoomsViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RF8N80M4W5A]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\alanc\.android\avd\Nexus_5X_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$/app">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AnonymousChat" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AnonymousChat" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AnonymousChat" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AnonymousChat" type="f1a62948:ProjectNode" />
+                <item name="app" type="2d1252cf:ModuleNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="valueResourceFile" />
+        <option value="Kotlin File" />
         <option value="Kotlin Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -57,19 +104,11 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ejare/Downloads/ProgramacionAndroidJetpackCompose2023-E2-19100159-19100234/SimonSays/SimonSays&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;PLAIN_TEXT&quot;
-    ]
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Android Instrumented Tests.test_registro_contrasenias_no_coinciden()">
+  <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
       <module name="AnonymousChat.app.main" />
       <option name="DEPLOY" value="true" />
@@ -412,6 +451,21 @@
       <option name="presentableId" value="Default" />
       <updated>1685413586934</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updates Diseno, no borrar la rama unu">
+      <created>1685641112748</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685641112748</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updates Diseno, no borrar la rama unu">
+      <created>1685641808533</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685641808533</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,5 +478,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updates Diseno, no borrar la rama unu" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates Diseno, no borrar la rama unu" />
   </component>
 </project>

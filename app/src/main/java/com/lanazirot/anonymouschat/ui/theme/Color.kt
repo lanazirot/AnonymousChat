@@ -2,8 +2,8 @@ package com.lanazirot.anonymouschat.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val DarkBlack = Color(0xFF17202A)
-val SecondaryBlack = Color(0xFF1B2631)
+val DarkBlack = Color(0xFF000000)
+val SecondaryBlack = Color(0xFF2C3E50)
 val ThirdBlack = Color(0xFF515A5A)
 val Guindo = Color(0xFF7B241C)
 
