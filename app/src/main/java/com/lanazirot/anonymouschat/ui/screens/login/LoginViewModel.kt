@@ -205,5 +205,5 @@ class LoginViewModel @Inject constructor(
         _uiState.value = LoginUIState.Error
     }
 
-    private fun getCurrentUser() = streamService.getCurrentUser()
+    fun getCurrentUser() = streamService.getCurrentUser()
 }
