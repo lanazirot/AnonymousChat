@@ -37,6 +37,7 @@ import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.loading.LoadingScreen
 import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
+import com.lanazirot.anonymouschat.ui.screens.preferences.ThemeViewModel
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 
@@ -62,10 +63,11 @@ fun RegisterScreen() {
 
 @Composable
 fun RegisterData() {
+    val themeViewModel: ThemeViewModel = hiltViewModel()
+    val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
     val navController = GlobalProvider.current.navController
     val loginViewModel: LoginViewModel = hiltViewModel()
     val userAux by loginViewModel.userState.collectAsState()
-    val imagePainter = painterResource(R.drawable.user)
 
     val openDialog = remember { mutableStateOf(false) }
     val errorMessage by loginViewModel.errorMessage.collectAsState()
@@ -93,11 +95,20 @@ fun RegisterData() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                painter = imagePainter,
-                modifier = Modifier.size(200.dp),
-                contentDescription = "Anonymous"
-            )
+            if(isDarkThemeEnabled){
+                Image(
+                    painter = painterResource(R.drawable.user),
+                    modifier = Modifier.size(200.dp),
+                    contentDescription = "Anonymous"
+                )
+            }
+            else{
+                Image(
+                    painter = painterResource(R.drawable.userclaro),
+                    modifier = Modifier.size(200.dp),
+                    contentDescription = "Anonymous"
+                )
+            }
             Spacer(modifier = Modifier.height(16.dp))
 
             StyledText(
