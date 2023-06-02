@@ -43,4 +43,7 @@
     <string name="spanish">Spanish</string>
     <string name="english">English</string>
     <string name="share_app">Share aplication</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete_room">Delete room</string>
+    <string name="my_room">My room</string>
 </resources>

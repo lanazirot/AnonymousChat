@@ -40,17 +40,17 @@ class ChatViewModel @Inject constructor(
         locationClient.getLocationUpdates(twoAndHalfMinutes.toLong()).catch {
             //Sacar al usuario de la sala y retornarlo a los chats
             Log.e("ChatViewModel", "Error: ${it.message}")
-            _chatState.value = ChatState(alive = false)
+//            _chatState.value = ChatState(alive = false)
         }.onEach {
             Log.i("ChatViewModel", "Location: ${it.latitude} ${it.longitude}")
-            val channelId = _chatState.value.channelId
-            val latLong = LatLongDTO(it.latitude, it.longitude)
-            val userCoordinates = UserCoordinatesDTO(streamService.getCurrentUser()!!.id, latLong, channelId)
-            val response = channelRepository.checkIfUserStillInTheRoomByItsCurrentLocation(userCoordinates)
-            if(!response){
-                //Sacar al usuario de la sala y retornarlo a los chats
-                _chatState.value = _chatState.value.copy(alive = false)
-            }
+//            val channelId = _chatState.value.channelId
+//            val latLong = LatLongDTO(it.latitude, it.longitude)
+//            val userCoordinates = UserCoordinatesDTO(streamService.getCurrentUser()!!.id, latLong, channelId)
+//            val response = channelRepository.checkIfUserStillInTheRoomByItsCurrentLocation(userCoordinates)
+//            if(!response){
+//                //Sacar al usuario de la sala y retornarlo a los chats
+//                _chatState.value = _chatState.value.copy(alive = false)
+//            }
         }.launchIn(serviceScope)
     }
 

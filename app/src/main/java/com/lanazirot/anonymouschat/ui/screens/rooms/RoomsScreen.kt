@@ -6,11 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -33,7 +32,6 @@ import com.lanazirot.anonymouschat.ui.components.common.TopBar
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.preferences.ThemeViewModel
 import com.lanazirot.anonymouschat.ui.screens.rooms.list.CustomRoomList
-import io.getstream.chat.android.compose.state.channels.list.Cancel.channel
 import io.getstream.chat.android.compose.ui.channels.list.ChannelList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
@@ -45,6 +43,8 @@ fun RoomsScreen(openDrawer: () -> Unit) {
 
     val roomsState = roomsViewModel.roomsState.collectAsState().value
     val navController = GlobalProvider.current.navController
+
+    val addIcon = Icons.Filled.Add
 
     LaunchedEffect(roomsState.transported) {
         if (roomsState.transported) {
@@ -86,6 +86,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
                             roomsViewModel.createRoom()
                         }
                     ) {
+                        Icon(addIcon, contentDescription = "Agregar")
                         Text(
                             text = stringResource(R.string.new_room),
                             color = MaterialTheme.colors.surface,
