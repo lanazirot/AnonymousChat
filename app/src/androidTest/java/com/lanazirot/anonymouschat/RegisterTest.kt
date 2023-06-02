@@ -1,31 +1,24 @@
 package com.lanazirot.anonymouschat
 
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.lanazirot.anonymouschat.ui.providers.AppProvider
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
-import com.lanazirot.anonymouschat.ui.screens.login.LoginScreen
-import com.lanazirot.anonymouschat.ui.screens.login.LoginViewModel
 import com.lanazirot.anonymouschat.ui.screens.register.RegisterScreen
 import com.lanazirot.anonymouschat.ui.theme.AnonymousChatTheme
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test
@@ -74,7 +67,6 @@ class RegisterTest {
             composeTestRule.onNodeWithText("Confirmar contraseña").performTextInput("password1234")
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
             composeTestRule.onNodeWithText("El correo electrónico no es válido.").assertExists()
-
         }
     }
 
@@ -110,7 +102,6 @@ class RegisterTest {
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
             composeTestRule.onNodeWithText("El correo electrónico no puede estar vacío.")
                 .assertExists()
-
         }
     }
 
@@ -148,7 +139,6 @@ class RegisterTest {
             composeTestRule.onNodeWithText("La contraseña no puede estar vacía.")
                 .assertExists()
         }
-
     }
 
 

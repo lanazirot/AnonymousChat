@@ -44,4 +44,5 @@
     <string name="theme">Tema Oscuro:</string>
     <string name="spanish">Español</string>
     <string name="english">Inglés</string>
+    <string name="share_app">Compartir aplicacion</string>
 </resources>

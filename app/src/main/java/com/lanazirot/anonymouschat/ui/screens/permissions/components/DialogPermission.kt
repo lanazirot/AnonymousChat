@@ -80,7 +80,8 @@ fun DialogPermission(
                 Button(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 32.dp, end = 32.dp),
+                        .padding(start = 32.dp, end = 32.dp)
+                        .testTag("btn_accept_permission"),
                     onClick = onClick,
                     contentPadding = PaddingValues(),
                     colors = ButtonDefaults.buttonColors(

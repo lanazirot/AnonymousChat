@@ -114,9 +114,7 @@ fun AppNavigation(navController: NavHostController, mainActivity: MainActivity) 
                         scope.launch {
                             drawerState.close()
                         }
-                        navController.navigate(route) {
-                            launchSingleTop = true
-                        }
+                        navController.navigate(route)
                     },
                     onCloseDrawer = { // Nueva función de callback para cerrar el drawer
                         scope.launch {

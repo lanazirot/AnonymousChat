@@ -47,7 +47,6 @@ class MainActivity : ComponentActivity() {
                     ) {
                         Surface(
                             modifier = Modifier.fillMaxSize(),
-                            //color = Color.Black
                             color = MaterialTheme.colors.primaryVariant
                         ) {
                             LaunchedEffect(language) {

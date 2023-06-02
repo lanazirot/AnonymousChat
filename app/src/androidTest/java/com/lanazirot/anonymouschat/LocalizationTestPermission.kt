@@ -3,6 +3,7 @@ package com.lanazirot.anonymouschat
 import android.Manifest
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.rememberNavController
@@ -19,33 +20,25 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.MethodSorters
 
-//@RunWith(AndroidJUnit4::class)
-//@HiltAndroidTest
-//@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(AndroidJUnit4::class)
+@HiltAndroidTest
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class LocalizationTestPermission {
-
-//    @get:Rule(order = 1)
-//    val hiltRule = HiltAndroidRule(this)
-
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    @OptIn(ExperimentalPermissionsApi::class, ExperimentalTestApi::class)
+    @OptIn(ExperimentalPermissionsApi::class)
     @Test
     fun test_primer_pantalla_aceptar_permiso() {
-        //hiltRule.inject()
         composeTestRule.setContent {
 
             val navController = rememberNavController()
-            val gp = AppProvider(navController = navController)
             RequestPermission(permission = Manifest.permission.ACCESS_FINE_LOCATION) {
-                App(navController)
+                App(navController, mainActivity = MainActivity())
             }
-
-
-
         }
-        composeTestRule.onNodeWithText("Aceptar").assertExists()
-        composeTestRule.onNodeWithText("Aceptar").performClick()
+
+        composeTestRule.onNodeWithTag("btn_accept_permission").assertExists()
+        composeTestRule.onNodeWithTag("btn_accept_permission").performClick()
     }
 }
