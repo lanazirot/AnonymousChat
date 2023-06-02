@@ -3,6 +3,7 @@ package com.lanazirot.anonymouschat.domain.services.interfaces.api
 import com.lanazirot.anonymouschat.domain.constants.APIConstants
 import com.lanazirot.anonymouschat.domain.models.api.AddMemberToChannelDTO
 import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
+import com.lanazirot.anonymouschat.domain.models.api.channel.ChannelMemberDTO
 import com.lanazirot.anonymouschat.domain.models.api.channel.CreateChannelResponseDTO
 import com.lanazirot.anonymouschat.domain.models.api.location.UserCoordinatesDTO
 import retrofit2.http.Body
@@ -26,5 +27,9 @@ interface IChannelAPI {
 
     @POST("channel/check-if-user-still-in-the-room")
     @Headers("X-API-Key: ${APIConstants.API_KEY}")
-    suspend fun checkIfUserStillInTheRoomByItsCurrentLocation(@Query("ChannelID") channelID: String, @Body userCoordinatesDTO: UserCoordinatesDTO): Boolean
+    suspend fun checkIfUserStillInTheRoomByItsCurrentLocation(@Body userCoordinatesDTO: UserCoordinatesDTO): Boolean
+
+    @POST("channel/reveal-chats-for-user")
+    @Headers("X-API-Key: ${APIConstants.API_KEY}")
+    suspend fun revealNewsChatsForCurrentUser(@Body channelDTO: ChannelMemberDTO)
 }

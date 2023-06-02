@@ -58,6 +58,7 @@ fun LoginScreen() {
     when (uiState) {
         is LoginUIState.Success -> {
             navController.navigate(DrawerScreens.Main.route)
+            loginViewModel.revealNewsChatsForCurrentUser()
         }
 
         is LoginUIState.Loading -> {
