@@ -2,14 +2,19 @@ package com.lanazirot.anonymouschat.ui.screens.rooms
 
 import android.os.Build
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +30,7 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.common.TopBar
+import com.lanazirot.anonymouschat.ui.screens.preferences.ThemeViewModel
 import com.lanazirot.anonymouschat.ui.screens.rooms.list.CustomRoomList
 import io.getstream.chat.android.compose.ui.channels.list.ChannelList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
@@ -32,6 +38,9 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 @Composable
 fun RoomsScreen(openDrawer: () -> Unit) {
     val roomsViewModel: RoomsViewModel = hiltViewModel()
+    val themeViewModel: ThemeViewModel = hiltViewModel()
+    val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
+
 
     val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(context)
@@ -45,8 +54,11 @@ fun RoomsScreen(openDrawer: () -> Unit) {
         .build()
 
     ChatTheme {
-        Column {
-            Spacer(modifier = Modifier.height(10.dp))
+        Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.primaryVariant
+    ){
+        Column(modifier = Modifier.background(MaterialTheme.colors.primaryVariant)) {
             TopBar(
                 title = "Anonymous Chat",
                 icon = null,
@@ -56,10 +68,10 @@ fun RoomsScreen(openDrawer: () -> Unit) {
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    roomsViewModel.createRoom()
+ //                   roomsViewModel.createRoom()
                 }
             ) {
-                Text(text = stringResource(R.string.new_room), color = Color.Black)
+                Text(text = stringResource(R.string.new_room), color = MaterialTheme.colors.surface)
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -77,21 +89,39 @@ fun RoomsScreen(openDrawer: () -> Unit) {
                     }
                 )
                 Spacer(modifier = Modifier.height(15.dp))
-                Image(
-                    painter = rememberAsyncImagePainter(
-                        ImageRequest.Builder(context)
-                            .data(data = R.drawable.buscandosala)
-                            .apply {
-                                size(Size(432, 432))
-                            }
-                            .build(),
-                        imageLoader = imageLoader
-                    ),
-                    contentDescription = null,
-                    modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
-                )
+                if(isDarkThemeEnabled){
+                    Image(
+                        painter = rememberAsyncImagePainter(
+                            ImageRequest.Builder(context)
+                                .data(data = R.drawable.buscandosala)
+                                .apply {
+                                    size(Size(432, 432))
+                                }
+                                .build(),
+                            imageLoader = imageLoader
+                        ),
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
+                    )
+                }
+                else{
+                    Image(
+                        painter = rememberAsyncImagePainter(
+                            ImageRequest.Builder(context)
+                                .data(data = R.drawable.buscandosalaclaro)
+                                .apply {
+                                    size(Size(432, 432))
+                                }
+                                .build(),
+                            imageLoader = imageLoader
+                        ),
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
+                    )
+                }
             }
         }
+    }
     }
 }
 

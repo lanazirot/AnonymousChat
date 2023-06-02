@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.lanazirot.anonymouschat.MainActivity
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.screens.login.LoginScreen
@@ -36,7 +37,7 @@ enum class SwipeDirection(val raw: Int) {
 @SuppressLint("CoroutineCreationDuringComposition")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun AppNavigation(navController: NavHostController) {
+fun AppNavigation(navController: NavHostController, mainActivity: MainActivity) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     val openDrawer = {
@@ -121,7 +122,8 @@ fun AppNavigation(navController: NavHostController) {
                         scope.launch {
                             drawerState.close()
                         }
-                    }
+                    },
+                    mainActivity
                 )
             },
             drawerBackgroundColor = Color.Black
@@ -143,10 +145,6 @@ fun AppNavigation(navController: NavHostController) {
                 }
                 composable(DrawerScreens.Main.route) {
                     RoomsScreen(openDrawer = { openDrawer() })
-                }
-
-                composable(DrawerScreens.Share.route) {
-                    Invitar()
                 }
 
                 composable(DrawerScreens.About.route) {

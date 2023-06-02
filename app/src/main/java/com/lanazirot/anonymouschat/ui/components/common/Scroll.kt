@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -19,16 +21,17 @@ fun ScrollableScreen(listItems: List<String>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(96, 95, 95 ))
+            .background(MaterialTheme.colors.primaryVariant)
             .verticalScroll(rememberScrollState())
             .padding(16.dp)
     ) {
         for (item in listItems) {
             Text(
                 text = item,
-                color = Color.White,
+                color = MaterialTheme.colors.primary,
+                textAlign = TextAlign.Justify,
                 fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Normal,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
         }

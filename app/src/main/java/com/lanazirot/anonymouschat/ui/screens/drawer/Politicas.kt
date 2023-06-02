@@ -1,7 +1,9 @@
 package com.lanazirot.anonymouschat.ui.screens.drawer
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
@@ -46,7 +48,7 @@ fun Politicas() {
                 "We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device.\n"
     )
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant)) {
         TopBar(
             title = stringResource(R.string.politics_priv),
             icon = painterResource(R.drawable.ipoliticas),
