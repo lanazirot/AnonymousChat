@@ -1,12 +1,5 @@
 package com.lanazirot.anonymouschat.ui.screens.drawer
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,14 +10,8 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -47,12 +34,6 @@ fun Creditos() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-//            Text(
-//                text = "Créditos:",
-//                color = MaterialTheme.colors.primary,
-//                style = MaterialTheme.typography.h6,
-//                modifier = Modifier.padding(16.dp)
-//            )
             Text(
                 text = "- Backend -",
                 color = MaterialTheme.colors.secondary,
@@ -90,7 +71,7 @@ fun Creditos() {
                 modifier = Modifier.padding(18.dp)
             )
             Text(
-                text = "- Fullstack -",
+                text = "- Testing -",
                 color = MaterialTheme.colors.secondary,
                 style = MaterialTheme.typography.subtitle1,
                 modifier = Modifier.padding(20.dp)

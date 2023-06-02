@@ -17,7 +17,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -37,10 +36,10 @@ import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
 @Composable
 fun RoomsScreen(openDrawer: () -> Unit) {
-//    val roomsViewModel: RoomsViewModel = hiltViewModel()
-//    roomsViewModel.startLocationServices()
+    val roomsViewModel: RoomsViewModel = hiltViewModel()
     val themeViewModel: ThemeViewModel = hiltViewModel()
     val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
+
 
     val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(context)
@@ -68,7 +67,7 @@ fun RoomsScreen(openDrawer: () -> Unit) {
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
- //                   roomsViewModel.createRoom()
+                    roomsViewModel.createRoom()
                 }
             ) {
                 Text(text = stringResource(R.string.new_room), color = MaterialTheme.colors.surface)

@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -82,7 +83,7 @@ fun RegisterData() {
         if (errorMessage.isNotEmpty())
             openDialog.value = true
     }
-
+    
     ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
         Column(
             modifier = Modifier
@@ -105,7 +106,7 @@ fun RegisterData() {
             else{
                 Image(
                     painter = painterResource(R.drawable.userclaro),
-                    modifier = Modifier.size(200.dp),
+                    modifier = Modifier.size(200.dp).testTag("RegisterScreenLogo"),
                     contentDescription = "Anonymous"
                 )
             }
@@ -206,7 +207,8 @@ fun RegisterData() {
                 onClick = { navController.popBackStack() },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(45.dp),
+                    .height(45.dp)
+                    .testTag("RegisterScreenRegisterButton"),
                 colors = ButtonDefaults.buttonColors(
                     Color(
                         147, 46, 61

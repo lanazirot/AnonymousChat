@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
@@ -48,7 +49,7 @@ fun LoadingScreen() {
                 imageLoader = imageLoader
             ),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant).wrapContentSize(Alignment.Center)
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant).wrapContentSize(Alignment.Center).testTag("LoadingScreenLogo")
         )
     }
     else{
@@ -63,7 +64,7 @@ fun LoadingScreen() {
                 imageLoader = imageLoader
             ),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant).wrapContentSize(Alignment.Center)
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primaryVariant).wrapContentSize(Alignment.Center).testTag("LoadingScreenLogo")
         )
     }
 }

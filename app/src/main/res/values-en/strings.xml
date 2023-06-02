@@ -42,4 +42,5 @@
     <string name="theme">Dark Mode:</string>
     <string name="spanish">Spanish</string>
     <string name="english">English</string>
+    <string name="share_app">Share aplication</string>
 </resources>
