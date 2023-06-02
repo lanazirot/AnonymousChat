@@ -49,6 +49,7 @@ fun StyledText(
             Text(
                 text = text,
                 color = if (isDarkThemeEnabled) Color.White else Color.Black,
+                //color = Color.Black,
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h2.copy(
                     fontSize = 24.sp,
@@ -58,6 +59,7 @@ fun StyledText(
         },
         textStyle = LocalTextStyle.current.copy(
             color = if (isDarkThemeEnabled) Color.White else Color.Black
+            //color = Color.Black
         ),
         visualTransformation = if (isPasswordVisible.value) VisualTransformation.None else visualTransformation,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
