@@ -2,9 +2,11 @@ package com.lanazirot.anonymouschat.ui.screens.chat
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.lanazirot.anonymouschat.domain.models.api.location.LatLongDTO
 import com.lanazirot.anonymouschat.domain.models.api.location.UserCoordinatesDTO
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI
+import com.lanazirot.anonymouschat.domain.services.interfaces.api.ISecurityAPI
 import com.lanazirot.anonymouschat.domain.services.interfaces.app.IStreamService
 import com.lanazirot.anonymouschat.domain.services.interfaces.location.ILocationClient
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,13 +17,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     private val locationClient: ILocationClient,
     private val channelRepository: IChannelAPI,
-    private val streamService: IStreamService
+    private val streamService: IStreamService,
+    private val securityAPI: ISecurityAPI
 ) : ViewModel() {
 
     private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
@@ -32,6 +36,15 @@ class ChatViewModel @Inject constructor(
     fun initChat(channelId: String){
         _chatState.value = ChatState(channelId = channelId, alive = true)
         startLocationServices()
+    }
+
+    fun reportRoom(){
+        val channelId = _chatState.value.channelId
+        viewModelScope.launch {
+            securityAPI.reportRoom(channelId)
+        }.invokeOnCompletion {
+            _chatState.value = _chatState.value.copy(reported = true)
+        }
     }
 
     private fun startLocationServices(){

@@ -5,6 +5,7 @@ import com.lanazirot.anonymouschat.domain.converters.BooleanConverterFactory
 import com.lanazirot.anonymouschat.domain.converters.StringConverterFactory
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IAuthAPI
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI
+import com.lanazirot.anonymouschat.domain.services.interfaces.api.ISecurityAPI
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IUserAPI
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -40,4 +41,8 @@ object ApiModule {
     @Provides
     @Singleton
     fun provideChannelAPI(apiBuilder: Retrofit) :IChannelAPI = apiBuilder.create(IChannelAPI::class.java)
+
+    @Provides
+    @Singleton
+    fun provideSecurityAPI(apiBuilder: Retrofit) :ISecurityAPI = apiBuilder.create(ISecurityAPI::class.java)
 }
