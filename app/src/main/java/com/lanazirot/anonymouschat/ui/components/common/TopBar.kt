@@ -1,4 +1,4 @@
-package com.lanazirot.anonymouschat.ui.components.common
+package com.lanazirot.anonymouschat.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
@@ -35,7 +35,7 @@ fun TopBar(title: String = "", buttonIcon: ImageVector, icon: Painter?, onButton
                 color = Color.White,
                 fontFamily = Anonymous,
                 fontWeight = FontWeight.Black,
-                fontSize = 25.sp
+                fontSize = 35.sp
             )
         },
         navigationIcon = {

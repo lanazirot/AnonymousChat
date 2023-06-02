@@ -45,8 +45,8 @@ class ChatViewModel @Inject constructor(
             Log.i("ChatViewModel", "Location: ${it.latitude} ${it.longitude}")
             val channelId = _chatState.value.channelId
             val latLong = LatLongDTO(it.latitude, it.longitude)
-            val userCoordinates = UserCoordinatesDTO(streamService.getCurrentUser()!!.id, latLong, channelId)
-            val response = channelRepository.checkIfUserStillInTheRoomByItsCurrentLocation(userCoordinates)
+            val userCoordinates = UserCoordinatesDTO(streamService.getCurrentUser()!!.id, latLong)
+            val response = channelRepository.checkIfUserStillInTheRoomByItsCurrentLocation(channelId, userCoordinates)
             if(!response){
                 //Sacar al usuario de la sala y retornarlo a los chats
                 _chatState.value = _chatState.value.copy(alive = false)

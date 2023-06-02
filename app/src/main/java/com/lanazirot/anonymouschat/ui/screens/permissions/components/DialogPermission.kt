@@ -21,13 +21,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import com.lanazirot.anonymouschat.R
 
 @Composable
 fun DialogPermission(
@@ -89,7 +87,7 @@ fun DialogPermission(
                     shape = RoundedCornerShape(topStart = 30.dp, bottomEnd = 30.dp)
                 ) {
                     Text(
-                        text = stringResource(R.string.ok),
+                        text = "Aceptar",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
                         letterSpacing = 2.sp,

@@ -2,7 +2,6 @@ package com.lanazirot.anonymouschat.domain.services.implementations.app
 
 import com.lanazirot.anonymouschat.domain.models.api.AddMemberToChannelDTO
 import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
-import com.lanazirot.anonymouschat.domain.models.api.channel.ChannelMemberDTO
 import com.lanazirot.anonymouschat.domain.models.api.channel.CreateChannelResponseDTO
 import com.lanazirot.anonymouschat.domain.models.api.location.LatLongDTO
 import com.lanazirot.anonymouschat.domain.models.api.location.UserCoordinatesDTO
@@ -113,10 +112,12 @@ class StreamService @Inject constructor(
     }
 
     override fun checkIfUserStillInTheRoomByItsCurrentLocation(
+        channelID: String,
         userCoordinates: UserCoordinatesDTO,
     ): Response<Boolean> {
         return try {
             val response = channelRepository.checkIfUserStillInTheRoomByItsCurrentLocation(
+                channelID = channelID,
                 userCoordinatesDTO = userCoordinates
             )
             if (response) Response.Success(true) else Response.Failure(Exception())
@@ -142,14 +143,6 @@ class StreamService @Inject constructor(
             }
         } catch (e: Exception) {
             return Response.Failure(e)
-        }
-    }
-
-    override fun revealNewsChatsForCurrentUser(channelDTO: ChannelMemberDTO) {
-        try {
-            channelRepository.revealNewsChatsForCurrentUser(channelDTO)
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 }

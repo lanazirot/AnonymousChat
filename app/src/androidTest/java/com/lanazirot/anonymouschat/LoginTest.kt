@@ -97,14 +97,18 @@ class LoginTest {
         loginViewModel.viewModelScope.launch {
             delay(5000)
         }
+        val login = composeTestRule.activity.getString(R.string.login)
+        val email = composeTestRule.activity.getString(R.string.email)
+        val password = composeTestRule.activity.getString(R.string.password)
+        val invalid_email = composeTestRule.activity.getString(R.string.val_email_invalid)
         composeTestRule.onNodeWithTag("loginImage").assertExists()
-        composeTestRule.onNodeWithText(text = "Iniciar sesión").assertExists()
-        composeTestRule.onNodeWithText(text = "Correo electrónico").assertExists()
-        composeTestRule.onNodeWithText(text = "Contraseña").assertExists()
-        composeTestRule.onNodeWithText(text = "Correo electrónico").performTextInput("JISIDH")
-        composeTestRule.onNodeWithText(text = "Contraseña").performTextInput("JISIDH")
-        composeTestRule.onNodeWithText(text = "Iniciar sesión").performClick()
-        composeTestRule.onNodeWithText(text = "Email invalido").assertExists()
+        composeTestRule.onNodeWithText(text = login).assertExists()
+        composeTestRule.onNodeWithText(text = email).assertExists()
+        composeTestRule.onNodeWithText(text = password).assertExists()
+        composeTestRule.onNodeWithText(text = email).performTextInput("JISIDH")
+        composeTestRule.onNodeWithText(text = email).performTextInput("JISIDH")
+        composeTestRule.onNodeWithText(text = login).performClick()
+        composeTestRule.onNodeWithText(text = invalid_email).assertExists()
     }
 
     @Test
@@ -132,13 +136,17 @@ class LoginTest {
         loginViewModel.viewModelScope.launch {
             delay(5000)
         }
+        val pass_empty = composeTestRule.activity.getString(R.string.val_pass_empty)
+        val login = composeTestRule.activity.getString(R.string.login)
+        val email = composeTestRule.activity.getString(R.string.email)
+        val password = composeTestRule.activity.getString(R.string.password)
         composeTestRule.onNodeWithTag("loginImage").assertExists()
-        composeTestRule.onNodeWithText(text = "Iniciar sesión").assertExists()
-        composeTestRule.onNodeWithText(text = "Correo electrónico").assertExists()
-        composeTestRule.onNodeWithText(text = "Contraseña").assertExists()
-        composeTestRule.onNodeWithText(text = "Correo electrónico").performTextInput("JISIDH")
-        composeTestRule.onNodeWithText(text = "Iniciar sesión").performClick()
-        composeTestRule.onNodeWithText(text = "Contraseña vacia").assertExists()
+        composeTestRule.onNodeWithText(text = login).assertExists()
+        composeTestRule.onNodeWithText(text = email).assertExists()
+        composeTestRule.onNodeWithText(text = password).assertExists()
+        composeTestRule.onNodeWithText(text = email).performTextInput("JISIDH")
+        composeTestRule.onNodeWithText(text = login).performClick()
+        composeTestRule.onNodeWithText(text = pass_empty).assertExists()
     }
 
     @Test
@@ -166,13 +174,17 @@ class LoginTest {
         loginViewModel.viewModelScope.launch {
             delay(5000)
         }
+        val email_empty = composeTestRule.activity.getString(R.string.val_email_empty)
+        val login = composeTestRule.activity.getString(R.string.login)
+        val email = composeTestRule.activity.getString(R.string.email)
+        val password = composeTestRule.activity.getString(R.string.password)
         composeTestRule.onNodeWithTag("loginImage").assertExists()
-        composeTestRule.onNodeWithText(text = "Iniciar sesión").assertExists()
-        composeTestRule.onNodeWithText(text = "Correo electrónico").assertExists()
-        composeTestRule.onNodeWithText(text = "Contraseña").assertExists()
-        composeTestRule.onNodeWithText(text = "Contraseña").performTextInput("JISIDH")
-        composeTestRule.onNodeWithText(text = "Iniciar sesión").performClick()
-        composeTestRule.onNodeWithText(text = "Email vacio").assertExists()
+        composeTestRule.onNodeWithText(text = login).assertExists()
+        composeTestRule.onNodeWithText(text = email).assertExists()
+        composeTestRule.onNodeWithText(text = password).assertExists()
+        composeTestRule.onNodeWithText(text = password).performTextInput("JISIDH")
+        composeTestRule.onNodeWithText(text = login).performClick()
+        composeTestRule.onNodeWithText(text = email_empty).assertExists()
     }
 }
 

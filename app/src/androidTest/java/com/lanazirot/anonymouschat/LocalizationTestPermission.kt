@@ -45,7 +45,21 @@ class LocalizationTestPermission {
 
 
         }
-        composeTestRule.onNodeWithText("Aceptar").assertExists()
-        composeTestRule.onNodeWithText("Aceptar").performClick()
+        composeTestRule.onNodeWithText("Otorgar permiso").assertExists()
+        composeTestRule.onNodeWithText("Otorgar permiso").performClick()
+    }
+
+    @OptIn(ExperimentalPermissionsApi::class, ExperimentalTestApi::class)
+    @Test
+    fun test_allow_screen_accept_permission(){
+        composeTestRule.setContent {
+            val navController = rememberNavController()
+            val gp = AppProvider(navController = navController)
+            RequestPermission(permission = Manifest.permission.ACCESS_FINE_LOCATION) {
+                App(navController)
+            }
+        }
+        composeTestRule.onNodeWithText("Allow permission").assertExists()
+        composeTestRule.onNodeWithText("Allow permission").performClick()
     }
 }

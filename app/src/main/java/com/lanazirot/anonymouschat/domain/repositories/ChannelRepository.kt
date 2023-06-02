@@ -2,7 +2,6 @@ package com.lanazirot.anonymouschat.domain.repositories;
 
 import com.lanazirot.anonymouschat.domain.models.api.AddMemberToChannelDTO
 import com.lanazirot.anonymouschat.domain.models.api.CreateChannelDTO
-import com.lanazirot.anonymouschat.domain.models.api.channel.ChannelMemberDTO
 import com.lanazirot.anonymouschat.domain.models.api.channel.CreateChannelResponseDTO
 import com.lanazirot.anonymouschat.domain.models.api.location.UserCoordinatesDTO
 import com.lanazirot.anonymouschat.domain.services.interfaces.api.IChannelAPI
@@ -61,12 +60,14 @@ class ChannelRepository @Inject constructor(
 
     @OptIn(DelicateCoroutinesApi::class)
     fun checkIfUserStillInTheRoomByItsCurrentLocation(
+        channelID: String,
         userCoordinatesDTO: UserCoordinatesDTO,
     ): Boolean {
         var response: Boolean? = null
         runBlocking {
             val job = GlobalScope.launch {
                 response = channelAPI.checkIfUserStillInTheRoomByItsCurrentLocation(
+                    channelID,
                     userCoordinatesDTO
                 )
             }
@@ -75,16 +76,5 @@ class ChannelRepository @Inject constructor(
         }
 
         return response != null
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    fun revealNewsChatsForCurrentUser(channelDTO: ChannelMemberDTO)  {
-        runBlocking {
-            val job = GlobalScope.launch {
-                channelAPI.revealNewsChatsForCurrentUser(channelDTO)
-            }
-
-            job.join()
-        }
     }
 }
