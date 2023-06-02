@@ -1,6 +1,7 @@
 package com.lanazirot.anonymouschat.ui.screens.login
 
 import android.util.Log
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -60,11 +61,11 @@ class LoginViewModel @Inject constructor(
     fun signInWithCredentials() = viewModelScope.launch {
         try {
             if (_userState.value.user.email.isEmpty())
-                throw Exception("Email vacio")
+                setError("1")
             if (_userState.value.user.password.isEmpty())
-                throw Exception("Contraseña vacia")
+                setError("2")
             if(!android.util.Patterns.EMAIL_ADDRESS.matcher(_userState.value.user.email).matches())
-                throw Exception("Email invalido")
+                setError("3")
             _uiState.value = LoginUIState.Loading
             _auth.signInWithEmailAndPassword(_userState.value.user.email, _userState.value.user.password)
                 .addOnCompleteListener { task ->

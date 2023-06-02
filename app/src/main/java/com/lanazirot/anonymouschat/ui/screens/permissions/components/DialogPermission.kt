@@ -89,7 +89,8 @@ fun DialogPermission(
                     Text(
                         text = "Aceptar",
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth()
+                            .testTag("dialog_otorgar_button"),
                         letterSpacing = 2.sp,
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.button,

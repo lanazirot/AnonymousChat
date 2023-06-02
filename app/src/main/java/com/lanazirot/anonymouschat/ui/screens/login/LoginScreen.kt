@@ -40,6 +40,7 @@ import com.lanazirot.anonymouschat.ui.screens.loading.LoadingScreen
 import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
+
 @Composable
 fun LoginScreen() {
     val loginViewModel: LoginViewModel = hiltViewModel()
@@ -73,6 +74,9 @@ fun LoginData() {
     val openDialog = remember { mutableStateOf(false) }
     val errorMessage by loginViewModel.errorMessage.collectAsState()
 
+    var val1 = stringResource(id =R.string.val_email_empty)
+    var val2 = stringResource(id =R.string.val_pass_empty)
+    var val3 = stringResource(id =R.string.val_email_invalid)
     LaunchedEffect(errorMessage) {
         if (errorMessage.isNotEmpty())
             openDialog.value = true
@@ -139,6 +143,18 @@ fun LoginData() {
         Button(
             onClick = {
 
+                if (userAux.user.email.isEmpty()) {
+                    loginViewModel.setError(val1)
+                    return@Button
+                }
+                if (userAux.user.password.isEmpty()) {
+                    loginViewModel.setError(val2)
+                    return@Button
+                }
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(userAux.user.email).matches()) {
+                    loginViewModel.setError(val3)
+                    return@Button
+                }
                 try {
                     loginViewModel.signInWithCredentials()
                 } catch (e: Exception) {
@@ -156,7 +172,7 @@ fun LoginData() {
             )
         ) {
             Text(
-                text = "Iniciar sesión",
+                text = "Iniciar sesion",
                 color = Color.White,
                 fontFamily = Anonymous,
                 fontSize = 20.sp,
@@ -229,6 +245,7 @@ fun LoginData() {
         }
 
         if (openDialog.value) {
+
             CustomAlertDialog(message = errorMessage) {
                 openDialog.value = false
                 loginViewModel.setError("")

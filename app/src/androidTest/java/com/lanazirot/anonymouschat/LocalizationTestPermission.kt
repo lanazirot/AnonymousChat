@@ -3,6 +3,7 @@ package com.lanazirot.anonymouschat
 import android.Manifest
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.rememberNavController
@@ -47,5 +48,19 @@ class LocalizationTestPermission {
         }
         composeTestRule.onNodeWithText("Aceptar").assertExists()
         composeTestRule.onNodeWithText("Aceptar").performClick()
+    }
+
+    @OptIn(ExperimentalPermissionsApi::class, ExperimentalTestApi::class)
+    @Test
+    fun test_allow_screen_accept_permission(){
+        composeTestRule.setContent {
+            val navController = rememberNavController()
+            val gp = AppProvider(navController = navController)
+            RequestPermission(permission = Manifest.permission.ACCESS_FINE_LOCATION) {
+                App(navController)
+            }
+        }
+        composeTestRule.onNodeWithText("Allow permission").assertExists()
+        composeTestRule.onNodeWithText("Allow permission").performClick()
     }
 }

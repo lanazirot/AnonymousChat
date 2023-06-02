@@ -1,17 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">AnonymousChat</string>
-    <string name="google_token" translatable="false">284051697851-lro474aenbne24s7cten8eu6suvvfjam.apps.googleusercontent.com</string>
-    <string name="stream_app_key" translatable="false">g86vvadnsr44</string>
     <string name="warning">Advertencia</string>
     <string name="ok">De acuerdo</string>
     <string name="login">Iniciar sesion</string>
     <string name="register">Registrarse</string>
     <string name="chat">Mensajes</string>
     <string name="share_with_friends">Invitar amigos</string>
-    <string name="about_app">Acerca de la aplicación</string>
-    <string name="preferences_app">Preferencias de la app</string>
-    <string name="politics_priv">Políticas de privacidad</string>
-    <string name="credits">Créditos</string>
     <string name="back">Volver</string>
     <string name="home_page_content">Contenido principal</string>
     <string name="logout">Cerrar sesión</string>
@@ -33,13 +27,17 @@
     <string name="gps_info">AnonymousChat necesita saber tu ubicación en tiempo real. Tranquilo, no compartiremos tu ubicación con nadie. Solo la usaremos para mostrarte personas cercanas a ti.</string>
     <string name="permission">Petición de permiso</string>
     <string name="allow_permission">Otorgar permiso</string>
-    <string name="confirm_password">Confirmar contraseña</string>
     <string name="val_email_empty">El correo electrónico no puede estar vacío.</string>
-    <string name="val_pass_empty">La contraseña no puede estar vacía.</string>
     <string name="val_pass_dif">Las contraseñas no coinciden.</string>
     <string name="val_email_invalid">El correo electrónico no es válido.</string>
     <string name="val_pass_weak">La contraseña debe tener al menos 8 caracteres.</string>
     <string name="new_room">Crear nueva sala</string>
+    <string name="about_app">Acerca de la aplicación</string>
+    <string name="preferences_app">Preferencias de la app</string>
+    <string name="politics_priv">Políticas de privacidad</string>
+    <string name="credits">Créditos</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="val_pass_empty">La contraseña no puede estar vacía.</string>
     <string name="language">Idioma:</string>
     <string name="theme">Tema Oscuro:</string>
     <string name="spanish">Español</string>
