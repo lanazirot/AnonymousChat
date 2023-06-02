@@ -78,7 +78,10 @@ fun RegisterData() {
     val val3 = stringResource(R.string.val_pass_dif)
     val val4 = stringResource(R.string.val_email_invalid)
     val val5 = stringResource(R.string.val_pass_weak)
+<<<<<<< HEAD
 
+=======
+>>>>>>> f191428d44df72951d9c8e35209c98bbb907968c
     LaunchedEffect(errorMessage) {
         if (errorMessage.isNotEmpty())
             openDialog.value = true
@@ -136,6 +139,7 @@ fun RegisterData() {
             )
             Spacer(modifier = Modifier.height(16.dp))
 
+<<<<<<< HEAD
             StyledText(
                 value = userAux.user.confirmPassword,
                 onValueChange = {
@@ -228,6 +232,43 @@ fun RegisterData() {
                 CustomAlertDialog(message = errorMessage) {
                     openDialog.value = false
                     loginViewModel.setError("")
+=======
+        Button(
+            onClick = {
+
+                if (userAux.user.email.isEmpty()) {
+                    loginViewModel.setError(val1)
+                    return@Button
+                }
+                if (userAux.user.password.isEmpty()) {
+                    loginViewModel.setError(val2)
+                    return@Button
+                }
+                if (userAux.user.confirmPassword.isEmpty()) {
+                    loginViewModel.setError(val3)
+                    return@Button
+                }
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(userAux.user.email).matches()) {
+                    loginViewModel.setError(val4)
+                    return@Button
+                }
+                if (userAux.user.password.length < 8) {
+                    loginViewModel.setError(val5)
+                    return@Button
+                }
+                if (userAux.user.confirmPassword.length < 8) {
+                    loginViewModel.setError(val3)
+                    return@Button
+                }
+                if (validatePasswords(userAux.user.password, userAux.user.confirmPassword)) {
+                    try {
+                        loginViewModel.createUserWithCredentials()
+                    } catch (e: Exception) {
+                        loginViewModel.setError(e.message.toString())
+                    }
+                } else {
+                    loginViewModel.setError(val3)
+>>>>>>> f191428d44df72951d9c8e35209c98bbb907968c
                 }
             }
         }

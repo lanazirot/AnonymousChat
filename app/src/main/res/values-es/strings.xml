@@ -42,8 +42,11 @@
     <string name="theme">Tema Oscuro:</string>
     <string name="spanish">Español</string>
     <string name="english">Inglés</string>
+<<<<<<< HEAD
     <string name="share_app">Compartir aplicacion</string>
     <string name="cancel">Cancelar</string>
     <string name="delete_room">Eliminar sala</string>
     <string name="my_room">Mi sala</string>
+=======
+>>>>>>> f191428d44df72951d9c8e35209c98bbb907968c
 </resources>
