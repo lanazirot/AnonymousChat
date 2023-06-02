@@ -7,4 +7,4 @@ val SecondaryBlack = Color(0xFF2C3E50)
 val ThirdBlack = Color(0xFF515A5A)
 val Guindo = Color(0xFF7B241C)
 
-val Light = Color(0xFFF4F6F7)
+val Light = Color(0xFFFFFFFF)

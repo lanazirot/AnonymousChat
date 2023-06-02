@@ -46,6 +46,9 @@ import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.loading.LoadingScreen
 import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
+import com.lanazirot.anonymouschat.ui.screens.preferences.PreferencesViewModel
+import com.lanazirot.anonymouschat.ui.screens.preferences.ThemeViewModel
+import com.lanazirot.anonymouschat.ui.screens.preferences.components.ToggleButtonLanguage
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
 
 @Composable
@@ -80,6 +83,9 @@ fun LoginData() {
 
     val openDialog = remember { mutableStateOf(false) }
     val errorMessage by loginViewModel.errorMessage.collectAsState()
+
+    val themeViewModel: ThemeViewModel = hiltViewModel()
+    val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
 
     LaunchedEffect(errorMessage) {
         if (errorMessage.isNotEmpty())
