@@ -1,6 +1,7 @@
 package com.lanazirot.anonymouschat.ui.screens.rooms
 
 import android.os.Build
+import android.provider.Settings.Global
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -29,6 +31,7 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.common.TopBar
+import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.preferences.ThemeViewModel
 import com.lanazirot.anonymouschat.ui.screens.rooms.list.CustomRoomList
 import io.getstream.chat.android.compose.ui.channels.list.ChannelList
@@ -40,6 +43,14 @@ fun RoomsScreen(openDrawer: () -> Unit) {
     val themeViewModel: ThemeViewModel = hiltViewModel()
     val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
 
+    val roomsState = roomsViewModel.roomsState.collectAsState().value
+    val navController = GlobalProvider.current.navController
+
+    LaunchedEffect(roomsState.transported){
+        if(roomsState.transported){
+            navController.navigate("chat/${roomsState.roomToBeTransported}")
+        }
+    }
 
     val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(context)
