@@ -55,7 +55,7 @@ fun Drawer (
         modifier
             .fillMaxHeight()
             .width(300.dp)
-            .background(MaterialTheme.colors.secondary)
+            .background(MaterialTheme.colors.primaryVariant)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().background(Color.Black).padding(start = 25.dp),
