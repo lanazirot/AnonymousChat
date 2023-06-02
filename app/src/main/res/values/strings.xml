@@ -45,4 +45,7 @@
     <string name="spanish">Español</string>
     <string name="english">Inglés</string>
     <string name="share_app">Compartir aplicacion</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete_room">Eliminar sala</string>
+    <string name="my_room">Mi sala</string>
 </resources>

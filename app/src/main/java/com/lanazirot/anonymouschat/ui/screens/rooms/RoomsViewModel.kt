@@ -50,5 +50,9 @@ class RoomsViewModel @Inject constructor(
             }
         }
     }
+
+    fun deleteRoom(cid: String) {
+        streamService.deleteChannel(cid)
+    }
     //endregion
 }

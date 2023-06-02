@@ -23,7 +23,7 @@ interface IChannelAPI {
 
     @DELETE("channel/")
     @Headers("X-API-Key: ${APIConstants.API_KEY}")
-    suspend fun deleteChannel(@Body channelID: String): Boolean
+    suspend fun deleteChannel(@Query("ChannelID") channelID: String): Boolean
 
     @POST("channel/check-if-user-still-in-the-room")
     @Headers("X-API-Key: ${APIConstants.API_KEY}")
