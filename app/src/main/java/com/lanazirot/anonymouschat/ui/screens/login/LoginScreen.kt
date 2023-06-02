@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -120,6 +121,7 @@ fun LoginData() {
                 Modifier
                     .width(150.dp)
                     .height(150.dp)
+                    .testTag("loginImage")
             )
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -160,7 +162,8 @@ fun LoginData() {
                 },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(45.dp),
+                    .height(45.dp)
+                     .testTag("loginButton"),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color(
                         147, 46, 61

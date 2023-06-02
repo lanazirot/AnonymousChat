@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavHostController
 import com.lanazirot.anonymouschat.MainActivity
@@ -45,7 +46,7 @@ fun SplashScreen(){
 
             ){
         //Logo
-        Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Logo", modifier = Modifier.fillMaxSize(0.6f))
+        Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Logo", modifier = Modifier.fillMaxSize(0.6f).testTag("SplashScreenLogo"))
 
         //Name of the app
         Image(painter = painterResource(id = R.drawable.nombre) , contentDescription = "Nombre",modifier = Modifier.fillMaxSize(0.6f))
