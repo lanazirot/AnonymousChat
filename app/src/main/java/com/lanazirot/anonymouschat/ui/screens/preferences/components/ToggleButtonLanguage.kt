@@ -31,10 +31,10 @@ fun ToggleButtonLanguage(
         onChange(id)
     }
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.fillMaxSize(),
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+        //modifier = Modifier.fillMaxSize(),
     ) {
         languages.forEach { lan ->
             Row(

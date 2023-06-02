@@ -9,18 +9,22 @@
     <string name="chat">Mensajes</string>
     <string name="share_with_friends">Invitar amigos</string>
     <string name="about_app">Acerca de la aplicación</string>
-    <string name="preferences_app">Preferencias de la aplicación</string>
+    <string name="preferences_app">Preferencias de la app</string>
     <string name="politics_priv">Políticas de privacidad</string>
     <string name="credits">Créditos</string>
     <string name="back">Volver</string>
     <string name="home_page_content">Contenido principal</string>
     <string name="logout">Cerrar sesión</string>
+    <string name="general">General</string>
     <string name="dudes">Dudas</string>
     <string name="dudes_1">¿Qué es Anonymous Chat?</string>
-    <string name="general">General</string>
-    <string name="dudes_2">¿Quienes pueden enviarme mensaje?</string>
-    <string name="dudes_3">¿Como se maneja la privacidad en  Anonymous Chat?</string>
-    <string name="dudes_4">¿Que son los nombres de usuario? ¿Como se eligen?</string>
+    <string name="dudes_2">¿Como se maneja la privacidad en  Anonymous Chat?</string>
+    <string name="dudes_3">¿Por que no puedo elegir el nombre del chat?</string>
+    <string name="dudes_4">¿Hay alguna razón oculta detrás de la aplicación?</string>
+    <string name="dudes_R1">Anonymous Chat es una aplicación diseñada para conocer y chatear con personas cercanas de forma anónima a traves de salas de chat comunitarias creadas en base a la ubicación del usuario.</string>
+    <string name="dudes_R2">Toda la información de los usuarios es utilizada solo con fines de gestión de cuenta y no es proporcionada a terceros ni puede ser consultada por personas externas</string>
+    <string name="dudes_R3">Esto sucede para mantener de mejor manera el anonimato, ya que un nombre personalizado puede dar indicios de tu identidad.</string>
+    <string name="dudes_R4">Ninguna. El equipo de Anonymous Chat solo piensa en el beneficio de sus usuarios y esperamos que disfruten de la aplicación :]</string>
     <string name="email">Correo electrónico</string>
     <string name="password">Contraseña</string>
     <string name="login_google">Iniciar sesión con Google</string>
@@ -37,6 +41,7 @@
     <string name="val_pass_weak">La contraseña debe tener al menos 8 caracteres.</string>
     <string name="new_room">Crear nueva sala</string>
     <string name="language">Idioma:</string>
+    <string name="theme">Tema Oscuro:</string>
     <string name="spanish">Español</string>
     <string name="english">Inglés</string>
 </resources>
