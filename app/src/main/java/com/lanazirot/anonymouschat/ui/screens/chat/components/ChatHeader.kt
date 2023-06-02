@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -43,16 +44,10 @@ fun ChatHeader(channel: Channel, onBack: () -> Unit) {
     val context = LocalContext.current
 
     LaunchedEffect(chatState.reported) {
-        if (!chatState.reported) {
+        if (chatState.reported) {
             Toast.makeText(
                 context,
                 "Room was reported to AnonymousChat team. Thank you! and keep safe.",
-                Toast.LENGTH_SHORT
-            ).show()
-        }else{
-            Toast.makeText(
-                context,
-                "Room was already reported to AnonymousChat team. Thank you! and keep safe.",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -76,15 +71,19 @@ fun ChatHeader(channel: Channel, onBack: () -> Unit) {
                     contentDescription = stringResource(R.string.back),
                 )
             }
-            Spacer(modifier = Modifier.width(20.dp))
+            Spacer(modifier = Modifier.width(10.dp))
             Icon(
                 imageVector = Icons.Outlined.PeopleOutline,
                 contentDescription = "",
                 tint = Color.Gray
             )
             Spacer(modifier = Modifier.width(10.dp))
+
             Text(
                 text = channel.id,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.width(200.dp),
+                maxLines = 1,
                 style = TextStyle(
                     fontFamily = Anonymous,
                     fontSize = 20.sp,
@@ -93,6 +92,7 @@ fun ChatHeader(channel: Channel, onBack: () -> Unit) {
                     textAlign = TextAlign.Center
                 ),
             )
+
             Spacer(modifier = Modifier.width(10.dp))
             Button(
                 onClick = {
