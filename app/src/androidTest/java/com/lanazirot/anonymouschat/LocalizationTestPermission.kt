@@ -1,18 +1,14 @@
 package com.lanazirot.anonymouschat
 
 import android.Manifest
-import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.navigation.compose.rememberNavController
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.lanazirot.anonymouschat.ui.providers.AppProvider
 import com.lanazirot.anonymouschat.ui.screens.permissions.RequestPermission
 import com.lanazirot.anonymouschat.ui.screens.splashscreen.App
-import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.FixMethodOrder
 import org.junit.Rule

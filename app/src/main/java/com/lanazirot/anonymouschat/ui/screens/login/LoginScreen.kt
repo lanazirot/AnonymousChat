@@ -161,7 +161,7 @@ fun LoginData() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(45.dp)
-                     .testTag("loginButton"),
+                    .testTag("loginButton"),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color(
                         147, 46, 61

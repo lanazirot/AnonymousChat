@@ -56,17 +56,28 @@ class RegisterTest {
                     }
                 }
             }
+            val empty_email = composeTestRule.activity.getString(R.string.val_email_empty)
+            val empty_password = composeTestRule.activity.getString(R.string.val_pass_empty)
+            val empty_confirm_password = composeTestRule.activity.getString(R.string.val_pass_dif)
+            val invalid_email = composeTestRule.activity.getString(R.string.val_email_invalid)
+            val weak_pass = composeTestRule.activity.getString(R.string.val_pass_weak)
+            val email = composeTestRule.activity.getString(R.string.email)
+            val password = composeTestRule.activity.getString(R.string.password)
+            val confirm_password = composeTestRule.activity.getString(R.string.confirm_password)
+            val register = composeTestRule.activity.getString(R.string.register)
+            val login = composeTestRule.activity.getString(R.string.login)
+
             composeTestRule.onNodeWithTag("RegisterScreenLogo").assertExists()
-            composeTestRule.onNodeWithText("Correo electrónico").assertExists()
-            composeTestRule.onNodeWithText("Contraseña").assertExists()
-            composeTestRule.onNodeWithText("Confirmar contraseña").assertExists()
+            composeTestRule.onNodeWithText(email).assertExists()
+            composeTestRule.onNodeWithText(password).assertExists()
+            composeTestRule.onNodeWithText(confirm_password).assertExists()
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").assertExists()
 
-            composeTestRule.onNodeWithText("Correo electrónico").performTextInput("correo")
-            composeTestRule.onNodeWithText("Contraseña").performTextInput("password1234")
-            composeTestRule.onNodeWithText("Confirmar contraseña").performTextInput("password1234")
+            composeTestRule.onNodeWithText(email).performTextInput("correo")
+            composeTestRule.onNodeWithText(password).performTextInput("password1234")
+            composeTestRule.onNodeWithText(confirm_password).performTextInput("password1234")
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
-            composeTestRule.onNodeWithText("El correo electrónico no es válido.").assertExists()
+            composeTestRule.onNodeWithText(invalid_email).assertExists()
         }
     }
 
@@ -90,17 +101,28 @@ class RegisterTest {
                     }
                 }
             }
+            val empty_email = composeTestRule.activity.getString(R.string.val_email_empty)
+            val empty_password = composeTestRule.activity.getString(R.string.val_pass_empty)
+            val empty_confirm_password = composeTestRule.activity.getString(R.string.val_pass_dif)
+            val invalid_email = composeTestRule.activity.getString(R.string.val_email_invalid)
+            val weak_pass = composeTestRule.activity.getString(R.string.val_pass_weak)
+            val email = composeTestRule.activity.getString(R.string.email)
+            val password = composeTestRule.activity.getString(R.string.password)
+            val confirm_password = composeTestRule.activity.getString(R.string.confirm_password)
+            val register = composeTestRule.activity.getString(R.string.register)
+            val login = composeTestRule.activity.getString(R.string.login)
+
             composeTestRule.onNodeWithTag("RegisterScreenLogo").assertExists()
-            composeTestRule.onNodeWithText("Correo electrónico").assertExists()
-            composeTestRule.onNodeWithText("Contraseña").assertExists()
-            composeTestRule.onNodeWithText("Confirmar contraseña").assertExists()
+            composeTestRule.onNodeWithText(email).assertExists()
+            composeTestRule.onNodeWithText(password).assertExists()
+            composeTestRule.onNodeWithText(confirm_password).assertExists()
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").assertExists()
 
-            composeTestRule.onNodeWithText("Correo electrónico").performTextInput("")
-            composeTestRule.onNodeWithText("Contraseña").performTextInput("password1234")
-            composeTestRule.onNodeWithText("Confirmar contraseña").performTextInput("password1234")
+            composeTestRule.onNodeWithText(email).performTextInput("")
+            composeTestRule.onNodeWithText(password).performTextInput("password1234")
+            composeTestRule.onNodeWithText(confirm_password).performTextInput("password1234")
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
-            composeTestRule.onNodeWithText("El correo electrónico no puede estar vacío.")
+            composeTestRule.onNodeWithText(empty_email)
                 .assertExists()
         }
     }
@@ -126,17 +148,28 @@ class RegisterTest {
                     }
                 }
             }
+            val empty_email = composeTestRule.activity.getString(R.string.val_email_empty)
+            val empty_password = composeTestRule.activity.getString(R.string.val_pass_empty)
+            val empty_confirm_password = composeTestRule.activity.getString(R.string.val_pass_dif)
+            val invalid_email = composeTestRule.activity.getString(R.string.val_email_invalid)
+            val weak_pass = composeTestRule.activity.getString(R.string.val_pass_weak)
+            val email = composeTestRule.activity.getString(R.string.email)
+            val password = composeTestRule.activity.getString(R.string.password)
+            val confirm_password = composeTestRule.activity.getString(R.string.confirm_password)
+            val register = composeTestRule.activity.getString(R.string.register)
+            val login = composeTestRule.activity.getString(R.string.login)
+
             composeTestRule.onNodeWithTag("RegisterScreenLogo").assertExists()
-            composeTestRule.onNodeWithText("Correo electrónico").assertExists()
-            composeTestRule.onNodeWithText("Contraseña").assertExists()
-            composeTestRule.onNodeWithText("Confirmar contraseña").assertExists()
+            composeTestRule.onNodeWithText(email).assertExists()
+            composeTestRule.onNodeWithText(password).assertExists()
+            composeTestRule.onNodeWithText(confirm_password).assertExists()
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").assertExists()
 
-            composeTestRule.onNodeWithText("Correo electrónico").performTextInput("email@gmail.com")
-            composeTestRule.onNodeWithText("Contraseña").performTextInput("")
-            composeTestRule.onNodeWithText("Confirmar contraseña").performTextInput("password1234")
+            composeTestRule.onNodeWithText(email).performTextInput("email@gmail.com")
+            composeTestRule.onNodeWithText(password).performTextInput("")
+            composeTestRule.onNodeWithText(confirm_password).performTextInput("password1234")
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
-            composeTestRule.onNodeWithText("La contraseña no puede estar vacía.")
+            composeTestRule.onNodeWithText(empty_password)
                 .assertExists()
         }
     }
@@ -163,17 +196,28 @@ class RegisterTest {
                     }
                 }
             }
+            val empty_email = composeTestRule.activity.getString(R.string.val_email_empty)
+            val empty_password = composeTestRule.activity.getString(R.string.val_pass_empty)
+            val empty_confirm_password = composeTestRule.activity.getString(R.string.val_pass_dif)
+            val invalid_email = composeTestRule.activity.getString(R.string.val_email_invalid)
+            val weak_pass = composeTestRule.activity.getString(R.string.val_pass_weak)
+            val email = composeTestRule.activity.getString(R.string.email)
+            val password = composeTestRule.activity.getString(R.string.password)
+            val confirm_password = composeTestRule.activity.getString(R.string.confirm_password)
+            val register = composeTestRule.activity.getString(R.string.register)
+            val login = composeTestRule.activity.getString(R.string.login)
+
             composeTestRule.onNodeWithTag("RegisterScreenLogo").assertExists()
-            composeTestRule.onNodeWithText("Correo electrónico").assertExists()
-            composeTestRule.onNodeWithText("Contraseña").assertExists()
-            composeTestRule.onNodeWithText("Confirmar contraseña").assertExists()
+            composeTestRule.onNodeWithText(email).assertExists()
+            composeTestRule.onNodeWithText(password).assertExists()
+            composeTestRule.onNodeWithText(confirm_password).assertExists()
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").assertExists()
 
-            composeTestRule.onNodeWithText("Correo electrónico").performTextInput("email@gmail.com")
-            composeTestRule.onNodeWithText("Contraseña").performTextInput("pass")
-            composeTestRule.onNodeWithText("Confirmar contraseña").performTextInput("pass")
+            composeTestRule.onNodeWithText(email).performTextInput("email@gmail.com")
+            composeTestRule.onNodeWithText(password).performTextInput("pass")
+            composeTestRule.onNodeWithText(confirm_password).performTextInput("pass")
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
-            composeTestRule.onNodeWithText("La contraseña debe tener al menos 8 caracteres.")
+            composeTestRule.onNodeWithText(weak_pass)
                 .assertExists()
         }
     }
@@ -198,17 +242,28 @@ class RegisterTest {
                     }
                 }
             }
+            val empty_email = composeTestRule.activity.getString(R.string.val_email_empty)
+            val empty_password = composeTestRule.activity.getString(R.string.val_pass_empty)
+            val diff_pass = composeTestRule.activity.getString(R.string.val_pass_dif)
+            val invalid_email = composeTestRule.activity.getString(R.string.val_email_invalid)
+            val weak_pass = composeTestRule.activity.getString(R.string.val_pass_weak)
+            val email = composeTestRule.activity.getString(R.string.email)
+            val password = composeTestRule.activity.getString(R.string.password)
+            val confirm_password = composeTestRule.activity.getString(R.string.confirm_password)
+            val register = composeTestRule.activity.getString(R.string.register)
+            val login = composeTestRule.activity.getString(R.string.login)
+
             composeTestRule.onNodeWithTag("RegisterScreenLogo").assertExists()
-            composeTestRule.onNodeWithText("Correo electrónico").assertExists()
-            composeTestRule.onNodeWithText("Contraseña").assertExists()
-            composeTestRule.onNodeWithText("Confirmar contraseña").assertExists()
+            composeTestRule.onNodeWithText(email).assertExists()
+            composeTestRule.onNodeWithText(password).assertExists()
+            composeTestRule.onNodeWithText(confirm_password).assertExists()
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").assertExists()
 
-            composeTestRule.onNodeWithText("Correo electrónico").performTextInput("email@gmail.com")
-            composeTestRule.onNodeWithText("Contraseña").performTextInput("password1234")
-            composeTestRule.onNodeWithText("Confirmar contraseña").performTextInput("")
+            composeTestRule.onNodeWithText(email).performTextInput("email@gmail.com")
+            composeTestRule.onNodeWithText(password).performTextInput("password1234")
+            composeTestRule.onNodeWithText(confirm_password).performTextInput("")
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
-            composeTestRule.onNodeWithText("La confirmación de la contraseña no puede estar vacía.")
+            composeTestRule.onNodeWithText(diff_pass)
                 .assertExists()
         }
     }
@@ -233,17 +288,28 @@ class RegisterTest {
                     }
                 }
             }
+            val empty_email = composeTestRule.activity.getString(R.string.val_email_empty)
+            val empty_password = composeTestRule.activity.getString(R.string.val_pass_empty)
+            val diff_pass = composeTestRule.activity.getString(R.string.val_pass_dif)
+            val invalid_email = composeTestRule.activity.getString(R.string.val_email_invalid)
+            val weak_pass = composeTestRule.activity.getString(R.string.val_pass_weak)
+            val email = composeTestRule.activity.getString(R.string.email)
+            val password = composeTestRule.activity.getString(R.string.password)
+            val confirm_password = composeTestRule.activity.getString(R.string.confirm_password)
+            val register = composeTestRule.activity.getString(R.string.register)
+            val login = composeTestRule.activity.getString(R.string.login)
+
             composeTestRule.onNodeWithTag("RegisterScreenLogo").assertExists()
-            composeTestRule.onNodeWithText("Correo electrónico").assertExists()
-            composeTestRule.onNodeWithText("Contraseña").assertExists()
-            composeTestRule.onNodeWithText("Confirmar contraseña").assertExists()
+            composeTestRule.onNodeWithText(email).assertExists()
+            composeTestRule.onNodeWithText(password).assertExists()
+            composeTestRule.onNodeWithText(confirm_password).assertExists()
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").assertExists()
 
-            composeTestRule.onNodeWithText("Correo electrónico").performTextInput("email@gmail.com")
-            composeTestRule.onNodeWithText("Contraseña").performTextInput("password1234")
-            composeTestRule.onNodeWithText("Confirmar contraseña").performTextInput("pass")
+            composeTestRule.onNodeWithText(email).performTextInput("email@gmail.com")
+            composeTestRule.onNodeWithText(password).performTextInput("password1234")
+            composeTestRule.onNodeWithText(confirm_password).performTextInput("pass")
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
-            composeTestRule.onNodeWithText("La confirmación de la contraseña debe tener al menos 8 caracteres.")
+            composeTestRule.onNodeWithText(diff_pass)
                 .assertExists()
         }
     }
@@ -268,17 +334,28 @@ class RegisterTest {
                     }
                 }
             }
+            val empty_email = composeTestRule.activity.getString(R.string.val_email_empty)
+            val empty_password = composeTestRule.activity.getString(R.string.val_pass_empty)
+            val diff_pass = composeTestRule.activity.getString(R.string.val_pass_dif)
+            val invalid_email = composeTestRule.activity.getString(R.string.val_email_invalid)
+            val weak_pass = composeTestRule.activity.getString(R.string.val_pass_weak)
+            val email = composeTestRule.activity.getString(R.string.email)
+            val password = composeTestRule.activity.getString(R.string.password)
+            val confirm_password = composeTestRule.activity.getString(R.string.confirm_password)
+            val register = composeTestRule.activity.getString(R.string.register)
+            val login = composeTestRule.activity.getString(R.string.login)
+
             composeTestRule.onNodeWithTag("RegisterScreenLogo").assertExists()
-            composeTestRule.onNodeWithText("Correo electrónico").assertExists()
-            composeTestRule.onNodeWithText("Contraseña").assertExists()
-            composeTestRule.onNodeWithText("Confirmar contraseña").assertExists()
+            composeTestRule.onNodeWithText(email).assertExists()
+            composeTestRule.onNodeWithText(password).assertExists()
+            composeTestRule.onNodeWithText(confirm_password).assertExists()
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").assertExists()
 
-            composeTestRule.onNodeWithText("Correo electrónico").performTextInput("email@gmail.com")
-            composeTestRule.onNodeWithText("Contraseña").performTextInput("password1234")
-            composeTestRule.onNodeWithText("Confirmar contraseña").performTextInput("password12345")
+            composeTestRule.onNodeWithText(email).performTextInput("email@gmail.com")
+            composeTestRule.onNodeWithText(password).performTextInput("password1234")
+            composeTestRule.onNodeWithText(confirm_password).performTextInput("password12345")
             composeTestRule.onNodeWithTag("RegisterScreenRegisterButton").performClick()
-            composeTestRule.onNodeWithText("Las contraseñas no coinciden.")
+            composeTestRule.onNodeWithText(diff_pass)
                 .assertExists()
         }
     }
