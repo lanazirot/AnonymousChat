@@ -42,11 +42,8 @@
     <string name="theme">Dark Mode:</string>
     <string name="spanish">Spanish</string>
     <string name="english">English</string>
-<<<<<<< HEAD
     <string name="share_app">Share aplication</string>
     <string name="cancel">Cancel</string>
     <string name="delete_room">Delete room</string>
     <string name="my_room">My room</string>
-=======
->>>>>>> f191428d44df72951d9c8e35209c98bbb907968c
 </resources>

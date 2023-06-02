@@ -46,11 +46,7 @@ import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.loading.LoadingScreen
 import com.lanazirot.anonymouschat.ui.screens.login.states.LoginUIState
-import com.lanazirot.anonymouschat.ui.screens.preferences.PreferencesViewModel
-import com.lanazirot.anonymouschat.ui.screens.preferences.ThemeViewModel
-import com.lanazirot.anonymouschat.ui.screens.preferences.components.ToggleButtonLanguage
 import com.lanazirot.anonymouschat.ui.theme.Anonymous
-
 
 @Composable
 fun LoginScreen() {
@@ -85,15 +81,6 @@ fun LoginData() {
     val openDialog = remember { mutableStateOf(false) }
     val errorMessage by loginViewModel.errorMessage.collectAsState()
 
-<<<<<<< HEAD
-    val themeViewModel: ThemeViewModel = hiltViewModel()
-    val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
-
-=======
-    var val1 = stringResource(id =R.string.val_email_empty)
-    var val2 = stringResource(id =R.string.val_pass_empty)
-    var val3 = stringResource(id =R.string.val_email_invalid)
->>>>>>> f191428d44df72951d9c8e35209c98bbb907968c
     LaunchedEffect(errorMessage) {
         if (errorMessage.isNotEmpty())
             openDialog.value = true
@@ -114,75 +101,8 @@ fun LoginData() {
             }
         }
 
-<<<<<<< HEAD
     ProvideWindowInsets(windowInsetsAnimationsEnabled = true) {
         Column(
-=======
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        //Imagen de logo
-        Image(
-            painter = painterResource(id = R.drawable.login), contentDescription = "", modifier =
-            Modifier
-                .width(150.dp)
-                .height(150.dp)
-                .testTag("loginImage")
-        )
-        Spacer(modifier = Modifier.height(32.dp))
-
-        StyledText(
-            value = userAux.user.email,
-            text = "Correo electrónico",
-            onValueChange = {
-                loginViewModel.updateUser(
-                    userAux.user.copy(email = it)
-                )
-            },
-            visualTransformation = VisualTransformation.None
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        StyledText(
-            value = userAux.user.password,
-            onValueChange = {
-                loginViewModel.updateUser(
-                    userAux.user.copy(password = it)
-                )
-            },
-            text = "Contraseña",
-            visualTransformation = PasswordVisualTransformation()
-        )
-
-        Spacer(modifier = Modifier.height(32.dp))
-
-        Button(
-            onClick = {
-
-                if (userAux.user.email.isEmpty()) {
-                    loginViewModel.setError(val1)
-                    return@Button
-                }
-                if (userAux.user.password.isEmpty()) {
-                    loginViewModel.setError(val2)
-                    return@Button
-                }
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(userAux.user.email).matches()) {
-                    loginViewModel.setError(val3)
-                    return@Button
-                }
-                try {
-                    loginViewModel.signInWithCredentials()
-                } catch (e: Exception) {
-                    Log.d("LoginScreen", e.message ?: "Error al iniciar sesion")
-                }
-            },
->>>>>>> f191428d44df72951d9c8e35209c98bbb907968c
             modifier = Modifier
                 .background(MaterialTheme.colors.primaryVariant)
                 .statusBarsPadding()
@@ -193,7 +113,6 @@ fun LoginData() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-<<<<<<< HEAD
             //Imagen de logo
             Image(
                 painter = painterResource(id = R.drawable.login), contentDescription = "", modifier =
@@ -201,14 +120,6 @@ fun LoginData() {
                     .width(150.dp)
                     .height(150.dp)
                     .testTag("loginImage")
-=======
-            Text(
-                text = "Iniciar sesion",
-                color = Color.White,
-                fontFamily = Anonymous,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Normal
->>>>>>> f191428d44df72951d9c8e35209c98bbb907968c
             )
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -250,7 +161,7 @@ fun LoginData() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(45.dp)
-                     .testTag("loginButton"),
+                    .testTag("loginButton"),
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = Color(
                         147, 46, 61
@@ -305,7 +216,6 @@ fun LoginData() {
                 }
             }
 
-<<<<<<< HEAD
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(
@@ -333,13 +243,6 @@ fun LoginData() {
                     openDialog.value = false
                     loginViewModel.setError("")
                 }
-=======
-        if (openDialog.value) {
-
-            CustomAlertDialog(message = errorMessage) {
-                openDialog.value = false
-                loginViewModel.setError("")
->>>>>>> f191428d44df72951d9c8e35209c98bbb907968c
             }
         }
     }
