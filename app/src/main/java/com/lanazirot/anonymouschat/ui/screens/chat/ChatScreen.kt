@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.lanazirot.anonymouschat.ui.navigator.routes.DrawerScreens
 import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.chat.components.ChatHeader
 import com.lanazirot.anonymouschat.ui.screens.chat.components.MessageMaker
@@ -45,14 +46,13 @@ fun ChatScreen(channelId : String) {
         }
     }
 
-
     val factory by lazy {
         MessagesViewModelFactory(
             context = context,
             channelId = channelId,
             showDateSeparators = false,
             showSystemMessages = false,
-            messageFooterVisibility = MessageFooterVisibility.Never,
+            messageFooterVisibility = MessageFooterVisibility.LastInGroup
         )
     }
 
@@ -118,4 +118,5 @@ fun ChatScreen(channelId : String) {
 
 private fun onBackPressed(navController : NavHostController) {
     navController.popBackStack()
+    navController.navigate(DrawerScreens.Main.route)
 }

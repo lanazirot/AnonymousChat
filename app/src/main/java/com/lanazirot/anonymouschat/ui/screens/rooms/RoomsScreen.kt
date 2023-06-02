@@ -13,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -29,8 +30,10 @@ import coil.request.ImageRequest
 import coil.size.Size
 import com.lanazirot.anonymouschat.R
 import com.lanazirot.anonymouschat.ui.components.common.TopBar
+import com.lanazirot.anonymouschat.ui.providers.GlobalProvider
 import com.lanazirot.anonymouschat.ui.screens.preferences.ThemeViewModel
 import com.lanazirot.anonymouschat.ui.screens.rooms.list.CustomRoomList
+import io.getstream.chat.android.compose.state.channels.list.Cancel.channel
 import io.getstream.chat.android.compose.ui.channels.list.ChannelList
 import io.getstream.chat.android.compose.ui.theme.ChatTheme
 
@@ -40,6 +43,14 @@ fun RoomsScreen(openDrawer: () -> Unit) {
     val themeViewModel: ThemeViewModel = hiltViewModel()
     val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
 
+    val roomsState = roomsViewModel.roomsState.collectAsState().value
+    val navController = GlobalProvider.current.navController
+
+    LaunchedEffect(roomsState.transported) {
+        if (roomsState.transported) {
+            navController.navigate("chat/${roomsState.roomToBeTransported}")
+        }
+    }
 
     val context = LocalContext.current
     val imageLoader = ImageLoader.Builder(context)
@@ -54,73 +65,72 @@ fun RoomsScreen(openDrawer: () -> Unit) {
 
     ChatTheme {
         Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colors.primaryVariant
-    ){
-        Column(modifier = Modifier.background(MaterialTheme.colors.primaryVariant)) {
-            TopBar(
-                title = "Anonymous Chat",
-                icon = null,
-                buttonIcon = Icons.Filled.Menu
-            ) { openDrawer() }
-            Spacer(modifier = Modifier.height(20.dp))
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = {
-                    roomsViewModel.createRoom()
-                }
-            ) {
-                Text(text = stringResource(R.string.new_room), color = MaterialTheme.colors.surface)
-            }
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(500.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                ChannelList(
-                    itemContent = { channelItem ->
-                        CustomRoomList(channelItem = channelItem)
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colors.primaryVariant
+        ) {
+            Column(modifier = Modifier.background(MaterialTheme.colors.primaryVariant)) {
+                TopBar(
+                    title = "Anonymous Chat",
+                    icon = null,
+                    buttonIcon = Icons.Filled.Menu
+                ) { openDrawer() }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(
+                        modifier = Modifier.width(200.dp),
+                        onClick = {
+                            roomsViewModel.createRoom()
+                        }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.new_room),
+                            color = MaterialTheme.colors.surface,
+                            modifier = Modifier.padding(10.dp)
+                        )
                     }
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                if(isDarkThemeEnabled){
-                    Image(
-                        painter = rememberAsyncImagePainter(
-                            ImageRequest.Builder(context)
-                                .data(data = R.drawable.buscandosala)
-                                .apply {
-                                    size(Size(432, 432))
-                                }
-                                .build(),
-                            imageLoader = imageLoader
-                        ),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
-                    )
                 }
-                else{
-                    Image(
-                        painter = rememberAsyncImagePainter(
-                            ImageRequest.Builder(context)
-                                .data(data = R.drawable.buscandosalaclaro)
-                                .apply {
-                                    size(Size(432, 432))
-                                }
-                                .build(),
-                            imageLoader = imageLoader
-                        ),
-                        contentDescription = null,
-                        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(500.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    ChannelList(
+                        itemContent = { channelItem ->
+                            CustomRoomList(channelItem = channelItem)
+                        },
+                        emptyContent = {
+                            Image(
+                                painter = rememberAsyncImagePainter(
+                                    ImageRequest.Builder(context)
+                                        .data(
+                                            data = if (isDarkThemeEnabled) {
+                                                R.drawable.buscandosala
+                                            } else {
+                                                R.drawable.buscandosalaclaro
+                                            }
+                                        )
+                                        .apply {
+                                            size(Size(432, 432))
+                                        }
+                                        .build(),
+                                    imageLoader = imageLoader
+                                ),
+                                contentDescription = null,
+                                modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
+                            )
+                        }
                     )
                 }
             }
         }
     }
-    }
 }
-

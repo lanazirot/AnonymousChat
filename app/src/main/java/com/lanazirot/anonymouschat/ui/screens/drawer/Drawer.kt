@@ -3,15 +3,7 @@ package com.lanazirot.anonymouschat.ui.screens.drawer
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -28,10 +20,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.lanazirot.anonymouschat.MainActivity
 import com.lanazirot.anonymouschat.R
+import com.lanazirot.anonymouschat.ui.components.common.ImageFromUrl
 import com.lanazirot.anonymouschat.ui.navigator.routes.AppScreens
 import com.lanazirot.anonymouschat.ui.navigator.routes.screens
 import com.lanazirot.anonymouschat.ui.navigator.routes.screensLight
@@ -48,7 +39,7 @@ fun Drawer (
     mainActivity: MainActivity
 ) {
     val loginViewModel: LoginViewModel = hiltViewModel()
-    val name = Firebase.auth.currentUser?.displayName ?: ""
+    val name = loginViewModel.getCurrentUser()?.name ?: ""
     val navController = GlobalProvider.current.navController
     val themeViewModel: ThemeViewModel = hiltViewModel()
     val isDarkThemeEnabled by themeViewModel.isDarkThemeEnabled.collectAsState()
@@ -63,9 +54,8 @@ fun Drawer (
             modifier = Modifier.fillMaxWidth().background(Color.Black).padding(start = 25.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(R.drawable.iusuario),
-                contentDescription = null,
+            ImageFromUrl(
+                imageUrl = loginViewModel.getCurrentUser()?.image ?: "",
                 modifier = Modifier
                     .size(50.dp)
                     .padding(end = 16.dp)
