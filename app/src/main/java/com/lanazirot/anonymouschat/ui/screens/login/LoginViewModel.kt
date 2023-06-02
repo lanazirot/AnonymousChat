@@ -182,7 +182,7 @@ class LoginViewModel @Inject constructor(
             val latLong = LatLongDTO(it.latitude, it.longitude)
             val channelDTO = getCurrentUser()?.let { it1 -> ChannelMemberDTO(it1.id, latLong) }
             if(channelDTO != null) {
-               // streamService.revealNewsChatsForCurrentUser(channelDTO)
+                streamService.revealNewsChatsForCurrentUser(channelDTO)
                 Log.d("Location", "Location updated  $channelDTO")
             }
 
